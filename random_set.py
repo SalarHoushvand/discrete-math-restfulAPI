@@ -1,8 +1,5 @@
 import random
 import datasets as ds
-import matplotlib_venn as vplt
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import show, plot
 import itertools
 
 
@@ -115,40 +112,9 @@ def subsetsRecur(current, sset):
     return [current]
 
 
-def ven2(num_gen1, num_gen2):
-    """Venn Diagram example for 2 sets"""
 
 
-    set1 = set()
-    set2 = set()
-    # try to add elem to set until set length is less than 3
-    for x in itertools.takewhile(lambda x: len(set1) < 7, num_gen1):
-        set1.add(x)
-    for x in itertools.takewhile(lambda x: len(set2) < 10, num_gen2):
-        set2.add(x)
-
-    # length of sets for venn diagram
-    a = len(set1)
-    b = len(set2)
-    c = len(set1.intersection(set2))
-
-    # Venn Diagram
-    v = vplt.venn2(subsets={'10': a, '01': b, '11': c}, set_labels=('A', 'B'))
-    try:
-        l1 = ','.join(map(str, set1.difference(set2)))
-        v.get_label_by_id('10').set_text(l1)
-        l2 = ','.join(map(str, set2.difference(set1)))
-        v.get_label_by_id('01').set_text(l2)
-        l3 = ','.join(map(str, set2.intersection(set1)))
-        v.get_label_by_id('11').set_text(l3)
-    except:
-        print('Disjoint sets.')
-    name = "".join(random_set(integer=0, char=20))+'.png'
-    print('Plot name : ' + name)
-    plt.savefig('plots/'+name)
-
-
-def set_operation(op='union', set_1=random_set(), set_2=random_set(), venn=False):
+def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     """
     Implements different set operations on two given sets.
 
@@ -225,8 +191,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set(), venn=False
                                                                                                            '{').replace(
             ']', '}') + ' U-A = ' + str(set(set_1) - set(subset_1)).replace('[', '{').replace(']', '}')
 
-    if venn == True:
-        ven2(set_1, set_2)
+
 
 
     return output
