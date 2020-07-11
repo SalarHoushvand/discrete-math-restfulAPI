@@ -1,0 +1,13 @@
+Flask==1.0.2
+Flask-Cors==3.0.7
+Flask-RESTful==0.3.7
+Flask-SQLAlchemy==2.4.1
+Werkzeug==0.14.1
+gunicorn==19.9.0
+Click==7.0
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+
+
+
