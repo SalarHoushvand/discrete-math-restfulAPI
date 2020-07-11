@@ -4,13 +4,9 @@ import random_set as rs
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
-    if (request.method == 'POST'):
-        some_json = request.get_json()
-        return jsonify({'you send': some_json}), 201
-    else:
-        return jsonify({'about': 'hello world'})
+    return jsonify({'Welcome message': 'Welcome to api, start calling ex: /union/5'})
 
 
 @app.route('/union/<int:num>', methods=['GET'])
