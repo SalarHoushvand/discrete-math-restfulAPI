@@ -20,8 +20,7 @@ GET /random
 **Response**
 
 ```ts
-{
-  question number : string
+question number : string{{
   
   question : string
   
@@ -30,7 +29,7 @@ GET /random
   set2: list
   
   answer: string
-}
+}}
 ```
 
 ### Questions from topics
