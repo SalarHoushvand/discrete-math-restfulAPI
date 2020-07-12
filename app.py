@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    return jsonify({'Welcome message': 'Welcome to api, start calling ex: /union/5'})
+    return jsonify({'Welcome message': 'Welcome to api, start calling ex: /union/5/11 which means : '
+                                       '/operation name/number of questions/<first set type><second set type>'})
 
 
 def question(num, par, operation):
