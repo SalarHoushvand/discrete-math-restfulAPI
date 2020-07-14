@@ -112,8 +112,6 @@ def subsetsRecur(current, sset):
     return [current]
 
 
-
-
 def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     """
     Implements different set operations on two given sets.
@@ -191,11 +189,20 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
                                                                                                            '{').replace(
             ']', '}') + ' U-A = ' + str(set(set_1) - set(subset_1)).replace('[', '{').replace(']', '}')
 
-
-
-
     return output
 
 
-
-
+def function(A, B):
+    output=''
+    if len(A) == len(set(A)):
+        output = ('function')
+        if len(B) != len(set(B)):
+            if len(B) < len(A) or len(B) == len(A):
+                output = ('surjective function')
+            elif len(B) > len(A) or len(B) == len(A):
+                output = ('injective function')
+        elif len(B) == len(set(B)) and len(A) == len(B):
+            output = ('bijective function')
+    else:
+        output = ('not function')
+    return output

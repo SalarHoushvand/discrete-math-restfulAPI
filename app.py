@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import random_set as rs
+import random
 
 app = Flask(__name__)
 
@@ -95,8 +96,31 @@ def complement(num, par):
     return jsonify(output)
 
 
+@app.route('/function/<int:num>', methods=['GET'])
+def function(num):
+    global zip
+    output = {}
+    for i in range(num):
+        A = []
+        B = []
+        question_json = 'question ' + str(i + 1)
+        for i in range(random.randint(3, 6)):
+            A.append(random.randint(1, 10))
+        for i in range(random.randint(3, 6)):
+            B.append(random.randint(1, 10))
+        zip1 = list(zip(A, B))
+
+        question = 'Is this a function? if so what kind of function it is ? ' + str(zip1)
+        answer = rs.function(A,B)
+
+        output.update({question_json: {'A': A, 'B': B, 'question': question, 'answer': str(answer)}})
+        print(output)
+    return jsonify(output)
+
+
+
 @app.route('/random', methods=['GET'])
-def random():
+def random_qa():
     output = {}
     output.update(question(21, 11, 'union'))
     output.update(question(18, 11, 'intersection'))
