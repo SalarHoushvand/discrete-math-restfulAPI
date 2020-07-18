@@ -130,10 +130,15 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     :return: output
     """
     global output
-    intersection_symbol = u'\u2229'
-    union_symbol = u'\u222a'
-    empty_symbol = u'\u2205'
-    delta = u'\u0394'
+    # intersection_symbol = u'\u2229'
+    # union_symbol = u'\u222a'
+    # empty_symbol = u'\u2205'
+    # delta = u'\u0394'
+
+    intersection_symbol = '&cap;'
+    union_symbol = '&cup;'
+    empty_symbol = '&empty;'
+    delta = '&Delta;'
     set1 = str(set_1).replace("'", '').replace("[", '(').replace(']', ')')
     set2 = str(set_2).replace("'", '').replace("[", '(').replace(']', ')')
     if op == 'union':
@@ -195,14 +200,18 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
 def function(A, B):
     output=''
     if len(A) == len(set(A)):
-        output = ('function')
+        output = ('General function')
         if len(B) != len(set(B)):
             if len(B) < len(A) or len(B) == len(A):
-                output = ('surjective function')
+                output = ('Surjective function')
             elif len(B) > len(A) or len(B) == len(A):
-                output = ('injective function')
+                output = ('Injective function')
         elif len(B) == len(set(B)) and len(A) == len(B):
-            output = ('bijective function')
+            output = ('Bijective function')
     else:
-        output = ('not function')
+        output = ('Not function')
     return output
+
+
+
+
