@@ -143,7 +143,7 @@ def floor_ceiling(num):
             question = l_ceiling_symbol + str(A) + r_ceiling_symbol + ' ?'
             answer = str(math.ceil(A))
         output.update({question_json: {'question': question, 'answer': answer}})
-    return jsonify(output)
+    return str(output)
 
 @app.route('/function/inverse/<int:num>', methods=['GET'])
 def inverse(num):
