@@ -2,6 +2,7 @@ import math
 from flask import Flask, jsonify, request
 import random_set as rs
 import random
+import jsonify as js
 
 app = Flask(__name__)
 
@@ -13,7 +14,10 @@ def index():
 
 
 def question(num, par, operation):
-    output = {}
+    output_json = {}
+    output = []
+    topic = js.title_maker(operation)
+
     for i in range(num):
         num2 = str(par)
         if num2[0] == '1':
@@ -51,8 +55,12 @@ def question(num, par, operation):
             question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ')
         answer = rs.set_operation(op=operation, set_1=set1, set_2=set2)
         question_json = 'question ' + str(i + 1)
-        output.update({question_json: {'set1': set1, 'set2': set2, 'question': question, 'answer': answer}})
-    return output
+        #output.update({question_json: {'set1': set1, 'set2': set2, 'question': question, 'answer': answer}})
+        output_json = js.json_maker(str(question) + ' ' + str(set1) + ' ' + str(set2), answer)
+        output.append(output_json)
+    output_json = js.title_maker(operation, output)
+    print(type(output_json))
+    return output_json
 
 
 @app.route('/union/<int:num>/<int:par>', methods=['GET'])
