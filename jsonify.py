@@ -1,26 +1,4 @@
 
-
-template = {
-  "quizTitle": "sets",
-  "quizSynopsis": "Test Quiz for ",
-  "questions": [
-    {
-      "question": "What is a set?",
-      "questionType": "text",
-      "answerSelectionType": "single",
-      "answers": [
-        "A set is an unordered collection of different elements.",
-        "",
-        "",
-        ""
-      ],
-      "correctAnswer": "1",
-      "messageForCorrectAnswer": "CORRECT ANSWER",
-      "messageForIncorrectAnswer": "INCORRECT ANSWER",
-      "explanation": "",
-      "point": "10"
-    }]}
-
 def json_maker(question, answer):
 
   questions_template = {
@@ -46,13 +24,13 @@ def json_maker(question, answer):
 def title_maker(topic='', questions_list=[]):
   title = {
   "quizTitle": topic,
-  "quizSynopsis": "Test Quiz for ",
+  "quizSynopsis": f"Test Quiz for {topic}",
   "questions": questions_list }
 
   return title
 
 
-print(title_maker('union', ['hello','salar']))
+
 
 
 

@@ -14,9 +14,9 @@ def index():
 
 
 def question(num, par, operation):
-    output_json = {}
+    # output_json = {}
     output = []
-    topic = js.title_maker(operation)
+    # topic = js.title_maker(operation)
 
     for i in range(num):
         num2 = str(par)
@@ -55,11 +55,10 @@ def question(num, par, operation):
             question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ')
         answer = rs.set_operation(op=operation, set_1=set1, set_2=set2)
         question_json = 'question ' + str(i + 1)
-        #output.update({question_json: {'set1': set1, 'set2': set2, 'question': question, 'answer': answer}})
+        # output.update({question_json: {'set1': set1, 'set2': set2, 'question': question, 'answer': answer}})
         output_json = js.json_maker(str(question) + ' ' + str(set1) + ' ' + str(set2), answer)
         output.append(output_json)
     output_json = js.title_maker(operation, output)
-    print(type(output_json))
     return output_json
 
 
@@ -108,11 +107,12 @@ def complement(num, par):
 @app.route('/function/<int:num>', methods=['GET'])
 def function(num):
     global zip
-    output = {}
+    # output_json = {}
+    output = []
     for i in range(num):
         A = []
         B = []
-        question_json = 'question ' + str(i + 1)
+        # question_json = 'question ' + str(i + 1)
         for i in range(random.randint(3, 6)):
             A.append(random.randint(1, 10))
         for i in range(random.randint(3, 6)):
@@ -121,16 +121,18 @@ def function(num):
 
         question = 'Is f(x) from A to B a function ? If so what kind of function it is ? f(x)=' + str(zip1)
         answer = rs.function(A, B)
-
-        output.update({question_json: {'A': A, 'B': B, 'question': question, 'answer': str(answer)}})
-        print(output)
-    return jsonify(output)
+        # output.update({question_json: {'A': A, 'B': B, 'question': question, 'answer': str(answer)}})
+        output_json = js.json_maker(question, answer)
+        output.append(output_json)
+    output_json = js.title_maker('function', output)
+    return jsonify(output_json)
 
 
 @app.route('/function/floorceiling/<int:num>', methods=['GET'])
 def floor_ceiling(num):
     global question, answer
-    output = {}
+    # output_json = {}
+    output = []
     # r_floor_symbol = u"\u230B"
     # l_floor_symbol = u"\u230A"
     # r_ceiling_symbol = u"\u2309"
@@ -141,7 +143,7 @@ def floor_ceiling(num):
     l_ceiling_symbol = '&lceil;'
     A = 0
     for i in range(num):
-        question_json = 'question ' + str(i + 1)
+        # question_json = 'question ' + str(i + 1)
         A = round(random.uniform(-40, 40), 2)
         identifier = random.randint(0, 10)
         if identifier % 2 == 0:
@@ -150,18 +152,23 @@ def floor_ceiling(num):
         else:
             question = l_ceiling_symbol + str(A) + r_ceiling_symbol + ' ?'
             answer = str(math.ceil(A))
-        output.update({question_json: {'question': question, 'answer': answer}})
-    return str(output)
+        # output.update({question_json: {'question': question, 'answer': answer}})
+        output_json = js.json_maker(question, answer)
+        output.append(output_json)
+    output_json = js.title_maker('floor and ceiling function', output)
+    return jsonify(output_json)
+
 
 @app.route('/function/inverse/<int:num>', methods=['GET'])
 def inverse(num):
     global zip
-    output = {}
+    # output_json = {}
+    output = []
     for i in range(num):
         A = []
         B = []
         set_len = random.randint(3, 6)
-        question_json = 'question ' + str(i + 1)
+        # question_json = 'question ' + str(i + 1)
         while len(A) != set_len:
             rand_int = random.randint(1, 15)
             if rand_int not in A:
@@ -176,8 +183,11 @@ def inverse(num):
         question = 'What is the inverse of function f=' + str(zip1) + ' ?'
         answer = str(zip2)
 
-        output.update({question_json: {'question': question, 'answer': str(answer)}})
-    return jsonify(output)
+        # output.update({question_json: {'question': question, 'answer': str(answer)}})
+        output_json = js.json_maker(question, answer)
+        output.append(output_json)
+    output_json = js.title_maker('inverse of a function', output)
+    return jsonify(output_json)
 
 
 @app.route('/random', methods=['GET'])
