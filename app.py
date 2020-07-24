@@ -7,7 +7,6 @@ import jsonify as js
 app = Flask(__name__)
 
 
-
 def question(num, par, operation):
     output = []
     for i in range(num):
@@ -159,6 +158,22 @@ def random_qa(num):
         operation = random.choice(operations)
         output.append(rs.choices('11', operation))
     return jsonify(js.title_maker('Random', output))
+
+
+@app.route('/function/domain/<int:num>', methods=['GET'])
+def domain(num):
+    questions = []
+    for i in range(num):
+        questions.append(rs.domain())
+    return jsonify(js.title_maker('function domain', questions))
+
+
+@app.route('/function/target/<int:num>', methods=['GET'])
+def target(num):
+    questions = []
+    for i in range(num):
+        questions.append(rs.target())
+    return jsonify(js.title_maker('function domain', questions))
 
 
 if __name__ == '__main__':

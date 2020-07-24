@@ -143,7 +143,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     set1 = str(set_1).replace("'", '').replace("[", '(').replace(']', ')')
     set2 = str(set_2).replace("'", '').replace("[", '(').replace(']', ')')
     if op == 'union':
-        output = str(set(set_1).union(set(set_2))).replace("'",'').replace("{", '(').replace('}', ')')
+        output = str(set(set_1).union(set(set_2))).replace("'", '').replace("{", '(').replace('}', ')')
         answer = str(set(set_1).union(set(set_2))).replace("'", '').replace("{", '(').replace('}', ')')
 
     elif op == 'intersection':
@@ -151,14 +151,13 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
             set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
                                                                                                          '(').replace(
             '}', ')')
-        #answer = str(set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
-       #                                                                                                           '(').replace(
-      #      '}', ')')
-
+        # answer = str(set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
+    #                                                                                                           '(').replace(
+    #      '}', ')')
 
     elif op == 'difference':
         output = str(set(set_1).difference(set(set_2))).replace('set()',
-                                                                                                   empty_symbol).replace(
+                                                                empty_symbol).replace(
             "'", '').replace("{", '(').replace('}', ')')
         answer = str(set(set_1).difference(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
                                                                                                                 '(').replace(
@@ -172,7 +171,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
             '}', ')')
 
     elif op == 'symmetric_difference':
-        output =str(
+        output = str(
             set(set_1).difference(set(set_2)).union(set(set_2).difference(set(set_1)))).replace('set()',
                                                                                                 empty_symbol).replace(
             "'", '').replace("{",
@@ -196,7 +195,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
 
 
 def function(A, B):
-    output=''
+    output = ''
     if len(A) == len(set(A)):
         output = ('General function')
         if len(B) != len(set(B)):
@@ -306,3 +305,48 @@ def choices(par, operation):
 
     return output_json
 
+
+def domain():
+    global zip
+    choices = []
+    while len(choices) < 4:
+        A = []
+        B = []
+        # question_json = 'question ' + str(i + 1)
+        for i in range(random.randint(3, 6)):
+            A.append(random.randint(1, 10))
+        for i in range(random.randint(3, 6)):
+            B.append(random.randint(11, 21))
+        zip1 = list(zip(A, B))
+        question = 'what is the domain of this function ? f(x)=' + str(zip1)
+        zip2=[]
+        for i in zip1:
+            zip2.append(i[0])
+        answer = str(set(zip2))
+        choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.json_maker(question, choices, choices.index(answer)+1)
+
+
+def target():
+    global zip
+    choices = []
+    while len(choices) < 4:
+        A = []
+        B = []
+        # question_json = 'question ' + str(i + 1)
+        for i in range(random.randint(3, 6)):
+            A.append(random.randint(1, 10))
+        for i in range(random.randint(3, 6)):
+            B.append(random.randint(11, 21))
+        zip1 = list(zip(A, B))
+        question = 'what is the domain of this function ? f(x)=' + str(zip1)
+        zip2=[]
+        for i in zip1:
+            zip2.append(i[1])
+        answer = str(set(zip2))
+        choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.json_maker(question, choices, choices.index(answer)+1)
+
+print(domain())
