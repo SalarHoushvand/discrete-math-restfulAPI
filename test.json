@@ -1,0 +1,22 @@
+{
+  'quizTitle': 'union',
+  'quizSynopsis': 'Test Quiz for union',
+  'questions': [
+    {
+      'question': 'What is the union of these two sets?  [9, 18, 16, 1, 17] [13, 19, 17, 16, 14]',
+      'questionType': 'text',
+      'answerSelectionType': 'single',
+      'answers': [
+        '(1, 4, 5, 10, 11, 14, 15, 16, 18)',
+        '(0, 3, 8, 10, 11, 14, 16, 17, 18)',
+        '(1, 9, 13, 14, 16, 17, 18, 19)',
+        '(0, 1, 2, 6, 9, 12, 14, 16)'
+      ],
+      'correctAnswer': 3,
+      'messageForCorrectAnswer': 'CORRECT ANSWER',
+      'messageForIncorrectAnswer': 'INCORRECT ANSWER',
+      'explanation': '',
+      'point': '10'
+    }
+  ]
+}

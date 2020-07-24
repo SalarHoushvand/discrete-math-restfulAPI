@@ -7,59 +7,18 @@ import jsonify as js
 app = Flask(__name__)
 
 
+
+def question(num, par, operation):
+    output = []
+    for i in range(num):
+        output.append(rs.choices(par, operation))
+    return js.title_maker(operation, output)
+
+
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({'Welcome message': 'Welcome to api, start calling ex: /union/5/11 which means : '
                                        '/operation name/number of questions/<first set type><second set type>'})
-
-
-def question(num, par, operation):
-    # output_json = {}
-    output = []
-    # topic = js.title_maker(operation)
-
-    for i in range(num):
-        num2 = str(par)
-        if num2[0] == '1':
-            set1 = rs.random_set()
-        elif num2[0] == '2':
-            set1 = rs.random_set(integer=0, float=5)
-        elif num2[0] == '3':
-            set1 = rs.random_set(integer=0, char=5)
-        elif num2[0] == '4':
-            set1 = rs.random_set(integer=0, country_name=5)
-        elif num2[0] == '5':
-            set1 = rs.random_set(integer=0, city_name=5)
-        elif num2[0] == '6':
-            set1 = rs.random_set(integer=0, male_name=5)
-        elif num2[0] == '7':
-            set1 = rs.random_set(integer=0, female_name=5)
-        if num2[1] == '1':
-            set2 = rs.random_set()
-        elif num2[1] == '2':
-            set2 = rs.random_set(integer=0, float=5)
-        elif num2[1] == '3':
-            set2 = rs.random_set(integer=0, char=5)
-        elif num2[1] == '4':
-            set2 = rs.random_set(integer=0, country_name=5)
-        elif num2[1] == '5':
-            set2 = rs.random_set(integer=0, city_name=5)
-        elif num2[1] == '6':
-            set2 = rs.random_set(integer=0, male_name=5)
-        elif num2[1] == '7':
-            set2 = rs.random_set(integer=0, female_name=5)
-
-        if operation == 'partition' or operation == 'complement':
-            question = 'What is the ' + operation + ' of this set? '
-        else:
-            question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ')
-        answer = rs.set_operation(op=operation, set_1=set1, set_2=set2)
-        question_json = 'question ' + str(i + 1)
-        # output.update({question_json: {'set1': set1, 'set2': set2, 'question': question, 'answer': answer}})
-        output_json = js.json_maker(str(question) + ' ' + str(set1) + ' ' + str(set2), answer)
-        output.append(output_json)
-    output_json = js.title_maker(operation, output)
-    return output_json
 
 
 @app.route('/union/<int:num>/<int:par>', methods=['GET'])
@@ -122,6 +81,8 @@ def function(num):
         question = 'Is f(x) from A to B a function ? If so what kind of function it is ? f(x)=' + str(zip1)
         answer = rs.function(A, B)
         # output.update({question_json: {'A': A, 'B': B, 'question': question, 'answer': str(answer)}})
+        answer_options = ['General function', 'Surjective function', 'Injective function', 'Bijective function',
+                          'Not function']
         output_json = js.json_maker(question, answer)
         output.append(output_json)
     output_json = js.title_maker('function', output)
@@ -190,18 +151,14 @@ def inverse(num):
     return jsonify(output_json)
 
 
-@app.route('/random', methods=['GET'])
-def random_qa():
-    output = {}
-    output.update(question(21, 11, 'union'))
-    output.update(question(18, 11, 'intersection'))
-    output.update(question(15, 11, 'difference'))
-    output.update(question(12, 11, 'cartesian'))
-    output.update(question(9, 11, 'symmetric_difference'))
-    output.update(question(6, 11, 'partition'))
-    output.update(question(3, 11, 'complement'))
-
-    return jsonify(output)
+@app.route('/random/<int:num>', methods=['GET'])
+def random_qa(num):
+    output = []
+    operations = ['union', 'intersection', 'difference', 'symmetric_difference', 'partition', 'cartesian']
+    for i in range(num):
+        operation = random.choice(operations)
+        output.append(rs.choices('11', operation))
+    return jsonify(js.title_maker('Random', output))
 
 
 if __name__ == '__main__':

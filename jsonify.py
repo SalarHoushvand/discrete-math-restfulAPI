@@ -1,24 +1,17 @@
 
-def json_maker(question, answer):
+def json_maker(question, answer, answer_index=0):
 
   questions_template = {
       "question": question,
       "questionType": "text",
       "answerSelectionType": "single",
-      "answers": [
-        answer,
-        "",
-        "",
-        ""
-      ],
-      "correctAnswer": "1",
+      "answers": answer,
+      "correctAnswer": answer_index,
       "messageForCorrectAnswer": "CORRECT ANSWER",
       "messageForIncorrectAnswer": "INCORRECT ANSWER",
       "explanation": "",
       "point": "10"
     }
-
-
   return questions_template
 
 def title_maker(topic='', questions_list=[]):

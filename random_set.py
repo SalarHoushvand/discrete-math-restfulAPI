@@ -1,6 +1,7 @@
 import random
 import datasets as ds
 import itertools
+import jsonify as js
 
 
 # datasets are lists made for names and characters
@@ -142,24 +143,21 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     set1 = str(set_1).replace("'", '').replace("[", '(').replace(']', ')')
     set2 = str(set_2).replace("'", '').replace("[", '(').replace(']', ')')
     if op == 'union':
-        output = set1 + ' ' + union_symbol + ' ' + set2 + ' = ' + str(set(set_1).union(set(set_2))).replace("'",
-                                                                                                            '').replace(
-            "{", '(').replace('}', ')')
+        output = str(set(set_1).union(set(set_2))).replace("'",'').replace("{", '(').replace('}', ')')
         answer = str(set(set_1).union(set(set_2))).replace("'", '').replace("{", '(').replace('}', ')')
 
     elif op == 'intersection':
-        output = set1 + ' ' + intersection_symbol + ' ' + set2 + ' = ' + str(
+        output = str(
             set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
                                                                                                          '(').replace(
             '}', ')')
-        answer = str(set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
-                                                                                                                  '(').replace(
-            '}', ')')
-        if answer == empty_symbol:
-            output = output + '  These two sets are disjoint.'
+        #answer = str(set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
+       #                                                                                                           '(').replace(
+      #      '}', ')')
+
 
     elif op == 'difference':
-        output = set1 + ' -' + ' ' + set2 + ' = ' + str(set(set_1).difference(set(set_2))).replace('set()',
+        output = str(set(set_1).difference(set(set_2))).replace('set()',
                                                                                                    empty_symbol).replace(
             "'", '').replace("{", '(').replace('}', ')')
         answer = str(set(set_1).difference(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
@@ -167,14 +165,14 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
             '}', ')')
 
     elif op == 'cartesian':
-        output = set1 + ' X ' + ' ' + set2 + ' = ' + str([(obj1, obj2) for obj1 in set_1 for obj2 in set_2]).replace(
+        output = str([(obj1, obj2) for obj1 in set_1 for obj2 in set_2]).replace(
             '[', '').replace(']', '')
         answer = str(set(set_1).difference(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
                                                                                                                 '(').replace(
             '}', ')')
 
     elif op == 'symmetric_difference':
-        output = set1 + ' ' + delta + ' ' + set2 + ' = ' + str(
+        output =str(
             set(set_1).difference(set(set_2)).union(set(set_2).difference(set(set_1)))).replace('set()',
                                                                                                 empty_symbol).replace(
             "'", '').replace("{",
@@ -213,5 +211,98 @@ def function(A, B):
     return output
 
 
+def choices(par, operation):
+    choices = []
+    output = []
+    while len(choices) < 4:
+        num2 = str(par)
+        if operation == 'partition':
+            set2 = []
+            if num2[0] == '1':
+                set1 = random_set(integer=3)
+            elif num2[0] == '2':
+                set1 = random_set(integer=0, float=3)
+            elif num2[0] == '3':
+                set1 = random_set(integer=0, char=3)
+            elif num2[0] == '4':
+                set1 = random_set(integer=0, country_name=3)
+            elif num2[0] == '5':
+                set1 = random_set(integer=0, city_name=3)
+            elif num2[0] == '6':
+                set1 = random_set(integer=0, male_name=3)
+            elif num2[0] == '7':
+                set1 = random_set(integer=0, female_name=3)
+        elif operation == 'cartesian':
+            if num2[0] == '1':
+                set1 = random_set(integer=3)
+            elif num2[0] == '2':
+                set1 = random_set(integer=0, float=3)
+            elif num2[0] == '3':
+                set1 = random_set(integer=0, char=3)
+            elif num2[0] == '4':
+                set1 = random_set(integer=0, country_name=3)
+            elif num2[0] == '5':
+                set1 = random_set(integer=0, city_name=3)
+            elif num2[0] == '6':
+                set1 = random_set(integer=0, male_name=3)
+            elif num2[0] == '7':
+                set1 = random_set(integer=0, female_name=3)
+            if num2[1] == '1':
+                set2 = random_set(integer=3)
+            elif num2[1] == '2':
+                set2 = random_set(integer=0, float=3)
+            elif num2[1] == '3':
+                set2 = random_set(integer=0, char=3)
+            elif num2[1] == '4':
+                set2 = random_set(integer=0, country_name=3)
+            elif num2[1] == '5':
+                set2 = random_set(integer=0, city_name=3)
+            elif num2[1] == '6':
+                set2 = random_set(integer=0, male_name=3)
+            elif num2[1] == '7':
+                set2 = random_set(integer=0, female_name=3)
 
+        else:
+            if num2[0] == '1':
+                set1 = random_set()
+            elif num2[0] == '2':
+                set1 = random_set(integer=0, float=5)
+            elif num2[0] == '3':
+                set1 = random_set(integer=0, char=5)
+            elif num2[0] == '4':
+                set1 = random_set(integer=0, country_name=5)
+            elif num2[0] == '5':
+                set1 = random_set(integer=0, city_name=5)
+            elif num2[0] == '6':
+                set1 = random_set(integer=0, male_name=5)
+            elif num2[0] == '7':
+                set1 = random_set(integer=0, female_name=5)
+            if num2[1] == '1':
+                set2 = random_set()
+            elif num2[1] == '2':
+                set2 = random_set(integer=0, float=5)
+            elif num2[1] == '3':
+                set2 = random_set(integer=0, char=5)
+            elif num2[1] == '4':
+                set2 = random_set(integer=0, country_name=5)
+            elif num2[1] == '5':
+                set2 = random_set(integer=0, city_name=5)
+            elif num2[1] == '6':
+                set2 = random_set(integer=0, male_name=5)
+            elif num2[1] == '7':
+                set2 = random_set(integer=0, female_name=5)
+        answer = set_operation(op=operation, set_1=set1, set_2=set2)
+        if answer not in choices:
+            choices.append(answer)
+        else:
+            pass
+    if operation == 'partition' or operation == 'complement':
+        question = ('What is the ' + operation + ' of this set? ').replace('[]', '')
+    else:
+        question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ')
+    choices = random.sample(choices, len(choices))
+    output_json = js.json_maker(str(question) + ' ' + str(set1) + ' ' + str(set2).replace('[]', ''), choices,
+                                choices.index(answer) + 1)
+
+    return output_json
 
