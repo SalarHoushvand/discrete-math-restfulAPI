@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discrete Math API</title>
+</head>
+<body style="font-family: sans-serif; margin-bottom: 60px;">
+    <div style="margin-left: 50px; width: 50%;">
+    <h1>Discrete Math RestfulAPI
+    </h1>
+<h4>This is an API made by python using flask to generate unlimited questions for different discrete mathematic topics.
+
+</h4>
+
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-7q3x{font-family:Arial, Helvetica, sans-serif !important;;font-weight:bold;text-align:left;vertical-align:top}
+    .tg .tg-gx32{font-family:Arial, Helvetica, sans-serif !important;;text-align:left;vertical-align:top}
+    .tg .tg-szot{background-color:#FFF;color:#24292E;font-family:Arial, Helvetica, sans-serif !important;;text-align:left;
+      vertical-align:middle}
+    </style>
+    <table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-7q3x">Name</th>
+        <th class="tg-7q3x">URL</th>
+        <th class="tg-7q3x">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-gx32">Staging</td>
+        <td class="tg-gx32"><a href="https://mathgen-api.herokuapp.com/">https://mathgen-api.herokuapp.com/</a></td>
+        <td class="tg-szot">Synced with the master branch of <a href="https://github.com/SalarHoushvand/discrete-math-restfulAPI">this repository</a></td>
+      </tr>
+    </tbody>
+    </table>
+
+    <h2>API Methods
+    </h2>
+
+    <h3>Set Theories
+    </h3>
+
+    <h3>Get random quizz
+    </h3>
+
+    <p>By this call you can get as many questions as you requested for set theories randomly.
+    </p>
+
+    <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">GET</b> /random/int:num</int:num></p>
+
+    <p><b>Response</b></p>
+    <div style="background-color:rgb(231, 231, 231); font-size: small; padding:15px ;">
+        {<br>
+            &nbsp;"questions": [<br>
+            &nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"answerSelectionType": "single",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"answers": list<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"correctAnswer": int,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"explanation": "",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"messageForCorrectAnswer": "CORRECT ANSWER",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"messageForIncorrectAnswer": "INCORRECT ANSWER",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"point": "10",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"question": String,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"questionType": "text"<br>
+                &nbsp;&nbsp;}<br>
+                &nbsp;],<br>
+                &nbsp;"quizSynopsis": String,<br>
+                &nbsp;"quizTitle": String<br>
+            }<br>
+    </div>
+
+
+    <h3>Questions from topics
+    </h3>
+
+    <p>By calling this you need to first define the topic, then number of questions you want and finally 
+        type of items in each sets. as an example to call 5 questions from union of sets that both sets are containing integers:
+    </p>
+
+    <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">GET</b> /union/5/11</int:num></p>
+
+    <p>Here is the list of all available topics:
+    </p>
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-size:14px;
+          overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-size:14px;
+          font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-plyd{background-color:#F6F8FA;color:#24292E;;
+          text-align:left;vertical-align:middle}
+        .tg .tg-bznl{background-color:#FFF;color:#24292E;
+          font-weight:bold;text-align:left;vertical-align:middle}
+        .tg .tg-1zn6{background-color:#FFF;color:#24292E;
+          text-align:left;vertical-align:middle}
+        </style>
+        <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-bznl"><span style="font-weight:600">param</span></th>
+            <th class="tg-bznl"><span style="font-weight:600">Output</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-1zn6">union</td>
+            <td class="tg-1zn6">two random sets and union of them as answer.</td>
+          </tr>
+          <tr>
+            <td class="tg-plyd">intersection</td>
+            <td class="tg-plyd">two random sets and intersection of them as answer.</td>
+          </tr>
+          <tr>
+            <td class="tg-1zn6">difference</td>
+            <td class="tg-1zn6">two random sets and difference of them as answer.</td>
+          </tr>
+          <tr>
+            <td class="tg-plyd">symmetric_difference</td>
+            <td class="tg-plyd">two random sets and symmetric difference of them as answer.</td>
+          </tr>
+          <tr>
+            <td class="tg-1zn6">cartesian</td>
+            <td class="tg-1zn6">two sets and cartesian product of them as answer.</td>
+          </tr>
+          <tr>
+            <td class="tg-plyd">partition</td>
+            <td class="tg-plyd">one set and all subsets of it as answer.</td>
+          </tr>
+          <tr>
+            <td class="tg-1zn6">complement</td>
+            <td class="tg-1zn6">one set and complment of it as answer.</td>
+          </tr>
+        </tbody>
+        </table>
+
+        <p>The first number defines the elements in 
+            first set and second number defines elements in second, here is the list of all available elements:</p>
+
+            <style type="text/css">
+                .tg  {border-collapse:collapse;border-spacing:0;}
+                .tg td{border-color:black;border-style:solid;border-width:1px;font-size:14px;
+                  overflow:hidden;padding:10px 5px;word-break:normal;}
+                .tg th{border-color:black;border-style:solid;border-width:1px;font-size:14px;
+                  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                .tg .tg-plyd{background-color:#F6F8FA;color:#24292E;
+                  text-align:left;vertical-align:middle}
+                .tg .tg-bznl{background-color:#FFF;color:#24292E;
+                  font-weight:bold;text-align:left;vertical-align:middle}
+                .tg .tg-1zn6{background-color:#FFF;color:#24292E;
+                  text-align:left;vertical-align:middle}
+                </style>
+                <table class="tg">
+                <thead>
+                  <tr>
+                    <th class="tg-bznl"><span style="font-weight:600">param</span></th>
+                    <th class="tg-bznl"><span style="font-weight:600">Set Items</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="tg-1zn6">1</td>
+                    <td class="tg-1zn6">integer</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-plyd">2</td>
+                    <td class="tg-plyd">float</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-1zn6">3</td>
+                    <td class="tg-1zn6">character</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-plyd">4</td>
+                    <td class="tg-plyd">country name</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-1zn6">5</td>
+                    <td class="tg-1zn6">city name</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-plyd">6</td>
+                    <td class="tg-plyd">male name</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-1zn6">7</td>
+                    <td class="tg-1zn6">female name</td>
+                  </tr>
+                </tbody>
+                </table>
+
+
+    <h3>Functions</h3>
+
+    <p> You can generate random questions for different topics in function section by following calls. you can define number of output questions
+        by giving the value for num.
+    </p>
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+        </style>
+        <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-0pky"><b>call</b></th>
+            <th class="tg-0pky"><b>Question Topic</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/int:num </td>
+            <td class="tg-0pky">Whether it's a function or not if yes what kind of function. <a href="https://mathgen-api.herokuapp.com/function/1">example call</a><br></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/floorceiling/int:num</td>
+            <td class="tg-0pky">Random questions for floor and ceiling function. <a href="https://mathgen-api.herokuapp.com/function/floorceiling/1">example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/inverse/int:num</td>
+            <td class="tg-0pky">Random question for inverse of a function. <a href="https://mathgen-api.herokuapp.com/function/inverse/1">example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/domain/int:num</td>
+            <td class="tg-0pky">Random question for domain of a function. <a href="https://mathgen-api.herokuapp.com/function/domain/1">example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/target/int:num</td>
+            <td class="tg-0pky">Random question for target of a function. <a href="https://mathgen-api.herokuapp.com/function/target/1">example call</a></td>
+          </tr>
+        </tbody>
+        </table>
+</div>
+</body>
+</html>

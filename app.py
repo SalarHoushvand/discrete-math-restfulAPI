@@ -1,5 +1,5 @@
 import math
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import random_set as rs
 import random
 import jsonify as js
@@ -16,8 +16,7 @@ def question(num, par, operation):
 
 @app.route('/', methods=['GET'])
 def index():
-    return jsonify({'Welcome message': 'Welcome to api, start calling ex: /union/5/11 which means : '
-                                       '/operation name/number of questions/<first set type><second set type>'})
+    return render_template('index.html')
 
 
 @app.route('/union/<int:num>/<int:par>', methods=['GET'])
