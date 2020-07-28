@@ -319,13 +319,13 @@ def domain():
             B.append(random.randint(11, 21))
         zip1 = list(zip(A, B))
         question = 'what is the domain of this function ? f(x)=' + str(zip1)
-        zip2=[]
+        zip2 = []
         for i in zip1:
             zip2.append(i[0])
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.json_maker(question, choices, choices.index(answer)+1)
+    return js.json_maker(question, choices, choices.index(answer) + 1)
 
 
 def target():
@@ -341,12 +341,48 @@ def target():
             B.append(random.randint(11, 21))
         zip1 = list(zip(A, B))
         question = 'what is the domain of this function ? f(x)=' + str(zip1)
-        zip2=[]
+        zip2 = []
         for i in zip1:
             zip2.append(i[1])
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.json_maker(question, choices, choices.index(answer)+1)
+    return js.json_maker(question, choices, choices.index(answer) + 1)
 
-print(domain())
+
+def event_probability1():
+    choices = []
+
+    while len(choices) < 4:
+        roll_number = random.randint(2, 6)
+        outcome_num = random.randint(1, 6)
+        times = random.randint(1, roll_number)
+
+        question = f'We throw a dice for {roll_number} times what is the probability of having number {outcome_num}, {times} times?'
+        answer = f'{times}/{6 * roll_number}'
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.json_maker(question, choices, choices.index(answer) + 1)
+
+def event_probability2():
+    choices = []
+
+    while len(choices) < 4:
+        symbols = ['spades', 'hearts', 'clubs', 'diamonds']
+        cards=['Jack', 'King', 'Queen', 'Ace']
+        cards_num = random.randint(2,8)
+        goal_card1 = random.randint(2,10)
+        goal_card2= random.choice(cards)
+
+        question = f'{cards_num} cards are randomly drawn from a deck of normal playing cards (52 cards) and each time drawn card replaced to the deck what is the probability of drawing {goal_card1} of {random.choice(symbols)} and ' \
+            f' {goal_card2} of {random.choice(symbols)}?'
+
+        answer = f'1/52<sup>{cards_num}</sup>'
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.json_maker(question, choices, choices.index(answer) + 1)
+
+print(event_probability2())
+

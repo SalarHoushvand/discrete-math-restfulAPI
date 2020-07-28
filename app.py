@@ -175,5 +175,13 @@ def target(num):
     return jsonify(js.title_maker('function domain', questions))
 
 
+@app.route('/probability/event/<int:num>', methods=['GET'])
+def event_probability(num):
+    question_list = [rs.event_probability1(), rs.event_probability2()]
+    questions=[]
+    for i in range(num):
+        questions.append(random.choice(question_list))
+    return jsonify(js.title_maker('probability of an event', questions))
+
 if __name__ == '__main__':
     app.run()
