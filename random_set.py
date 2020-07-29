@@ -140,17 +140,15 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     union_symbol = '&cup;'
     empty_symbol = '&empty;'
     delta = '&Delta;'
-    set1 = str(set_1).replace("'", '').replace("[", '(').replace(']', ')')
-    set2 = str(set_2).replace("'", '').replace("[", '(').replace(']', ')')
+    set1 = str(set_1).replace("'", '').replace("[", '{').replace(']', '}')
+    set2 = str(set_2).replace("'", '').replace("[", '{').replace(']', '}')
     if op == 'union':
-        output = str(set(set_1).union(set(set_2))).replace("'", '').replace("{", '(').replace('}', ')')
-        answer = str(set(set_1).union(set(set_2))).replace("'", '').replace("{", '(').replace('}', ')')
+        output = str(set(set_1).union(set(set_2))).replace("'", '')
+        answer = str(set(set_1).union(set(set_2))).replace("'", '')
 
     elif op == 'intersection':
         output = str(
-            set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
-                                                                                                         '(').replace(
-            '}', ')')
+            set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '')
         # answer = str(set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
     #                                                                                                           '(').replace(
     #      '}', ')')
@@ -158,7 +156,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     elif op == 'difference':
         output = str(set(set_1).difference(set(set_2))).replace('set()',
                                                                 empty_symbol).replace(
-            "'", '').replace("{", '(').replace('}', ')')
+            "'", '')
         answer = str(set(set_1).difference(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
                                                                                                                 '(').replace(
             '}', ')')
@@ -174,10 +172,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
         output = str(
             set(set_1).difference(set(set_2)).union(set(set_2).difference(set(set_1)))).replace('set()',
                                                                                                 empty_symbol).replace(
-            "'", '').replace("{",
-                             '(').replace(
-            '}', ')')
-
+            "'", '')
     elif op == 'partition':
         set_2 = []
         output = str(sub_sets(set_1)).replace('[', '{').replace(']', '}')
@@ -296,11 +291,11 @@ def choices(par, operation):
         else:
             pass
     if operation == 'partition' or operation == 'complement':
-        question = ('What is the ' + operation + ' of this set? ').replace('[]', '')
+        question = ('What is the ' + operation + ' of this set? ').replace('[]', '').replace('[','{').replace(']','}')
     else:
-        question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ')
+        question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ').replace('[','{').replace(']','}')
     choices = random.sample(choices, len(choices))
-    output_json = js.json_maker(str(question) + ' ' + str(set1) + ' ' + str(set2).replace('[]', ''), choices,
+    output_json = js.json_maker(str(question) + ' ' + str(set1).replace('[]', '').replace('[','{').replace(']','}') + ' ' + str(set2).replace('[]', '').replace('[]', '').replace('[','{').replace(']','}'), choices,
                                 choices.index(answer) + 1)
 
     return output_json
