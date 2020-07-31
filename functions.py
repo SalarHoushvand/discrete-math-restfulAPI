@@ -1,13 +1,18 @@
+# -----------------------------------------------------------
+# This file contains all the functions for the API.
+# output of each file is sending to app.py to generate
+# JSON output and route to desired path.
+# -----------------------------------------------------------
+
+# ---------- Imports ----------
 import random
-import datasets as ds
-import itertools
-import jsonify as js
 import math
+import datasets as ds
+import jsonify as js
+
 
 
 # datasets are lists made for names and characters
-
-
 def random_set(integer=5, float=0, char=0, country_name=0, city_name=0, male_name=0
                , female_name=0, integer_min=0, integer_max=20, integer_type='mix'
                , float_min=0, float_max=20, float_dec=2, heterogeneous=False):
@@ -297,7 +302,7 @@ def choices(par, operation):
         question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ').replace('[', '{').replace(
             ']', '}')
     choices = random.sample(choices, len(choices))
-    output_json = js.json_maker(
+    output_json = js.question_json_maker(
         str(question) + ' ' + str(set1).replace('[]', '').replace('[', '{').replace(']', '}') + ' ' + str(set2).replace(
             '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
         choices.index(answer) + 1)
@@ -324,7 +329,7 @@ def domain():
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
 def target():
@@ -346,7 +351,7 @@ def target():
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
 def event_probability1():
@@ -362,7 +367,7 @@ def event_probability1():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
 def event_probability2():
@@ -385,7 +390,7 @@ def event_probability2():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
 def permutation1():
@@ -402,7 +407,7 @@ def permutation1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
 
@@ -418,7 +423,7 @@ def combination1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
 print(event_probability2())

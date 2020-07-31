@@ -1,3 +1,8 @@
+# -----------------------------------------------------------
+# All the datasets used in functions
+# -----------------------------------------------------------
+
+# a list containing name of all countries.
 country_names = ['United States', 'Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola',
                  'Anguilla', 'Antarctica', 'Antigua And Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia',
                  'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium',
@@ -30,6 +35,7 @@ country_names = ['United States', 'Afghanistan', 'Albania', 'Algeria', 'American
                  'Vatican City State', 'Venezuela', 'Viet Nam', 'Virgin Islands (British)', 'Virgin Islands (U.S.)',
                  'Western Sahara', 'Yemen', 'Yugoslavia', 'Zaire', 'Zambia', 'Zimbabwe']
 
+# a list contains name of all capital cities.
 city_names = [' Kabul', ' Tirana', ' Algiers', ' Andorra la Vella', ' Luanda', ' Saint John’s', ' Buenos Aires',
               ' Yerevan', ' Canberra', ' Vienna', ' Baku', ' Nassau', ' Manama', ' Dhaka', ' Bridgetown', ' Minsk',
               ' Brussels', ' Belmopan', ' Porto-Novo', ' Thimphu', ' La Paz, Sucre', ' Sarajevo', ' Gaborone',
@@ -57,17 +63,20 @@ city_names = [' Kabul', ' Tirana', ' Algiers', ' Andorra la Vella', ' Luanda', '
               ' London', ' Washington D.C.', ' Montevideo', ' Tashkent', ' Port-Vila', ' Vatican City', ' Caracas',
               ' Hanoi', ' Sanaa', ' Lusaka', ' Harare']
 
+# a list containing variety of male names to be used in sets.
 male_names = ['Saman', 'Farhad', 'Borna', 'Matin', 'Shayan', 'Farbod', 'Amir', 'Nima', 'Mohsen', 'Farzad', 'Salim',
               'Emre', 'Can', 'Mustafa', 'Tunc', 'Mesut', 'Nurcan', 'Kerem', 'Darius', 'Berat', 'Vance',
               'Ruben', 'Derick', 'Lance', 'Case', 'Reilly', 'Bryce', 'Efe', 'Allen', 'Zack', 'Matthew', 'Ezequiel',
               'Hassan', 'Shaun', 'Marvin', 'Derrick', 'Gavyn', 'Giovanni', 'Ryan', 'Ismael', 'Rudy', 'Makai', 'Ace',
               'Cooper', 'Trace', 'Darrell', 'Ali', 'Tony', 'Marquise', 'Niko']
 
+# a list containing variety of female names to be used in sets.
 female_names = ['Elif', 'Feray', 'Sevda', 'Umut', 'Dilara', 'Ece', 'Azra', 'Aylin', 'Sara', 'Ipek',
                 'Aysan', 'Marlene', 'Amira', 'Tiana', 'Yasmin', 'Guadalupe', 'Paula', 'Madilynn', 'Paityn', 'Sidney',
                 'Micaela', 'Jada', 'Elle', 'Kamora', 'Lillian', 'Anabelle', 'Shelby', 'Aniya', 'Aliza', 'Tatum',
                 'Naomi', 'Marie', 'Kaia', 'Ava', 'Naima', 'Marisol', 'Amy', 'Kaitlynn', 'Lizeth', 'Callie', 'Miriam',
                 'Alicia', 'Litzy', 'Charlize', 'Natalie', 'Ashanti', 'Jenna', 'Aliya', 'Lia', 'Savannah']
 
+# a list containing all english characters.
 characters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
               'V', 'W', 'X', 'Y', 'Z']
