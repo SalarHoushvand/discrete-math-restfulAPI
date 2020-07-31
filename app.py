@@ -185,5 +185,23 @@ def event_probability(num):
     return jsonify(js.title_maker('probability of an event', questions))
 
 
+@app.route('/probability/permutation/<int:num>', methods=['GET'])
+def permutation1(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(rs.permutation1())
+    return jsonify(js.title_maker('permutation', questions))
+
+
+@app.route('/probability/combination/<int:num>', methods=['GET'])
+def combination1(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(rs.combination1())
+    return jsonify(js.title_maker('combination', questions))
+
+
 if __name__ == '__main__':
     app.run()

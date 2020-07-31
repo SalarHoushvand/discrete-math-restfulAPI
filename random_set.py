@@ -2,6 +2,7 @@ import random
 import datasets as ds
 import itertools
 import jsonify as js
+import math
 
 
 # datasets are lists made for names and characters
@@ -291,12 +292,15 @@ def choices(par, operation):
         else:
             pass
     if operation == 'partition' or operation == 'complement':
-        question = ('What is the ' + operation + ' of this set? ').replace('[]', '').replace('[','{').replace(']','}')
+        question = ('What is the ' + operation + ' of this set? ').replace('[]', '').replace('[', '{').replace(']', '}')
     else:
-        question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ').replace('[','{').replace(']','}')
+        question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ').replace('[', '{').replace(
+            ']', '}')
     choices = random.sample(choices, len(choices))
-    output_json = js.json_maker(str(question) + ' ' + str(set1).replace('[]', '').replace('[','{').replace(']','}') + ' ' + str(set2).replace('[]', '').replace('[]', '').replace('[','{').replace(']','}'), choices,
-                                choices.index(answer) + 1)
+    output_json = js.json_maker(
+        str(question) + ' ' + str(set1).replace('[]', '').replace('[', '{').replace(']', '}') + ' ' + str(set2).replace(
+            '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
+        choices.index(answer) + 1)
 
     return output_json
 
@@ -360,17 +364,21 @@ def event_probability1():
     choices = random.sample(choices, len(choices))
     return js.json_maker(question, choices, choices.index(answer) + 1)
 
+
 def event_probability2():
     choices = []
 
     while len(choices) < 4:
         symbols = ['spades', 'hearts', 'clubs', 'diamonds']
-        cards=['Jack', 'King', 'Queen', 'Ace']
-        cards_num = random.randint(2,8)
-        goal_card1 = random.randint(2,10)
-        goal_card2= random.choice(cards)
+        cards = ['Jack', 'King', 'Queen', 'Ace']
+        cards_num = random.randint(2, 8)
+        goal_card1 = random.randint(2, 10)
+        goal_card2 = random.choice(cards)
 
-        question = f'{cards_num} cards are randomly drawn from a deck of normal playing cards (52 cards) and each time drawn card replaced to the deck what is the probability of drawing {goal_card1} of {random.choice(symbols)} and ' \
+        question = f'{cards_num} cards are randomly drawn from a deck of normal' \
+            f' playing cards (52 cards) and each time ' \
+            f'drawn card replaced to the deck what is the probability' \
+            f' of drawing {goal_card1} of {random.choice(symbols)} and ' \
             f' {goal_card2} of {random.choice(symbols)}?'
 
         answer = f'1/52<sup>{cards_num}</sup>'
@@ -379,5 +387,38 @@ def event_probability2():
     choices = random.sample(choices, len(choices))
     return js.json_maker(question, choices, choices.index(answer) + 1)
 
-print(event_probability2())
 
+def permutation1():
+    choices = []
+    while len(choices) < 4:
+        athletes_num = random.randint(6, 10)
+        question = f'{athletes_num} athletes are competing in a tournament, the first winner ' \
+            f'is going to get a golden medal, ' \
+            f'second is going to get a  silver and third is going to get bronze. considering ' \
+            f'the chances of all athletes for all three medals are same in how many possible' \
+            f' way we can distribute the medals?'
+        answer = str(math.factorial(athletes_num) / math.factorial(athletes_num - 3))
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.json_maker(question, choices, choices.index(answer) + 1)
+
+
+
+def combination1():
+    choices = []
+    while len(choices) < 4:
+        athletes_num = random.randint(3, 6)
+        total_num = athletes_num + random.randint(4,8)
+        question = f'{athletes_num} are going to be selected out of a team of {total_num} how many posisible combinations' \
+            f'exist?'
+        answer = str(math.factorial(total_num) / (math.factorial(athletes_num - athletes_num) * math.factorial(athletes_num)))
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.json_maker(question, choices, choices.index(answer) + 1)
+
+
+print(event_probability2())
