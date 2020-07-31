@@ -11,16 +11,15 @@ import datasets as ds
 import jsonify as js
 
 
-
-# datasets are lists made for names and characters
-def random_set(integer=5, float=0, char=0, country_name=0, city_name=0, male_name=0
+# ---------- Set Operations ----------
+def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_name=0
                , female_name=0, integer_min=0, integer_max=20, integer_type='mix'
                , float_min=0, float_max=20, float_dec=2, heterogeneous=False):
     """
     Generates set with given arguments.
 
     :param integer: number of integers in the set.
-    :param float: number of floats in the set.
+    :param floats: number of floats in the set.
     :param char: number of characters in the set.
     :param country_name: number of country names in the set.
     :param city_name: number of city names in the set.
@@ -70,7 +69,7 @@ def random_set(integer=5, float=0, char=0, country_name=0, city_name=0, male_nam
                 main_list.append(rand_int)
     # floats
     float_temp = []
-    while len(float_temp) < float:
+    while len(float_temp) < floats:
         if heterogeneous:
             rand_float = round(random.uniform(float_min, float_max), float_dec)
             if rand_float not in float_temp:
@@ -119,6 +118,7 @@ def subsetsRecur(current, sset):
     return [current]
 
 
+# DEBUG : partition and complement
 def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     """
     Implements different set operations on two given sets.
@@ -137,42 +137,28 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     :return: output
     """
     global output
-    # intersection_symbol = u'\u2229'
-    # union_symbol = u'\u222a'
-    # empty_symbol = u'\u2205'
-    # delta = u'\u0394'
 
-    intersection_symbol = '&cap;'
-    union_symbol = '&cup;'
+    # list of symbols used in the questions in HTML unicode format
+    # intersection_symbol = '&cap;'
+    # union_symbol = '&cup;'
     empty_symbol = '&empty;'
-    delta = '&Delta;'
-    set1 = str(set_1).replace("'", '').replace("[", '{').replace(']', '}')
-    set2 = str(set_2).replace("'", '').replace("[", '{').replace(']', '}')
+    # delta = '&Delta;'
+
     if op == 'union':
         output = str(set(set_1).union(set(set_2))).replace("'", '')
-        answer = str(set(set_1).union(set(set_2))).replace("'", '')
 
     elif op == 'intersection':
         output = str(
             set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '')
-        # answer = str(set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
-    #                                                                                                           '(').replace(
-    #      '}', ')')
 
     elif op == 'difference':
         output = str(set(set_1).difference(set(set_2))).replace('set()',
                                                                 empty_symbol).replace(
             "'", '')
-        answer = str(set(set_1).difference(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
-                                                                                                                '(').replace(
-            '}', ')')
 
     elif op == 'cartesian':
         output = str([(obj1, obj2) for obj1 in set_1 for obj2 in set_2]).replace(
             '[', '').replace(']', '')
-        answer = str(set(set_1).difference(set(set_2))).replace('set()', empty_symbol).replace("'", '').replace("{",
-                                                                                                                '(').replace(
-            '}', ')')
 
     elif op == 'symmetric_difference':
         output = str(
@@ -195,23 +181,14 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     return output
 
 
-def function(A, B):
-    output = ''
-    if len(A) == len(set(A)):
-        output = ('General function')
-        if len(B) != len(set(B)):
-            if len(B) < len(A) or len(B) == len(A):
-                output = ('Surjective function')
-            elif len(B) > len(A) or len(B) == len(A):
-                output = ('Injective function')
-        elif len(B) == len(set(B)) and len(A) == len(B):
-            output = ('Bijective function')
-    else:
-        output = ('Not function')
-    return output
-
-
 def choices(par, operation):
+    """
+    Generates choices for set operation multiple answer questions.
+
+    :param par: type of items in each list.(str)
+    :param operation: type of operation on sets.(str)
+    :return: Questions.(JSON)
+    """
     choices = []
     output = []
     while len(choices) < 4:
@@ -221,7 +198,7 @@ def choices(par, operation):
             if num2[0] == '1':
                 set1 = random_set(integer=3)
             elif num2[0] == '2':
-                set1 = random_set(integer=0, float=3)
+                set1 = random_set(integer=0, floats=3)
             elif num2[0] == '3':
                 set1 = random_set(integer=0, char=3)
             elif num2[0] == '4':
@@ -236,7 +213,7 @@ def choices(par, operation):
             if num2[0] == '1':
                 set1 = random_set(integer=3)
             elif num2[0] == '2':
-                set1 = random_set(integer=0, float=3)
+                set1 = random_set(integer=0, floats=3)
             elif num2[0] == '3':
                 set1 = random_set(integer=0, char=3)
             elif num2[0] == '4':
@@ -250,7 +227,7 @@ def choices(par, operation):
             if num2[1] == '1':
                 set2 = random_set(integer=3)
             elif num2[1] == '2':
-                set2 = random_set(integer=0, float=3)
+                set2 = random_set(integer=0, floats=3)
             elif num2[1] == '3':
                 set2 = random_set(integer=0, char=3)
             elif num2[1] == '4':
@@ -266,7 +243,7 @@ def choices(par, operation):
             if num2[0] == '1':
                 set1 = random_set()
             elif num2[0] == '2':
-                set1 = random_set(integer=0, float=5)
+                set1 = random_set(integer=0, floats=5)
             elif num2[0] == '3':
                 set1 = random_set(integer=0, char=5)
             elif num2[0] == '4':
@@ -280,7 +257,7 @@ def choices(par, operation):
             if num2[1] == '1':
                 set2 = random_set()
             elif num2[1] == '2':
-                set2 = random_set(integer=0, float=5)
+                set2 = random_set(integer=0, floats=5)
             elif num2[1] == '3':
                 set2 = random_set(integer=0, char=5)
             elif num2[1] == '4':
@@ -308,6 +285,30 @@ def choices(par, operation):
         choices.index(answer) + 1)
 
     return output_json
+
+# ---------- Functions ----------
+
+def function(domain_set, target_set):
+    """
+    :param domain_set:
+    :param target_set:
+    :return:
+    """
+
+    if len(domain_set) == len(set(domain_set)):
+        function_type = 'General function'
+        if len(target_set) != len(set(target_set)):
+            if len(target_set) < len(domain_set) or len(target_set) == len(domain_set):
+                function_type = 'Surjective function'
+            elif len(target_set) > len(domain_set) or len(target_set) == len(domain_set):
+                function_type = 'Injective function'
+        elif len(target_set) == len(set(target_set)) and len(domain_set) == len(target_set):
+            function_type = 'Bijective function'
+    else:
+        function_type = 'Not function'
+    return function_type
+
+
 
 
 def domain():
@@ -353,8 +354,14 @@ def target():
     choices = random.sample(choices, len(choices))
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
+# ---------- Probabilities ----------
 
-def event_probability1():
+
+def event_probability_1():
+    """
+    Generates a question for event probability.
+    :return: question, answer choices, correct answer.(JSON)
+    """
     choices = []
 
     while len(choices) < 4:
@@ -370,7 +377,7 @@ def event_probability1():
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
-def event_probability2():
+def event_probability_2():
     choices = []
 
     while len(choices) < 4:
@@ -393,7 +400,7 @@ def event_probability2():
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
-def permutation1():
+def permutation_1():
     choices = []
     while len(choices) < 4:
         athletes_num = random.randint(6, 10)
@@ -410,15 +417,15 @@ def permutation1():
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
-
-def combination1():
+def combination_1():
     choices = []
     while len(choices) < 4:
         athletes_num = random.randint(3, 6)
-        total_num = athletes_num + random.randint(4,8)
+        total_num = athletes_num + random.randint(4, 8)
         question = f'{athletes_num} are going to be selected out of a team of {total_num} how many posisible combinations' \
             f'exist?'
-        answer = str(math.factorial(total_num) / (math.factorial(athletes_num - athletes_num) * math.factorial(athletes_num)))
+        answer = str(
+            math.factorial(total_num) / (math.factorial(athletes_num - athletes_num) * math.factorial(athletes_num)))
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
@@ -426,4 +433,4 @@ def combination1():
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
-print(event_probability2())
+

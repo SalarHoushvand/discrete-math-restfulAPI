@@ -304,28 +304,29 @@ def event_probability(num):
     questions = []
 
     for i in range(num):
-        question_list = [functions.event_probability1(), functions.event_probability2()]
+        question_list = [functions.event_probability_1(), functions.event_probability_2()]
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('probability of an event', questions))
 
 
 @app.route('/probability/permutation/<int:num>', methods=['GET'])
-def permutation1(num):
+def permutation_1(num):
     questions = []
 
     for i in range(num):
-        questions.append(functions.permutation1())
+        questions.append(functions.permutation_1())
     return jsonify(js.json_maker('permutation', questions))
 
 
 @app.route('/probability/combination/<int:num>', methods=['GET'])
-def combination1(num):
+def combination_1(num):
     questions = []
 
     for i in range(num):
-        questions.append(functions.combination1())
+        questions.append(functions.combination_1())
     return jsonify(js.json_maker('combination', questions))
 
 
+# ---------- App Run ----------
 if __name__ == '__main__':
     app.run()
