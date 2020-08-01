@@ -162,7 +162,7 @@ def random_qa(num):
 # ---------- Functions ----------
 
 
-# DEBUG : Make multiple choice options
+# DEBUG : for some functions like (4,1) (4,1) gives not functions (eliminate repeated answers)
 @app.route('/function/<int:num>', methods=['GET'])
 def general_function(num):
     """
@@ -171,28 +171,11 @@ def general_function(num):
     :param num: number of questions.
     :return: questions in JSON format.
     """
-    global zip
-    # output_json = {}
-    output = []
-    for i in range(num):
-        A = []
-        B = []
-        # question_json = 'question ' + str(i + 1)
-        for i in range(random.randint(3, 6)):
-            A.append(random.randint(1, 10))
-        for i in range(random.randint(3, 6)):
-            B.append(random.randint(1, 10))
-        zip1 = list(zip(A, B))
+    questions = []
 
-        question = 'Is f(x) from A to B a function ? If so what kind of function it is ? f(x)=' + str(zip1)
-        answer = functions.function(A, B)
-        # output.update({question_json: {'A': A, 'B': B, 'question': question, 'answer': str(answer)}})
-        answer_options = ['General function', 'Surjective function', 'Injective function', 'Bijective function',
-                          'Not function']
-        output_json = js.question_json_maker(question, answer)
-        output.append(output_json)
-    output_json = js.json_maker('function', output)
-    return jsonify(output_json)
+    for i in range(num):
+        questions.append(functions.general_function())
+    return jsonify(js.json_maker('general function', questions))
 
 
 @app.route('/function/floorceiling/<int:num>', methods=['GET'])
@@ -203,33 +186,11 @@ def floor_ceiling_function(num):
     :param num: number of questions.
     :return: questions in JSON format.
     """
-    global question_list_maker, answer
-    # output_json = {}
-    output = []
-    # r_floor_symbol = u"\u230B"
-    # l_floor_symbol = u"\u230A"
-    # r_ceiling_symbol = u"\u2309"
-    # l_ceiling_symbol = u"\u2308"
-    r_floor_symbol = '&rfloor;'
-    l_floor_symbol = '&lfloor;'
-    r_ceiling_symbol = '&rceil;'
-    l_ceiling_symbol = '&lceil;'
-    A = 0
+    questions = []
+
     for i in range(num):
-        # question_json = 'question ' + str(i + 1)
-        A = round(random.uniform(-40, 40), 2)
-        identifier = random.randint(0, 10)
-        if identifier % 2 == 0:
-            question_list_maker = l_floor_symbol + str(A) + r_floor_symbol + ' ?'
-            answer = str(math.floor(A))
-        else:
-            question_list_maker = l_ceiling_symbol + str(A) + r_ceiling_symbol + ' ?'
-            answer = str(math.ceil(A))
-        # output.update({question_json: {'question': question, 'answer': answer}})
-        output_json = js.question_json_maker(question_list_maker, answer)
-        output.append(output_json)
-    output_json = js.json_maker('floor and ceiling function', output)
-    return jsonify(output_json)
+        questions.append(functions.floor_ceiling_function())
+    return jsonify(js.json_maker('floor ceiling function', questions))
 
 
 @app.route('/function/inverse/<int:num>', methods=['GET'])
@@ -240,33 +201,11 @@ def inverse_of_function(num):
     :param num: number of questions.
     :return: questions in JSON format.
     """
-    global zip
-    # output_json = {}
-    output = []
+    questions = []
+
     for i in range(num):
-        A = []
-        B = []
-        set_len = random.randint(3, 6)
-        # question_json = 'question ' + str(i + 1)
-        while len(A) != set_len:
-            rand_int = random.randint(1, 15)
-            if rand_int not in A:
-                A.append(rand_int)
-        while len(B) != set_len:
-            rand_int = random.randint(15, 30)
-            if rand_int not in B:
-                B.append(rand_int)
-        zip1 = list(zip(A, B))
-        zip2 = list(zip(B, A))
-
-        question = 'What is the inverse of function f=' + str(zip1) + ' ?'
-        answer = str(zip2)
-
-        # output.update({question_json: {'question': question, 'answer': str(answer)}})
-        output_json = js.question_json_maker(question, answer)
-        output.append(output_json)
-    output_json = js.json_maker('inverse of a function', output)
-    return jsonify(output_json)
+        questions.append(functions.inverse_of_function())
+    return jsonify(js.json_maker('inverse of function', questions))
 
 # DEBUG : Make sure its a function first, then ask for domain.
 @app.route('/function/domain/<int:num>', methods=['GET'])
