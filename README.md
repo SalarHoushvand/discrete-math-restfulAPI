@@ -11,25 +11,33 @@ This is an API made by python using flask to generate unlimited questions for di
 ## API Methods
 
 ### Get random quizz
-This call give you random quizz by choosing 3 questions from each topics.
+By this call you can get as many questions as you requested for set theories randomly.
 
 ```HTTP
-GET /random
+GET /random/int:num
 ```
 
 **Response**
 
-```ts
-question number : string{{
-  
-  question : string
-  
-  set1: list
-  
-  set2: list
-  
-  answer: string
-}}
+```{
+"questions": [
+{
+"answerSelectionType": "single",
+"answers": [
+list
+],
+"correctAnswer": int,
+"explanation": "",
+"messageForCorrectAnswer": "CORRECT ANSWER",
+"messageForIncorrectAnswer": "INCORRECT ANSWER",
+"point": "10",
+"question":str,
+"questionType": "text"
+}
+],
+"quizSynopsis":str,
+"quizTitle":str
+}
 ```
 
 ### Questions from topics
@@ -65,3 +73,14 @@ The first number defines the elements in first set and second number defines ele
 | 7    | female name
 
 
+### Functions
+
+You can generate random questions for different topics in function section by following calls. you can define number of output questions by giving the value for num.
+
+| Call| Question Topic                                                                                                                                                                                                                                                                                                     |
+| :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ```GET /function/int:num```    | Whether it's a function or not if yes what kind of function.                                                                                                                                                                                                         |
+|  ```GET /function/floorceiling/int:num```    | Random questions for floor and ceiling function.                                                                                                                                                                                                                                                                                     |
+| ```GET  /function/inverse/int:num```|Random question for inverse of a function.                                                                                                                                                                                           |
+| ```GET  /function/domain/int:num```| Random question for domain of a function.                                                                                                                                                                                                                       |
+| ```GET  /function/target/int:num```| Random question for target of a function.                                                                                                                                                                                                            |
