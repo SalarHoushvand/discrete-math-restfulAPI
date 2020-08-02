@@ -14,6 +14,7 @@ import math
 # silver and third is going to get bronze. considering the chances of all athletes for all three medals are same in
 # how many possible way we can distribute the medals?
 # n!/n-3!
+
 def permutations():
     athletes_num = random.randint(6, 10)
     question = f'{athletes_num} athletes are competing in a tournament, the first winner is going to get a golden medal, ' \

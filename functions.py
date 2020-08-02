@@ -141,7 +141,7 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     # list of symbols used in the questions in HTML unicode format
     # intersection_symbol = '&cap;'
     # union_symbol = '&cup;'
-    empty_symbol = '&empty;'
+    empty_symbol = '∅'
     # delta = '&Delta;'
 
     if op == 'union':
@@ -351,10 +351,10 @@ def floor_ceiling_function():
     """
     choices = []
     while len(choices) < 4:
-        r_floor_symbol = '&rfloor;'
-        l_floor_symbol = '&lfloor;'
-        r_ceiling_symbol = '&rceil;'
-        l_ceiling_symbol = '&lceil;'
+        r_floor_symbol = '⌋'
+        l_floor_symbol = '⌊'
+        r_ceiling_symbol = '⌉'
+        l_ceiling_symbol = '⌈'
         A = 0
 
         # question_json = 'question ' + str(i + 1)
@@ -371,6 +371,7 @@ def floor_ceiling_function():
     choices = random.sample(choices, len(choices))
 
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
 
 def inverse_of_function():
     """
@@ -405,6 +406,7 @@ def inverse_of_function():
 
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
+
 def domain():
     global zip
     choices = []
@@ -417,7 +419,7 @@ def domain():
         for i in range(random.randint(3, 6)):
             B.append(random.randint(11, 21))
         zip1 = list(zip(A, B))
-        question = 'what is the domain of this function ? f(x)=' + str(zip1).replace('[','{').replace(']','}')
+        question = 'what is the domain of this function ? f(x)=' + str(zip1).replace('[', '{').replace(']', '}')
         zip2 = []
         for i in zip1:
             zip2.append(i[0])
@@ -439,7 +441,7 @@ def target():
         for i in range(random.randint(3, 6)):
             B.append(random.randint(11, 21))
         zip1 = list(zip(A, B))
-        question = 'what is the domain of this function ? f(x)=' + str(zip1).replace('[','{').replace(']','}')
+        question = 'what is the domain of this function ? f(x)=' + str(zip1).replace('[', '{').replace(']', '}')
         zip2 = []
         for i in zip1:
             zip2.append(i[1])
@@ -474,6 +476,10 @@ def event_probability_1():
 
 
 def event_probability_2():
+    """
+       Generates a question for event probability.
+       :return: question, answer choices, correct answer.(JSON)
+       """
     choices = []
 
     while len(choices) < 4:
@@ -497,6 +503,10 @@ def event_probability_2():
 
 
 def permutation_1():
+    """
+       Generates a question for event permutation.
+       :return: question, answer choices, correct answer.(JSON)
+    """
     choices = []
     while len(choices) < 4:
         athletes_num = random.randint(6, 10)
@@ -514,6 +524,10 @@ def permutation_1():
 
 
 def combination_1():
+    """
+       Generates a question for combination.
+       :return: question, answer choices, correct answer.(JSON)
+       """
     choices = []
     while len(choices) < 4:
         athletes_num = random.randint(3, 6)
