@@ -9,22 +9,29 @@ import random
 import jsonify as js
 import math
 
+# In a certain population of class:
+# (n)round(raw_result,2)
 
-# (n) athletes are competing in a tournament, the first winner is going to get a golden medal, second is going to get a
-# silver and third is going to get bronze. considering the chances of all athletes for all three medals are same in
-# how many possible way we can distribute the medals?
-# n!/n-3!
+def multiplication_1():
+    """
+    Generates a question for multiplication.
+    :return: question, answer choices, correct answer.(JSON)
+    """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(3, 8)
+        question = ('You need to create a password ' + str(
+            a) + ' characters long. You can choose letters and numbers. Repetition of letters and numbers are allowed, '
+                 'and letters can be capital or lowercase. How many passwords are possible?')
+        answer = 'You have 62 choices available for each of the ' + str(
+            a) + ' positions since repetition is allowed.' + str(62 ** a)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return choices
 
-def permutations():
-    athletes_num = random.randint(6, 10)
-    question = f'{athletes_num} athletes are competing in a tournament, the first winner is going to get a golden medal, ' \
-        f'second is going to get a  silver and third is going to get bronze. considering ' \
-        f'the chances of all athletes for all three medals are same in how many possible way we can distribute the medals?'
-    answer = str(math.factorial(athletes_num) / math.factorial(athletes_num - 3))
-    output = question + answer
-    return output
 
 
-print(permutations())
+print(multiplication_1())
 
 # ===========================================================

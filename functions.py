@@ -502,6 +502,93 @@ def event_probability_2():
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
+def event_probability_3():
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(5, 9)
+        b = random.randint(8, 12)
+        question = ('While picking out a tie, you have the choice between ' + str(a) + ' satin ties or ' + str(b) +
+                    ' cotton. How many tie choices do you have?')
+        answer = str(a + b)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def multiplication_1():
+    """
+    Generates a question for multiplication.
+    :return: question, answer choices, correct answer.(JSON)
+    """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(3, 8)
+        question = ('You need to create a password ' + str(
+            a) + ' characters long. You can choose letters and numbers. Repetition of letters and numbers are allowed, '
+                 'and letters can be capital or lowercase. How many passwords are possible?')
+        answer = 'You have 62 choices available for each of the ' + str(
+            a) + ' positions since repetition is allowed.' + str(62 ** a)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def multiplication_2():
+    """
+        Generates a question for multiplication.
+        :return: question, answer choices, correct answer.(JSON)
+        """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(5, 10)
+        question = ('You decide to flip a coin ' + str(a) + ' times, resulting in a sequence of heads (H) '
+                                                            'or tails (T). How many difference sequences'
+                                                            ' of heads and tails are possible?')
+        answer = str(2 ** a)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def multiplication_3():
+    """
+        Generates a question for multiplication.
+        :return: question, answer choices, correct answer.(JSON)
+        """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(5, 10)
+        question = ('Rolling a 3-sided die results in a 1, 2, or 3 appearing. If you roll the die ' + str(
+            a) + ' times, how many different sequences are possible?')
+        answer = str(3 ** a)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def multiplication_4():
+    """
+        Generates a question for multiplication.
+        :return: question, answer choices, correct answer.(JSON)
+        """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(4, 8)
+        b = random.randint(3, 6)
+        c = random.randint(4, 9)
+        question = ('You have ' + str(a) + ' shirts, ' + str(b) + ' pairs of shoes, and ' + str(
+            c) + ' pairs of pants. How many outfits can you make?')
+        answer = str(a * b * c)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
 def permutation_1():
     """
        Generates a question for event permutation.
@@ -523,6 +610,27 @@ def permutation_1():
     return js.question_json_maker(question, choices, choices.index(answer) + 1)
 
 
+def permutation_2():
+    """
+          Generates a question for event permutation.
+          :return: question, answer choices, correct answer.(JSON)
+       """
+    choices = []
+
+    while len(choices) < 4:
+        a = random.randint(5, 8)
+        word_list = ['phone', 'truck', 'beach', 'ideal', 'spare', 'smart', 'tower', 'times', 'today']
+        selected_word = random.choice(word_list)
+        question = f'How many different {str(a)} letter words can be made' \
+            f' from {selected_word} if letters cannot be repeated?'
+        answer = str((math.factorial(a)) / (math.factorial(a - (len(selected_word)))))
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
 def combination_1():
     """
        Generates a question for combination.
@@ -534,9 +642,131 @@ def combination_1():
         total_num = athletes_num + random.randint(4, 8)
         question = f'{athletes_num} are going to be selected out of a team of {total_num}' \
             f' how many posisible combinations' \
-            f'exist?'
+            f' exist?'
         answer = str(
             math.factorial(total_num) / (math.factorial(athletes_num - athletes_num) * math.factorial(athletes_num)))
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def combination_2():
+    """
+           Generates a question for combination.
+           :return: question, answer choices, correct answer.(JSON)
+           """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(2, 7)
+        b = random.randint(3, 8)
+        question = (str(a) + ' marbles are drawn from a bag containing ' + str(a) + ' red and ' + str(
+            b) + ' white marbles. How many different draws are there?')
+        answer = str((math.factorial(a + b)) / (math.factorial(a) * math.factorial(b)))
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def combination_3():
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(3, 6)
+        b = random.randint(20, 40)
+        question = ('Drawing ' + str(a) + ' cards from a standard deck of ' + str(
+            b) + ' cards, how many different card hands are there?')
+        answer = str((math.factorial(b)) / (math.factorial(b - a)))
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def conditional_probability_1():
+    """
+          Generates a question for conditional probability.
+          :return: question, answer choices, correct answer.(JSON)
+          """
+    choices = []
+    while len(choices) < 4:
+
+        allergic_percent = round(random.uniform(2, 8), 2)
+        question = f'The {allergic_percent} percent of adults are female are allergic to sesame, ' \
+            f'what is the probability of being allergic to sesame, given being a female? round your answer to nearest hundredth'
+        raw_result = ((allergic_percent / 100) / (0.5)) * 100
+        answer = str(round(raw_result, 2)) + '%'
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def probability_union():
+    choices = []
+    while len(choices) < 4:
+        python = (random.randint(10, 60))
+        java = (random.randint(10, 50))
+        both = (random.randint(10, 20))
+        python_str = str(python) + '%'
+        java_str = str(java) + '%'
+        both_str = str(both) + '%'
+
+        question = f'In a certain population of class:  {python_str} are familiar with Python. {java_str} are familiar with Java.  ' \
+            f'{both_str} are familiar with both Python and Java.  What percent of students are familiar with either Python or Java?'
+        raw_result = str((python + java) - both)
+        answer = raw_result + '%'
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def probability_complement():
+    choices = []
+    while len(choices) < 4:
+
+        possible_outcomes = [1, 2, 3, 4, 5, 6]
+        chosen_ones = []
+        for i in range(random.randint(1, 5)):
+            chosen_ones.append(random.choice(possible_outcomes))
+
+        excluded_numebrs = str(set(chosen_ones)).replace('[', '{').replace(']', '}')
+        question = f'We are rolling a normal dice, What is the probability that out come would not be' \
+            f'one of these numbers ? {excluded_numebrs} round your answer to nearest hundredth'
+        chosen_ones = set(chosen_ones)
+        raw_answer = (1 - (len(chosen_ones) / 6)) * 100
+        answer = str(round(raw_answer, 2)) + '%'
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+
+
+def bayes_theorem():
+    choices = []
+    while len(choices) < 4:
+        A_blue = random.randint(2, 10)
+        A_red = random.randint(2, 10)
+        B_blue = random.randint(2, 10)
+        B_red = random.randint(2, 10)
+        P_blue_from_A = A_blue / (A_blue + A_red)
+        P_blue_from_B = B_blue / (B_blue + B_red)
+        P_bucket = 1 / 2
+        P_blue = (P_blue_from_A * P_bucket) + (P_blue_from_B * P_bucket)
+
+        question = f'We have two buckets A and B. There are {A_blue} blue pencils and {A_red} red pencils in bucket A. And ' \
+            f'there are {B_blue} blue pencils and {B_red} red pencils in bucket B. If we randomly draw a blue pencil,' \
+            f' what is the probability' \
+            f'that pencil was from bucket A ? '
+        raw_answer = ((P_blue_from_A * P_bucket) / P_blue) * 100
+        answer = str(round(raw_answer, 2)) + '%'
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))

@@ -159,6 +159,7 @@ def random_qa(num):
 
     return jsonify(js.json_maker('Random', output))
 
+
 # ---------- Functions ----------
 
 
@@ -207,6 +208,7 @@ def inverse_of_function(num):
         questions.append(functions.inverse_of_function())
     return jsonify(js.json_maker('inverse of function', questions))
 
+
 # DEBUG : Make sure its a function first, then ask for domain.
 @app.route('/function/domain/<int:num>', methods=['GET'])
 def domain(num):
@@ -220,6 +222,7 @@ def domain(num):
     for i in range(num):
         questions.append(functions.domain())
     return jsonify(js.json_maker('function domain', questions))
+
 
 # DEBUG : Make sure its a function first, then ask for target.
 @app.route('/function/target/<int:num>', methods=['GET'])
@@ -243,27 +246,77 @@ def event_probability(num):
     questions = []
 
     for i in range(num):
-        question_list = [functions.event_probability_1(), functions.event_probability_2()]
+        question_list = [functions.event_probability_1(), functions.event_probability_2(),
+                         functions.event_probability_3()]
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('probability of an event', questions))
 
 
 @app.route('/probability/permutation/<int:num>', methods=['GET'])
-def permutation_1(num):
+def permutation(num):
     questions = []
 
     for i in range(num):
-        questions.append(functions.permutation_1())
+        question_list = [functions.permutation_1(), functions.permutation_2()]
+        questions.append(random.choice(question_list))
     return jsonify(js.json_maker('permutation', questions))
 
 
-@app.route('/probability/combination/<int:num>', methods=['GET'])
-def combination_1(num):
+@app.route('/probability/multiplication/<int:num>', methods=['GET'])
+def multiplication(num):
     questions = []
 
     for i in range(num):
-        questions.append(functions.combination_1())
+        question_list = [functions.multiplication_1(), functions.multiplication_2(), functions.multiplication_3(),
+                         functions.multiplication_4()]
+        questions.append(random.choice(question_list))
+    return jsonify(js.json_maker('multiplication', questions))
+
+
+@app.route('/probability/combination/<int:num>', methods=['GET'])
+def combination(num):
+    questions = []
+
+    for i in range(num):
+        question_list = [functions.combination_2(), functions.combination_1(), functions.combination_3()]
+        questions.append(random.choice(question_list))
     return jsonify(js.json_maker('combination', questions))
+
+
+@app.route('/probability/conditional/<int:num>', methods=['GET'])
+def conditional_probability(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.conditional_probability_1())
+    return jsonify(js.json_maker('conditional probability', questions))
+
+
+@app.route('/probability/union/<int:num>', methods=['GET'])
+def probability_union(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.probability_union())
+    return jsonify(js.json_maker('probability union', questions))
+
+
+@app.route('/probability/complement/<int:num>', methods=['GET'])
+def probability_complement(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.probability_complement())
+    return jsonify(js.json_maker('probability complement', questions))
+
+
+@app.route('/probability/bayes/<int:num>', methods=['GET'])
+def bayes_theorem(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.bayes_theorem())
+    return jsonify(js.json_maker('bayes theorem', questions))
 
 
 # ---------- App Run ----------
