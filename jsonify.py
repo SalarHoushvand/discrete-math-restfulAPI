@@ -18,8 +18,8 @@ def question_json_maker(question, answer, answer_index=1):
         "answerSelectionType": "single",
         "answers": answer,
         "correctAnswer": answer_index,
-        "messageForCorrectAnswer": "CORRECT ANSWER",
-        "messageForIncorrectAnswer": "INCORRECT ANSWER",
+        "messageForCorrectAnswer": "Correct Answer",
+        "messageForIncorrectAnswer": "Incorrect Answer",
         "explanation": "",
         "point": "10"
     }
