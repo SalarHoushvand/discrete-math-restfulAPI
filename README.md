@@ -84,3 +84,20 @@ You can generate random questions for different topics in function section by fo
 | ```GET  /function/inverse/int:num```|Random question for inverse of a function.                                                                                                                                                                                           |
 | ```GET  /function/domain/int:num```| Random question for domain of a function.                                                                                                                                                                                                                       |
 | ```GET  /function/target/int:num```| Random question for target of a function.                                                                                                                                                                                                            |
+
+
+
+### Probabilities
+
+You can generate random questions for different topics in probabilities section by following calls. you can define number of output questions by giving the value for num.
+
+| Call| Question Topic                                                                                                                                                                                                                                                                                                     |
+| :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ```GET /probability/event/int:num```    | Probability of an event |
+|  ```GET /probability/permutation/int:num```    | Permutation  |
+| ```GET /probability/multiplication/int:num	```|Multiplication|
+| ```GET /probability/combination/int:num	```| Combination|
+| ```GET /probability/conditional/int:num```| Conditional Probability |
+| ```GET /probability/union/int:num```| Probability Union|
+| ```GET /probability/complement/int:num	```| Probability Complement |
+| ```GET /probability/bayes/int:num```| Bayes Theorem |
