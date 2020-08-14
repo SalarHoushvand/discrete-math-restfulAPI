@@ -267,7 +267,7 @@ def multiplication(num):
     questions = []
 
     for i in range(num):
-        question_list = [functions.multiplication_1(), functions.multiplication_2(), functions.multiplication_3(),
+        question_list = [functions.multiplication_2(), functions.multiplication_3(),
                          functions.multiplication_4()]
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('multiplication', questions))
