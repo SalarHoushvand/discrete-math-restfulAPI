@@ -319,6 +319,15 @@ def bayes_theorem(num):
     return jsonify(js.json_maker('bayes theorem', questions))
 
 
+@app.route('/topics', methods=['GET'])
+def topics():
+   topics = {"topics":{
+       'bayes theorem': '/probability/bayes/',
+        'probability complement':'/probability/complement/'}}
+   return jsonify(topics)
+
+
+
 # ---------- App Run ----------
 if __name__ == '__main__':
     app.run()
