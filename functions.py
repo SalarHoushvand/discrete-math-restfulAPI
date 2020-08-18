@@ -9,7 +9,7 @@ import random
 import math
 import datasets as ds
 import jsonify as js
-
+import uuid
 
 # ---------- Set Operations ----------
 def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_name=0
@@ -279,7 +279,7 @@ def choices(par, operation):
         question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ').replace('[', '{').replace(
             ']', '}')
     choices = random.sample(choices, len(choices))
-    output_json = js.question_json_maker(
+    output_json = js.question_json_maker(uuid.uuid1().hex,
         str(question) + ' ' + str(set1).replace('[]', '').replace('[', '{').replace(']', '}') + ' ' + str(set2).replace(
             '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
         choices.index(answer) + 1)
@@ -340,7 +340,7 @@ def general_function():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def floor_ceiling_function():
@@ -370,7 +370,7 @@ def floor_ceiling_function():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def inverse_of_function():
@@ -404,7 +404,7 @@ def inverse_of_function():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def domain():
@@ -426,7 +426,7 @@ def domain():
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def target():
@@ -448,7 +448,7 @@ def target():
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 # ---------- Probabilities ----------
@@ -472,7 +472,7 @@ def event_probability_1():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def event_probability_2():
@@ -499,7 +499,7 @@ def event_probability_2():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def event_probability_3():
@@ -513,7 +513,7 @@ def event_probability_3():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def multiplication_1():
@@ -532,7 +532,7 @@ def multiplication_1():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def multiplication_2():
@@ -550,7 +550,7 @@ def multiplication_2():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def multiplication_3():
@@ -567,7 +567,7 @@ def multiplication_3():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def multiplication_4():
@@ -586,7 +586,7 @@ def multiplication_4():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def permutation_1():
@@ -607,7 +607,7 @@ def permutation_1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1)
 
 
 def permutation_2():
@@ -628,7 +628,7 @@ def permutation_2():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def combination_1():
@@ -649,7 +649,7 @@ def combination_1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def combination_2():
@@ -668,7 +668,7 @@ def combination_2():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def combination_3():
@@ -683,7 +683,7 @@ def combination_3():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def conditional_probability_1():
@@ -703,7 +703,7 @@ def conditional_probability_1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def probability_union():
@@ -724,7 +724,7 @@ def probability_union():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def probability_complement():
@@ -746,7 +746,7 @@ def probability_complement():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1)
 
 
 def bayes_theorem():
@@ -771,4 +771,4 @@ def bayes_theorem():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(question, choices, choices.index(answer) + 1)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1)
