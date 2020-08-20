@@ -321,11 +321,30 @@ def bayes_theorem(num):
 
 @app.route('/topics', methods=['GET'])
 def topics():
-   topics = {"topics":{
-       'bayes theorem': '/probability/bayes/',
-        'probability complement':'/probability/complement/'}}
-   return jsonify(topics)
-
+    topics = {"topics": {
+        'bayes theorem': '/probability/bayes/',
+        'probability complement': '/probability/complement/',
+        'probability union': '/probability/union/',
+        'conditional probability': '/probability/conditional/',
+        'combination': '/probability/combination/',
+        'multiplication': '/probability/multiplication/',
+        'permutation': '/probability/permutation/',
+        'probability of an event': '/probability/event/',
+        'function target': '/function/target/',
+        'function domain': '/function/domain/',
+        'inverse of a function': '/function/inverse/',
+        'floor and ceiling function': '/function/floorceiling/',
+        'general function': '/function/',
+        'set theory': '/random/',
+        'complement': '/complement/',
+        'partition': '/partition/',
+        'symmetric difference': '/symmetric_difference/',
+        'cartesian product': '/cartesian/',
+        'difference of sets': '/difference/',
+        'intersection of sets': '/intersection/',
+        'union of sets': '/union/<int:num>/'
+    }}
+    return jsonify(topics)
 
 
 # ---------- App Run ----------
