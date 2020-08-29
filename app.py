@@ -13,18 +13,22 @@ import random
 from flask import Flask, jsonify, render_template
 import functions as functions
 import jsonify as js
+from flask_cors import CORS, cross_origin
 
 
 
 # ---------- App ----------
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 
 # ---------- Main Page ----------
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 
 def index():
     """
