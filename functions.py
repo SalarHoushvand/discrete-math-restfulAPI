@@ -280,7 +280,7 @@ def choices(par, operation):
             ']', '}')
     choices = random.sample(choices, len(choices))
     output_json = js.question_json_maker(uuid.uuid1().hex,
-        str(question) + ' ' + str(set1).replace('[]', '').replace('[', '{').replace(']', '}') + ' ' + str(set2).replace(
+        str(question) + ' A= ' + str(set1).replace('[]', '').replace('[', '{').replace(']', '}') + ' B= ' + str(set2).replace(
             '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
         choices.index(answer) + 1)
 
