@@ -772,3 +772,20 @@ def bayes_theorem():
     choices = random.sample(choices, len(choices))
 
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1)
+
+# Relations ------------------------------------------
+
+def relations_1():
+    """
+    Generates a question for relations.
+    :return: question, answer choices, correct answer.(JSON)
+    """
+    choices = []
+    while len(choices) < 4:
+        a = random.randint(2, 5)
+        question = (f'How many relations does set A have? A={random_set(integer= a)}').replace('[','{').replace(']','}')
+        answer = 2**2**(a)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1)

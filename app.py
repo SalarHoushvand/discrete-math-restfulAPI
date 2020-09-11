@@ -327,6 +327,15 @@ def bayes_theorem(num):
     return jsonify(js.json_maker('bayes theorem', questions))
 
 
+@app.route('/relations_1/<int:num>', methods=['GET'])
+def relations_1(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.relations_1())
+    return jsonify(js.json_maker('relations', questions))
+
+
 @app.route('/topics', methods=['GET'])
 def topics():
     topics = {"topics": {
@@ -350,7 +359,7 @@ def topics():
         'cartesian product': '/cartesian/',
         'difference of sets': '/difference/',
         'intersection of sets': '/intersection/',
-        'union of sets': '/union/<int:num>/'
+        'union of sets': '/union/'
     }}
     return jsonify(topics)
 
