@@ -336,6 +336,54 @@ def relations_1(num):
     return jsonify(js.json_maker('relations', questions))
 
 
+@app.route('/relations_2/<int:num>', methods=['GET'])
+def relations_2(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.relations_2())
+    return jsonify(js.json_maker('relations', questions))
+
+
+@app.route('/relations_3/<int:num>', methods=['GET'])
+def relations_3(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.relations_3())
+    return jsonify(js.json_maker('relations', questions))
+
+
+
+@app.route('/relations_4/<int:num>', methods=['GET'])
+def relations_4(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.relations_4())
+    return jsonify(js.json_maker('relations', questions))
+
+
+
+@app.route('/relations_5/<int:num>', methods=['GET'])
+def relations_5(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.relations_5())
+    return jsonify(js.json_maker('relations', questions))
+
+
+@app.route('/relations_6/<int:num>', methods=['GET'])
+def relations_6(num):
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.relations_6())
+    return jsonify(js.json_maker('relations', questions))
+
+
+
 @app.route('/topics', methods=['GET'])
 def topics():
     topics = {"topics": {
