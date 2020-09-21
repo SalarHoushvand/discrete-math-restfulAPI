@@ -383,10 +383,21 @@ def relations_6(num):
     return jsonify(js.json_maker('relations', questions))
 
 
+@app.route('/relations')
+def relations(num):
+    questions = []
+
+    for i in range(num):
+        question_list = [functions.relations_1(), functions.relations_2(), functions.relations_3(), functions.relations_4(),
+                         functions.relations_5(), functions.relations_6()]
+        questions.append(random.choice(question_list))
+    return jsonify(js.json_maker('Relations', questions))
+
 
 @app.route('/topics', methods=['GET'])
 def topics():
     topics = {"topics": {
+        'Relations': '/relations/',
         'bayes theorem': '/probability/bayes/',
         'probability complement': '/probability/complement/',
         'probability union': '/probability/union/',
