@@ -383,7 +383,7 @@ def relations_6(num):
     return jsonify(js.json_maker('relations', questions))
 
 
-@app.route('/relations')
+@app.route('/relations/<int:num>')
 def relations(num):
     questions = []
 
