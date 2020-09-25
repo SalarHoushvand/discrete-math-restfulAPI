@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 
 
-def ven2( set1,  set2):
+def ven2( set1={1,2,3,4,5},  set2={1,2,3,4,5}):
     """Venn Diagram example for 2 sets"""
 
 
@@ -30,3 +30,4 @@ def ven2( set1,  set2):
 
     return img
 
+print (ven2())
