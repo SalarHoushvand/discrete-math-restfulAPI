@@ -9,7 +9,7 @@
 # import boto3
 # import io
 #
-# 
+#
 # def random_gen(low, high):
 #     """Generates random integer"""
 #     while True:
