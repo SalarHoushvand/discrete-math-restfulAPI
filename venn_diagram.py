@@ -16,12 +16,15 @@ def ven2( set1={1,2,3,4,5},  set2={1,2,3,4,5}):
 
     # Venn Diagram
     v = vplt.venn2(subsets={'10': a, '01': b, '11': c}, set_labels=('A', 'B'))
-    l1 = ','.join(map(str, set1.difference(set2)))
-    v.get_label_by_id('10').set_text(l1)
-    l2 = ','.join(map(str, set2.difference(set1)))
-    v.get_label_by_id('01').set_text(l2)
-    l3 = ','.join(map(str, set2.intersection(set1)))
-    v.get_label_by_id('11').set_text(l3)
+    try:
+        l1 = ','.join(map(str, set1.difference(set2)))
+        v.get_label_by_id('10').set_text(l1)
+        l2 = ','.join(map(str, set2.difference(set1)))
+        v.get_label_by_id('01').set_text(l2)
+        l3 = ','.join(map(str, set2.intersection(set1)))
+        v.get_label_by_id('11').set_text(l3)
+    except:
+        print ('no label')
 
     plt.savefig('figure.png')
     plt.close()

@@ -321,8 +321,12 @@ def intersection_venn():
     choices = []
 
     while len(choices) < 4:
-        set1 = set(random_set())
-        set2 = set(random_set())
+        set1 = set(random_set(integer=8, floats=0, char=0, country_name=0, city_name=0, male_name=0
+               , female_name=0, integer_min=5, integer_max=20, integer_type='mix'
+               , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
+        set2 = set(random_set(integer=9, floats=0, char=0, country_name=0, city_name=0, male_name=0
+               , female_name=0, integer_min=1, integer_max=30, integer_type='mix'
+               , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
 
         question = f'Which one dipicts the two sets of A = {set1} B = {set2} ?'
         answer = venn.ven2(set1, set2)
