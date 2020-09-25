@@ -400,6 +400,14 @@ def img_test(num):
         questions.append(functions.img_test())
     return jsonify(js.json_maker('image',questions))
 
+@app.route('/intersection/venn/<int:num>')
+def intersection_ven(num):
+    questions = []
+    for i in range(num):
+        questions.append(functions.intersection_venn())
+    return jsonify(js.json_maker('ven', questions))
+
+
 @app.route('/topics', methods=['GET'])
 def topics():
     topics = {"topics": {
@@ -425,7 +433,7 @@ def topics():
         'difference of sets': '/difference/',
         'intersection of sets': '/intersection/',
         'union of sets': '/union/',
-        'img':'/img/'
+        'img':'/intersection/venn/'
     }}
     return jsonify(topics)
 

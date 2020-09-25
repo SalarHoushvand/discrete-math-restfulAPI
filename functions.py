@@ -5,14 +5,17 @@
 # -----------------------------------------------------------
 
 # ---------- Imports ----------
+import base64
 import itertools
 import random
 import math
 import datasets as ds
 import jsonify as js
 import uuid
-
-
+import matplotlib_venn as vplt
+# from PIL import Image
+from matplotlib import pyplot as plt
+import venn_diagram as venn
 # ---------- Set Operations ----------
 def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_name=0
                , female_name=0, integer_min=0, integer_max=20, integer_type='mix'
@@ -287,36 +290,51 @@ def choices(par, operation):
         choices.index(answer) + 1)
 
     return output_json
+#
+# def ven2(set1 = set(random_set()), set2 = set(random_set())):
+#     """Venn Diagram example for 2 sets"""
+#
+#
+#     # length of sets for venn diagram
+#     a = len(set1)
+#     b = len(set2)
+#     c = len(set1.intersection(set2))
+#     print('Intersection : ' + str(set1.intersection(set2)))
+#
+#     # Venn Diagram
+#     v = vplt.venn2(subsets={'10': a, '01': b, '11': c}, set_labels=('A', 'B'))
+#     l1 = ','.join(map(str, set1.difference(set2)))
+#     v.get_label_by_id('10').set_text(l1)
+#     l2 = ','.join(map(str, set2.difference(set1)))
+#     v.get_label_by_id('01').set_text(l2)
+#     l3 = ','.join(map(str, set2.intersection(set1)))
+#     v.get_label_by_id('11').set_text(l3)
+#     # img_link = 'https://regform2020.s3.us-east-2.amazonaws.com/' + filename
+#
+#     # s = io.BytesIO()
+#
+#     plt.savefig('figure.png')
+#     plt.close()
+#    # s = base64.b64encode(s.getvalue()).decode("utf-8").replace("\n", "")
+#     encoded = str(base64.b64encode(open("figure.png", "rb").read())).replace("b'"," ").replace("'","")
+#     img = '<img data:image/png;base64,%s />' % encoded
+#
+#     return img
 
-def ven2():
-    """Venn Diagram example for 2 sets"""
+def intersection_venn():
+    choices = []
 
-    print('Venn Diagram \n')
+    while len(choices) < 4:
+        set1 = set(random_set())
+        set2 = set(random_set())
 
-    set1 = set(random_set())
-    set2 = set(random_set())
-    # # try to add elem to set until set length is less than 3
-    # for x in itertools.takewhile(lambda x: len(set1) < 7, num_gen1):
-    #     set1.add(x)
-    # for x in itertools.takewhile(lambda x: len(set2) < 10, num_gen2):
-    #     set2.add(x)
-    # print('A : ' + str(set1) + ' , B : ' + str(set2))
+        question = f'Which one dipicts the two sets of A = {set1} B = {set2} ?'
+        answer = venn.ven2(set1, set2)
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
 
-    # length of sets for venn diagram
-    a = len(set1)
-    b = len(set2)
-    c = len(set1.intersection(set2))
-    print('Intersection : ' + str(set1.intersection(set2)))
-
-    # Venn Diagram
-    v = vplt.venn2(subsets={'10': a, '01': b, '11': c}, set_labels=('A', 'B'))
-    l1 = ','.join(map(str, set1.difference(set2)))
-    v.get_label_by_id('10').set_text(l1)
-    l2 = ','.join(map(str, set2.difference(set1)))
-    v.get_label_by_id('01').set_text(l2)
-    l3 = ','.join(map(str, set2.intersection(set1)))
-    v.get_label_by_id('11').set_text(l3)
-    return plt
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1)
 
 
 # ---------- Functions ----------
