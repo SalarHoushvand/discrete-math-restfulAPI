@@ -4,7 +4,7 @@
 # -----------------------------------------------------------
 
 
-def question_json_maker(question_id, question, answer, answer_index=1):
+def question_json_maker(question_id, question, answer, answer_index=1, difficulty = 1):
     """
     Generates JSON file for each question.
     :param question: input question.(str)
@@ -21,7 +21,7 @@ def question_json_maker(question_id, question, answer, answer_index=1):
         "correctAnswer": answer_index,
         "messageForCorrectAnswer": "Correct Answer",
         "messageForIncorrectAnswer": "Incorrect Answer",
-        "explanation": "",
+        "difficulty": difficulty,
         "point": "10"
     }
     return questions_template
