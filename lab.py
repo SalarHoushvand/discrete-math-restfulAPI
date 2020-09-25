@@ -4,27 +4,15 @@
 # import matplotlib_venn as vplt
 # from PIL import Image
 # from matplotlib import pyplot as plt
-# import random
-# import itertools
-# import boto3
+#
 # import io
 #
 #
-# def random_gen(low, high):
-#     """Generates random integer"""
-#     while True:
-#         yield random.randrange(low, high)
-#
-#
-# S3_BUCKET = "regform2020"
-# S3_KEY = "AKIAZ37JMIDXDSHHF5UI"
-# S3_SECRET = "ZPU4wjxZZt6pe0xMZjdTDL1BjljsrwqfIUyNFiEt"
-# S3_LOCATION = "https://regform2020.s3.us-east-2.amazonaws.com/"
 #
 #
 # def ven2():
 #     """Venn Diagram example for 2 sets"""
-#     s3 = boto3.resource('s3',aws_access_key_id=S3_KEY,aws_secret_access_key=S3_SECRET)
+#
 #
 #     print('Venn Diagram \n')
 #     num_gen1 = random_gen(3, 12)
