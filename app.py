@@ -393,19 +393,15 @@ def relations(num):
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('Relations', questions))
 
-@app.route('/img/<int:num>')
-def img_test(num):
-    questions = []
-    for i in range(num):
-        questions.append(functions.img_test())
-    return jsonify(js.json_maker('image',questions))
+# ======================================================================================================================
+
 
 @app.route('/intersection/venn/<int:num>')
 def intersection_ven(num):
     questions = []
     for i in range(num):
         questions.append(functions.intersection_venn())
-    return jsonify(js.json_maker('ven', questions))
+    return jsonify(js.json_maker('venn', questions))
 
 @app.route('/function/equation/<int:num>')
 def equation(num):
@@ -440,8 +436,8 @@ def topics():
         'difference of sets': '/difference/',
         'intersection of sets': '/intersection/',
         'union of sets': '/union/',
-        'intersection venn':'/intersection/venn/',
-        'equation':'/function/equation/'
+        'venn':'/intersection/venn/',
+        'one to one function':'/function/equation/'
     }}
     return jsonify(topics)
 
