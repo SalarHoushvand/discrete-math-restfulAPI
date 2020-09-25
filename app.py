@@ -407,11 +407,18 @@ def intersection_ven(num):
         questions.append(functions.intersection_venn())
     return jsonify(js.json_maker('ven', questions))
 
+@app.route('/function/equation/<int:num>')
+def equation(num):
+    questions = []
+    for i in range(num):
+        questions.append(functions.equation())
+    return jsonify(js.json_maker('function', questions))
+
 
 @app.route('/topics', methods=['GET'])
 def topics():
     topics = {"topics": {
-        'Relations': '/relations/',
+        'relations': '/relations/',
         'bayes theorem': '/probability/bayes/',
         'probability complement': '/probability/complement/',
         'probability union': '/probability/union/',
@@ -433,7 +440,8 @@ def topics():
         'difference of sets': '/difference/',
         'intersection of sets': '/intersection/',
         'union of sets': '/union/',
-        'intersection venn':'/intersection/venn/'
+        'intersection venn':'/intersection/venn/',
+        'equation':'/function/equation/'
     }}
     return jsonify(topics)
 
