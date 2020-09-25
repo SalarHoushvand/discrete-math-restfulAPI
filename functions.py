@@ -5,16 +5,12 @@
 # -----------------------------------------------------------
 
 # ---------- Imports ----------
-import base64
-import itertools
+
 import random
 import math
 import datasets as ds
 import jsonify as js
 import uuid
-import matplotlib_venn as vplt
-# from PIL import Image
-from matplotlib import pyplot as plt
 import venn_diagram as venn
 # ---------- Set Operations ----------
 def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_name=0
