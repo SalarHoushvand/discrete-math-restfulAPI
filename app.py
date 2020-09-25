@@ -433,7 +433,7 @@ def topics():
         'difference of sets': '/difference/',
         'intersection of sets': '/intersection/',
         'union of sets': '/union/',
-        'img':'/intersection/venn/'
+        'intersection venn':'/intersection/venn/'
     }}
     return jsonify(topics)
 
