@@ -26,10 +26,10 @@ def ven2( set1={1,2,3,4,5},  set2={1,2,3,4,5}):
     except:
         print ('no label')
 
-    plt.savefig('figure.png')
+    plt.savefig('figure.png', )
     plt.close()
     encoded = str(base64.b64encode(open("figure.png", "rb").read())).replace("b'"," ").replace("'","")
-    img = '<img src="data:image/png;base64,%s">' % encoded
+    img = '<img  style="max-width:400px ; height:auto;" src="data:image/png;base64,%s">' % encoded
 
     return img
 
