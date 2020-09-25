@@ -23,6 +23,10 @@ def ven2( set1={1,2,3,4,5},  set2={1,2,3,4,5}):
         v.get_label_by_id('01').set_text(l2)
         l3 = ','.join(map(str, set2.intersection(set1)))
         v.get_label_by_id('11').set_text(l3)
+        v.get_patch_by_id('10').set_color('#BC6F85')
+        v.get_patch_by_id('01').set_color('#D1E2F2')
+        v.get_patch_by_id('11').set_color('#C4AAC2')
+
     except:
         print ('no label')
 
