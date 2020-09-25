@@ -393,6 +393,10 @@ def relations(num):
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('Relations', questions))
 
+@app.route('/img')
+def img_test():
+    questions = [functions.img_test()]
+    return jsonify(js.json_maker('image',questions))
 
 @app.route('/topics', methods=['GET'])
 def topics():
@@ -418,7 +422,8 @@ def topics():
         'cartesian product': '/cartesian/',
         'difference of sets': '/difference/',
         'intersection of sets': '/intersection/',
-        'union of sets': '/union/'
+        'union of sets': '/union/',
+        'img':'/img'
     }}
     return jsonify(topics)
 
