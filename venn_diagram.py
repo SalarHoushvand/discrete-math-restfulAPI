@@ -26,7 +26,7 @@ def ven2( set1,  set2):
     plt.savefig('figure.png')
     plt.close()
     encoded = str(base64.b64encode(open("figure.png", "rb").read())).replace("b'"," ").replace("'","")
-    img = 'data:image/png;base64,%s' % encoded
+    img = '<img src="data:image/png;base64,%s">' % encoded
 
     return img
 
