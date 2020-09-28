@@ -12,6 +12,7 @@ import datasets as ds
 import jsonify as js
 import uuid
 import venn_diagram as venn
+import itertools
 # ---------- Set Operations ----------
 def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_name=0
                , female_name=0, integer_min=0, integer_max=20, integer_type='mix'
@@ -795,223 +796,397 @@ def bayes_theorem():
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 # Relations ------------------------------------------
+# NEED TO CHANGE
+#
+# def relations_1():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     choices = []
+#     while len(choices) < 4:
+#         a = random.randint(2, 5)
+#         question = (f'How many relations does set A have? A={random_set(integer= a)}').replace('[','{').replace(']','}')
+#         answer = 2**2**(a)
+#         if answer not in choices:
+#             choices.append(answer)
+#     choices = random.sample(choices, len(choices))
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1,difficulty=3)
+#
+#
+# def is_reflexive(universe, relation):
+#     """
+#     Function to determine if a relation of a set is reflexiver
+#     :param universe: a set
+#     :param relation: a relation on set universe
+#     return: True if relation is a reflexiver relation of set universe
+#     """
+#     new_set = {(a, b) for a in universe for b in universe if a == b}
+#     if relation >= new_set:
+#         return True
+#
+#     return False
+#
+#
+#
+# def is_irreflexive(universe, relation):
+#     """
+#     Function to determine if a relation of a set is irreflexiver
+#     :param universe: a set
+#     :param relation: a relation on set universe
+#     return: True if relation is a reflexiver relation of set universe
+#     """
+#     new_set = {(a, b) for a in universe for b in universe if a == b}
+#     if relation >= new_set:
+#         return False
+#
+#     return True
+#
+#
+# def inverse_of_relation(r):
+#     """
+#     Function to determine the inverse of a relation
+#     :param r: a relation
+#     :return: inverse of the relation
+#     """
+#     return [(y,x) for (x,y) in r]
+#
+# def is_symmetric(r):
+#     """
+#     Function to determine if a realtion is symmetric
+#     :param r: a relation
+#     :return: True if relation is symmetric, False otherwise
+#     """
+#     return set(r) == set([pair for pair in r if pair in inverse_of_relation(r)])
+#
+#
+# def is_asymmetric(r):
+#     """
+#     Function to determine if a realtion is asymmetric
+#     :param r: a relation
+#     :return: True if relation is asymmetric, False otherwise
+#     """
+#     return [pair for pair in r if pair in inverse_of_relation(r)] == []
+#
+#
+# def is_antisymmetric(r):
+#     """
+#     Function to determine if a realtion is antisymmetric
+#     :param r: a relation
+#     :return: True if relation is antisymmetric, False otherwise
+#     """
+#     for (x,y) in set([pair for pair in r if pair in inverse_of_relation(r)]):
+#         if x != y:
+#             return False
+#     return True
+#
+#
+# def binary_relations(n):
+#     '''Function to find all binary relations of a set n
+#     :param n: a python list of elements
+#     :return: all binary relations of set n
+#     '''
+#     cartesian = []
+#     for element in itertools.product(n, n):
+#         cartesian.append(element)
+#     result = [[]]
+#     for pair in cartesian:
+#         result = result + [L + [pair] for L in result]
+#     return result
+#
+#
+# def relations_2():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 3))))
+#     choices = []
+#     question = (f'Which of the following is a reflexive relation of set A? A = {rand_set} ').replace('[', '{').replace(
+#         ']', '}')
+#     relations = binary_relations(rand_set)
+#     random.shuffle(relations)
+#     for i in range(len(relations)):
+#         if is_reflexive(set(rand_set), set(relations[i])) == True:
+#             answer = relations[i]
+#             choices.append(set(relations[i]))
+#             break
+#     while len(choices) < 4:
+#         for i in range(len(relations)):
+#             if is_reflexive(set(rand_set), set(relations[i])) != True:
+#                 choices.append(set(relations[i]))
+#                 if len(choices) == 4:
+#                     break
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty = 2)
+#
+#
+# def relations_3():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 3))))
+#     relations = binary_relations(rand_set)
+#     random.shuffle(relations)
+#     choices = []
+#     question = (f'Which of the following is an irreflexive relation on set A? A = {rand_set} ').replace('[',
+#                                                                                                         '{').replace(
+#         ']', '}')
+#     for i in range(len(relations)):
+#         if is_irreflexive(set(rand_set), set(relations[i])) == True:
+#             answer = relations[i]
+#             choices.append(relations[i])
+#             break
+#     while len(choices) < 4:
+#         for i in range(len(relations)):
+#             if is_irreflexive(set(rand_set), set(relations[i])) != True:
+#                 choices.append(relations[i])
+#                 if len(choices) == 4:
+#                     break
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty = 4)
+#
+# def relations_4():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 3))))
+#     relations = binary_relations(rand_set)
+#     random.shuffle(relations)
+#     choices = []
+#     question = (f'Which of the following is a symmetric relation on set A? A = {rand_set} ').replace('[', '{').replace(
+#         ']', '}')
+#     for i in range(len(relations)):
+#         if is_symmetric(relations[i]) == True:
+#             answer = relations[i]
+#             choices.append(relations[i])
+#             break
+#     while len(choices) < 4:
+#         for i in range(len(relations)):
+#             if is_symmetric(relations[i]) != True:
+#                 choices.append(relations[i])
+#                 if len(choices) == 4:
+#                     break
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty = 4)
+#
+#
+#
+# def relations_5():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 3))))
+#     relations = binary_relations(rand_set)
+#     random.shuffle(relations)
+#     choices = []
+#     question = (f'Which of the following is an asymmetric relation on set A? A = {rand_set} ').replace('[',
+#                                                                                                        '{').replace(']',
+#                                                                                                                     '}')
+#     for i in range(len(relations)):
+#         if is_asymmetric(relations[i]) == True:
+#             answer = relations[i]
+#             choices.append(relations[i])
+#             break
+#     while len(choices) < 4:
+#         for i in range(len(relations)):
+#             if is_asymmetric(relations[i]) != True:
+#                 choices.append(relations[i])
+#                 if len(choices) == 4:
+#                     break
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty = 4)
+#
+#
+# def relations_6():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 3))))
+#     relations = binary_relations(rand_set)
+#     random.shuffle(relations)
+#     choices = []
+#     question = (f'Which of the following is an anitsymmetric relation on set A? A = {rand_set} ').replace('[',
+#                                                                                                           '{').replace(
+#         ']', '}')
+#     for i in range(len(relations)):
+#         if is_antisymmetric(relations[i]) == True:
+#             answer = relations[i]
+#             choices.append(relations[i])
+#             break
+#     while len(choices) < 4:
+#         for i in range(len(relations)):
+#             if is_antisymmetric(relations[i]) != True:
+#                 choices.append(relations[i])
+#                 if len(choices) == 4:
+#                     break
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+#
+#
+# def compose(rel_1, rel_2, universe):
+#     """
+#     Function to determine the compose between two relations of a set
+#     :param rel_1: a relation on set universe
+#     :param rel_2: a relaiton on set universe
+#     :param universe: a set
+#     :return: the compose of rel_1 and rel_2
+#     """
+#     result = []
+#     for a in universe:
+#         for b in universe:
+#             result += [(a, c) for c in universe
+#                        if (a, b) in rel_1 and (b, c) in rel_2]
+#     return result
+#
+#
+# def is_transitive(r, universe):
+#     """
+#     Function to determine if a relation is transitive
+#     :param r: a relation on set universe
+#     :param universe: a set
+#     :return: True if relation is transitive, False otherwise
+#     """
+#     for a in universe:
+#         for b in universe:
+#             if (a, b) in r:
+#                 for c in universe:
+#                     if (b, c) in r and (a, c) not in r:
+#                         return False
+#     return True
+#
+#
+# def relations_7():
+#     """
+#     Generates a question for relations.
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 3))))
+#     relations = binary_relations(rand_set)
+#     random.shuffle(relations)
+#     choices = []
+#     question = (f'Which of the following is a transitive relation on set A? A = {rand_set} ').replace('[', '{').replace(
+#         ']', '}')
+#     for i in range(len(relations)):
+#         if is_transitive(relations[i], rand_set) == True:
+#             answer = relations[i]
+#             choices.append(relations[i])
+#             break
+#     while len(choices) < 4:
+#         for i in range(len(relations)):
+#             if is_transitive(relations[i], rand_set) != True:
+#                 choices.append(relations[i])
+#                 if len(choices) == 4:
+#                     break
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+#
+#
+# def reflexive_closure(rel, universe):
+#     """
+#     Function to return the reflexive closure of a relation on a set
+#     :param rel: A list that is a relation on set universe
+#     :param universe: A list that represents a set
+#     :return: A list that is the  relexive closure of the relation rel on the set universe
+#     """
+#     return rel + [(x, x) for x in universe if (x, x) not in rel]
+#
+#
+# def relations_8():
+#     """
+#     Generates a question for realtions
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 4))))
+#     relations = binary_relations(rand_set)
+#     choices = []
+#     relation_1 = relations[random.randint(1, len(relations) - 1)]
+#     answer = reflexive_closure(relation_1, rand_set)
+#     choices.append(answer)
+#     question = (f'What is the reflexive closure of relation R on set A? R = {relation_1}, A = {rand_set}').replace('[',
+#                                                                                                                    '{').replace(
+#         ']', '}')
+#     while len(choices) < 4:
+#         rand_int = random.randint(1, len(relations) - 1)
+#         choices.append(relations[rand_int])
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+#
+#
+# def symmetric_closure(rel):
+#     """
+#     Function to determine the symmetric closure of a relation
+#     :param rel: A list that represents a relation
+#     :return: The symmetric closure of relation rel
+#     """
+#     return rel + [(y, x) for (x, y) in rel if (y, x) not in rel]
+#
+#
+# def relations_9():
+#     """
+#     Generates a question for realtions
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 4))))
+#     relations = binary_relations(rand_set)
+#     choices = []
+#     relation_1 = relations[random.randint(1, len(relations) - 1)]
+#     answer = symmetric_closure(relation_1)
+#     choices.append(answer)
+#     question = (f'What is the symmetric closure of relation R on set A? R = {relation_1}, A = {rand_set}').replace('[',
+#                                                                                                                    '{').replace(
+#         ']', '}')
+#     while len(choices) < 4:
+#         rand_int = random.randint(1, len(relations) - 1)
+#         choices.append(relations[rand_int])
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+#
+#
+# def transitive_closure(rel, universe):
+#     """
+#     Function to determine the transitive closure of a realtion
+#     :param rel: A list that represents a relation
+#     :return: The transitive closure of a relation
+#     """
+#     result = rel
+#     changed = True
+#     while changed:
+#         changed = False
+#         for a in universe:
+#             for b in universe:
+#                 for c in universe:
+#                     if (a, b) in result and (b, c) in result and (a, c) not in result:
+#                         result.append((a, c))
+#                         changed = True
+#     return result
+#
+#
+# def relations_10():
+#     """
+#     Generates a question for realtions
+#     :return: question, answer choices, correct answer.(JSON)
+#     """
+#     rand_set = list(set(random_set(integer=random.randint(2, 4))))
+#     relations = binary_relations(rand_set)
+#     choices = []
+#     relation_1 = relations[random.randint(1, len(relations) - 1)]
+#     answer = transitive_closure(relation_1, rand_set)
+#     choices.append(answer)
+#     question = (f'What is the transitive closure of relation R on set A? R = {relation_1}, A = {rand_set}').replace('[',
+#                                                                                                                     '{').replace(
+#         ']', '}')
+#     while len(choices) < 4:
+#         rand_int = random.randint(1, len(relations) - 1)
+#         choices.append(relations[rand_int])
+#     random.shuffle(choices)
+#     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
-def relations_1():
-    """
-    Generates a question for relations.
-    :return: question, answer choices, correct answer.(JSON)
-    """
-    choices = []
-    while len(choices) < 4:
-        a = random.randint(2, 5)
-        question = (f'How many relations does set A have? A={random_set(integer= a)}').replace('[','{').replace(']','}')
-        answer = 2**2**(a)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1,difficulty=3)
 
-
-def is_reflexive(universe, relation):
-    """
-    Function to determine if a relation of a set is reflexiver
-    :param universe: a set
-    :param relation: a relation on set universe
-    return: True if relation is a reflexiver relation of set universe
-    """
-    new_set = {(a, b) for a in universe for b in universe if a == b}
-    if relation >= new_set:
-        return True
-
-    return False
-
-
-
-def is_irreflexive(universe, relation):
-    """
-    Function to determine if a relation of a set is irreflexiver
-    :param universe: a set
-    :param relation: a relation on set universe
-    return: True if relation is a reflexiver relation of set universe
-    """
-    new_set = {(a, b) for a in universe for b in universe if a == b}
-    if relation >= new_set:
-        return False
-
-    return True
-
-
-def inverse_of_relation(r):
-    """
-    Function to determine the inverse of a relation
-    :param r: a relation
-    :return: inverse of the relation
-    """
-    return [(y,x) for (x,y) in r]
-
-def is_symmetric(r):
-    """
-    Function to determine if a realtion is symmetric
-    :param r: a relation
-    :return: True if relation is symmetric, False otherwise
-    """
-    return set(r) == set([pair for pair in r if pair in inverse_of_relation(r)])
-
-
-def is_asymmetric(r):
-    """
-    Function to determine if a realtion is asymmetric
-    :param r: a relation
-    :return: True if relation is asymmetric, False otherwise
-    """
-    return [pair for pair in r if pair in inverse_of_relation(r)] == []
-
-
-def is_antisymmetric(r):
-    """
-    Function to determine if a realtion is antisymmetric
-    :param r: a relation
-    :return: True if relation is antisymmetric, False otherwise
-    """
-    for (x,y) in set([pair for pair in r if pair in inverse_of_relation(r)]):
-        if x != y:
-            return False
-    return True
-
-
-def relations_2():
-    """
-    Generates a question for relations.
-    :return: question, answer choices, correct answer.(JSON)
-    """
-    choices = []
-    question = 'Which of the following is a reflexive relation on set {0,1}?'
-    binary_relations = [[]]
-    for pair in [(1, 1), (1, 0), (0, 1), (0, 0)]:
-        binary_relations = binary_relations + [L + [pair] for L in binary_relations]
-    random.shuffle(binary_relations)
-    universe = [0, 1]
-    while len(choices) < 4:
-        for i in range(len(binary_relations)):
-            if is_reflexive(set(universe), set(binary_relations[i])) == True:
-                answer = binary_relations[i]
-                choices.append(binary_relations[i])
-                break
-        for i in range(len(binary_relations)):
-            if is_reflexive(set(universe), set(binary_relations[i])) != True:
-                choices.append(binary_relations[i])
-                if len(choices) == 4:
-                    break
-    random.shuffle(choices)
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1,difficulty=3)
-
-
-def relations_3():
-    """
-    Generates a question for relations.
-    :return: question, answer choices, correct answer.(JSON)
-    """
-    choices = []
-    question = 'Which of the following is an irreflexive relation on set {0,1}?'
-    binary_relations = [[]]
-    for pair in [(1,1), (1,0), (0,1), (0,0)]:
-        binary_relations = binary_relations + [L + [pair] for L in binary_relations]
-    random.shuffle(binary_relations)
-    universe = [0,1]
-    while len(choices)<4:
-        for i in range(len(binary_relations)):
-            if is_irreflexive(set(universe), set(binary_relations[i])) == True:
-                answer = binary_relations[i]
-                choices.append(binary_relations[i])
-                break
-        for i in range(len(binary_relations)):
-            if is_irreflexive(set(universe), set(binary_relations[i])) != True:
-                choices.append(binary_relations[i])
-                if len(choices)==4:
-                    break
-    random.shuffle(choices)
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
-
-
-def relations_4():
-    """
-    Generates a question for relations.
-    :return: question, answer choices, correct answer.(JSON)
-    """
-    choices = []
-    question = 'Which of the following is a symmetric relation on set {0,1}?'
-    binary_relations = [[]]
-    for pair in [(1,1), (1,0), (0,1), (0,0)]:
-        binary_relations = binary_relations + [L + [pair] for L in binary_relations]
-    random.shuffle(binary_relations)
-    universe = [0,1]
-    while len(choices)<4:
-        for i in range(len(binary_relations)):
-            if is_symmetric(binary_relations[i]) == True:
-                answer = binary_relations[i]
-                choices.append(binary_relations[i])
-                break
-        for i in range(len(binary_relations)):
-            if is_symmetric(binary_relations[i]) != True:
-                choices.append(binary_relations[i])
-                if len(choices)==4:
-                    break
-    random.shuffle(choices)
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
-
-
-def relations_5():
-    """
-    Generates a question for relations.
-    :return: question, answer choices, correct answer.(JSON)
-    """
-    choices = []
-    question = 'Which of the following is an asymmetric relation on set {0,1}?'
-    binary_relations = [[]]
-    for pair in [(1,1), (1,0), (0,1), (0,0)]:
-        binary_relations = binary_relations + [L + [pair] for L in binary_relations]
-    random.shuffle(binary_relations)
-    universe = [0,1]
-    while len(choices)<4:
-        for i in range(len(binary_relations)):
-            if is_asymmetric(binary_relations[i]) == True:
-                answer = binary_relations[i]
-                choices.append(binary_relations[i])
-                break
-        for i in range(len(binary_relations)):
-            if is_asymmetric(binary_relations[i]) != True:
-                choices.append(binary_relations[i])
-                if len(choices)==4:
-                    break
-    random.shuffle(choices)
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
-
-
-def relations_6():
-    """
-    Generates a question for relations.
-    :return: question, answer choices, correct answer.(JSON)
-    """
-    choices = []
-    question = 'Which of the following is an anitsymmetric relation on set {0,1}?'
-    binary_relations = [[]]
-    for pair in [(1,1), (1,0), (0,1), (0,0)]:
-        binary_relations = binary_relations + [L + [pair] for L in binary_relations]
-    random.shuffle(binary_relations)
-    universe = [0,1]
-    while len(choices)<4:
-        for i in range(len(binary_relations)):
-            if is_antisymmetric(binary_relations[i]) == True:
-                answer = binary_relations[i]
-                choices.append(binary_relations[i])
-                break
-        for i in range(len(binary_relations)):
-            if is_antisymmetric(binary_relations[i]) != True:
-                choices.append(binary_relations[i])
-                if len(choices)==4:
-                    break
-    random.shuffle(choices)
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 #
 # def img_test():
 #     choices = []

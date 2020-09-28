@@ -389,7 +389,8 @@ def relations(num):
 
     for i in range(num):
         question_list = [functions.relations_1(), functions.relations_2(), functions.relations_3(), functions.relations_4(),
-                         functions.relations_5(), functions.relations_6()]
+                         functions.relations_5(), functions.relations_6(), functions.relations_7(), functions.relations_8(),
+                         functions.relations_9(),functions.relations_10()]
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('Relations', questions))
 

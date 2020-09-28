@@ -16,6 +16,8 @@ def ven2( set1={1,2,3,4,5},  set2={1,2,3,4,5}):
 
     # Venn Diagram
     v = vplt.venn2(subsets={'10': a, '01': b, '11': c}, set_labels=('A', 'B'))
+    v.get_patch_by_id('10').set_color('#BC6F85')
+    v.get_patch_by_id('01').set_color('#D1E2F2')
     try:
         l1 = ','.join(map(str, set1.difference(set2)))
         v.get_label_by_id('10').set_text(l1)
