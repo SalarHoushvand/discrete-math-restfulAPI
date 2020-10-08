@@ -13,6 +13,8 @@ import jsonify as js
 import uuid
 import venn_diagram as venn
 import itertools
+
+
 # ---------- Set Operations ----------
 def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_name=0
                , female_name=0, integer_min=0, integer_max=20, integer_type='mix'
@@ -282,9 +284,10 @@ def choices(par, operation):
             ']', '}')
     choices = random.sample(choices, len(choices))
     output_json = js.question_json_maker(uuid.uuid1().hex,
-        str(question) + ' A= ' + str(set1).replace('[]', '').replace('[', '{').replace(']', '}') + ' B= ' + str(set2).replace(
-            '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
-        choices.index(answer) + 1, difficulty= 2)
+                                         str(question) + ' A= ' + str(set1).replace('[]', '').replace('[', '{').replace(
+                                             ']', '}') + ' B= ' + str(set2).replace(
+                                             '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
+                                         choices.index(answer) + 1, difficulty=2)
 
     return output_json
 
@@ -294,11 +297,11 @@ def intersection_venn():
 
     while len(choices) < 4:
         set1 = set(random_set(integer=8, floats=0, char=0, country_name=0, city_name=0, male_name=0
-               , female_name=0, integer_min=5, integer_max=20, integer_type='mix'
-               , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
+                              , female_name=0, integer_min=5, integer_max=20, integer_type='mix'
+                              , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
         set2 = set(random_set(integer=9, floats=0, char=0, country_name=0, city_name=0, male_name=0
-               , female_name=0, integer_min=1, integer_max=30, integer_type='mix'
-               , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
+                              , female_name=0, integer_min=1, integer_max=30, integer_type='mix'
+                              , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
 
         question = f'Which one is correct for two sets of A = {set1} B = {set2} ?'
         answer = venn.ven2(set1, set2)
@@ -306,7 +309,7 @@ def intersection_venn():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 # ---------- Functions ----------
@@ -362,7 +365,7 @@ def general_function():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def floor_ceiling_function():
@@ -392,7 +395,7 @@ def floor_ceiling_function():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def inverse_of_function():
@@ -426,7 +429,7 @@ def inverse_of_function():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def domain():
@@ -448,7 +451,7 @@ def domain():
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def target():
@@ -470,7 +473,7 @@ def target():
         answer = str(set(zip2))
         choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 # ---------- Probabilities ----------
@@ -494,7 +497,7 @@ def event_probability_1():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def event_probability_2():
@@ -521,7 +524,7 @@ def event_probability_2():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def event_probability_3():
@@ -535,7 +538,7 @@ def event_probability_3():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def multiplication_1():
@@ -554,7 +557,7 @@ def multiplication_1():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=3 )
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def multiplication_2():
@@ -572,7 +575,7 @@ def multiplication_2():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def multiplication_3():
@@ -589,7 +592,7 @@ def multiplication_3():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def multiplication_4():
@@ -608,7 +611,7 @@ def multiplication_4():
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def permutation_1():
@@ -629,7 +632,7 @@ def permutation_1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def permutation_2():
@@ -650,7 +653,7 @@ def permutation_2():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def combination_1():
@@ -671,7 +674,7 @@ def combination_1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def combination_2():
@@ -690,7 +693,7 @@ def combination_2():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def combination_3():
@@ -705,7 +708,7 @@ def combination_3():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=4 )
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def conditional_probability_1():
@@ -725,7 +728,7 @@ def conditional_probability_1():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def probability_union():
@@ -746,7 +749,7 @@ def probability_union():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def probability_complement():
@@ -768,7 +771,7 @@ def probability_complement():
             choices.append(answer)
     choices = random.sample(choices, len(choices))
 
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
 def bayes_theorem():
@@ -794,6 +797,7 @@ def bayes_theorem():
     choices = random.sample(choices, len(choices))
 
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+
 
 # Relations ------------------------------------------
 # NEED TO CHANGE
@@ -1208,9 +1212,28 @@ def bayes_theorem():
 
 
 def equation():
-    answer = f'\(x+{random.randint(2,20)}\)'
-    choices = [f'\(x^{random.randint(2,6)}\)', '$${\sqrt{x} \over 2}$$', '$${\sqrt{x}}$$',answer ]
+    answer = f'\(x+{random.randint(2, 20)}\)'
+    choices = [f'\(x^{random.randint(2, 6)}\)', '$${\sqrt{x} \over 2}$$', '$${\sqrt{x}}$$', answer]
     question = 'Which one of these functions is one-to-one?'
 
     choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex,question, choices, choices.index(answer) + 1, difficulty= 3)
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+
+
+def template():
+    choices = []
+
+    while len(choices) < 4:
+
+        # TODO
+        question = 'question in string'
+        answer = 'whatever the answer is'
+        # END TODO
+
+        if answer not in choices:
+            choices.append(answer)
+        # end while
+
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)

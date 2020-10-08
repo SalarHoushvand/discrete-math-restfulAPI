@@ -133,7 +133,7 @@ def partition(num, par):
     output = question_list_maker(num, par, 'partition')
     return jsonify(output)
 
-
+@app.route('/complement', defaults={'num': 1, 'par': 11}, methods=['GET'])
 @app.route('/complement/<int:num>/<int:par>', methods=['GET'])
 def complement(num, par):
     """
@@ -147,6 +147,8 @@ def complement(num, par):
     return jsonify(output)
 
 
+
+@app.route('/random', defaults={'num': 1}, methods=['GET'])
 @app.route('/random/<int:num>', methods=['GET'])
 def random_qa(num):
     """
@@ -445,4 +447,5 @@ def topics():
 
 # ---------- App Run ----------
 if __name__ == '__main__':
-    app.run()
+
+    app.run(debug = True)

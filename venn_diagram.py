@@ -39,4 +39,4 @@ def ven2( set1={1,2,3,4,5},  set2={1,2,3,4,5}):
 
     return img
 
-print (ven2())
+#print (ven2())
