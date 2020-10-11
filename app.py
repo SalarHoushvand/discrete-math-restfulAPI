@@ -15,8 +15,6 @@ import functions as functions
 import jsonify as js
 from flask_cors import CORS, cross_origin
 
-
-
 # ---------- App ----------
 
 app = Flask(__name__)
@@ -24,12 +22,10 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-
 # ---------- Main Page ----------
 
 @app.route('/', methods=['GET'])
 @cross_origin()
-
 def index():
     """
     Home page of API.
@@ -56,8 +52,10 @@ def question_list_maker(num, par, operation):
     return js.json_maker(operation, output)
 
 
-@app.route('/union/<int:num>/<int:par>', methods=['GET'])
-def union(num, par):
+@app.route('/set-union', defaults={'num': 1, 'par': 11}, methods=['GET'])
+@app.route('/set-union/<int:num>', defaults={'par': 11}, methods=['GET'])
+@app.route('/set-union/<int:num>/<int:par>', methods=['GET'])
+def set_union(num, par):
     """
     A function returns question for union of two input sets.
 
@@ -65,12 +63,14 @@ def union(num, par):
     :param par: type of items in each sets based on documentation.
     :return: questions in JSON format.
     """
-    output = question_list_maker(num, par, 'union')
+    output = question_list_maker(num, par, 'set-union')
     return jsonify(output)
 
 
-@app.route('/intersection/<int:num>/<int:par>', methods=['GET'])
-def intersection(num, par):
+@app.route('/set-intersection', defaults={'num': 1, 'par': 11}, methods=['GET'])
+@app.route('/set-intersection/<int:num>', defaults={'par': 11}, methods=['GET'])
+@app.route('/set-intersection/<int:num>/<int:par>', methods=['GET'])
+def set_intersection(num, par):
     """
     A function returns question for intersection of two input sets.
 
@@ -78,12 +78,14 @@ def intersection(num, par):
     :param par: type of items in each sets based on documentation.
     :return: questions in JSON format.
     """
-    output = question_list_maker(num, par, 'intersection')
+    output = question_list_maker(num, par, 'set-intersection')
     return jsonify(output)
 
 
-@app.route('/difference/<int:num>/<int:par>', methods=['GET'])
-def difference(num, par):
+@app.route('/set-difference', defaults={'num': 1, 'par': 11}, methods=['GET'])
+@app.route('/set-difference/<int:num>', defaults={'par': 11}, methods=['GET'])
+@app.route('/set-difference/<int:num>/<int:par>', methods=['GET'])
+def set_difference(num, par):
     """
        A function returns question for difference of two input sets.
 
@@ -91,12 +93,14 @@ def difference(num, par):
        :param par: type of items in each sets based on documentation.
        :return: questions in JSON format.
        """
-    output = question_list_maker(num, par, 'difference')
+    output = question_list_maker(num, par, 'set-difference')
     return jsonify(output)
 
 
-@app.route('/cartesian/<int:num>/<int:par>', methods=['GET'])
-def cartesian(num, par):
+@app.route('/cartesian-product', defaults={'num': 1, 'par': 11}, methods=['GET'])
+@app.route('/cartesian-product/<int:num>', defaults={'par': 11}, methods=['GET'])
+@app.route('/cartesian-product/<int:num>/<int:par>', methods=['GET'])
+def cartesian_product(num, par):
     """
        A function returns question for cartesian product of two input sets.
 
@@ -104,12 +108,14 @@ def cartesian(num, par):
        :param par: type of items in each sets based on documentation.
        :return: questions in JSON format.
        """
-    output = question_list_maker(num, par, 'cartesian')
+    output = question_list_maker(num, par, 'cartesian-product')
     return jsonify(output)
 
 
-@app.route('/symmetric_difference/<int:num>/<int:par>', methods=['GET'])
-def symmetric_difference(num, par):
+@app.route('/set-symmetric-difference', defaults={'num': 1, 'par': 11}, methods=['GET'])
+@app.route('/set-symmetric-difference/<int:num>', defaults={'par': 11}, methods=['GET'])
+@app.route('/set-symmetric-difference/<int:num>/<int:par>', methods=['GET'])
+def set_symmetric_difference(num, par):
     """
        A function returns question for symmetric difference of two input sets.
 
@@ -117,12 +123,14 @@ def symmetric_difference(num, par):
        :param par: type of items in each sets based on documentation.
        :return: questions in JSON format.
        """
-    output = question_list_maker(num, par, 'symmetric_difference')
+    output = question_list_maker(num, par, 'set-symmetric-difference')
     return jsonify(output)
 
 
-@app.route('/partition/<int:num>/<int:par>', methods=['GET'])
-def partition(num, par):
+@app.route('/set-partition', defaults={'num': 1, 'par': 11}, methods=['GET'])
+@app.route('/set-partition/<int:num>', defaults={'par': 11}, methods=['GET'])
+@app.route('/set-partition/<int:num>/<int:par>', methods=['GET'])
+def set_partition(num, par):
     """
        A function returns question for partitions of a generated set.
 
@@ -130,12 +138,13 @@ def partition(num, par):
        :param par: type of items in the set based on documentation.
        :return: questions in JSON format.
        """
-    output = question_list_maker(num, par, 'partition')
+    output = question_list_maker(num, par, 'set-partition')
     return jsonify(output)
 
-@app.route('/complement', defaults={'num': 1, 'par': 11}, methods=['GET'])
-@app.route('/complement/<int:num>/<int:par>', methods=['GET'])
-def complement(num, par):
+
+@app.route('/set-complement', defaults={'num': 1}, methods=['GET'])
+@app.route('/set-complement/<int:num>', methods=['GET'])
+def set_complement(num):
     """
         A function returns question for complement of a generated set.
 
@@ -143,9 +152,10 @@ def complement(num, par):
         :param par: type of items in the set based on documentation.
         :return: questions in JSON format.
     """
-    output = question_list_maker(num, par, 'complement')
-    return jsonify(output)
-
+    questions = []
+    for i in range(num):
+        questions.append(functions.set_complement())
+    return jsonify(js.json_maker('set-complement', questions))
 
 
 @app.route('/random', defaults={'num': 1}, methods=['GET'])
@@ -160,22 +170,33 @@ def random_qa(num):
     output = []
 
     # list of available topics
-    topics = ['union', 'intersection', 'difference', 'symmetric_difference', 'partition', 'cartesian']
+    topics = ['set-union', 'set-intersection', 'set-difference', 'set-symmetric-difference', 'set-partition',
+              'cartesian-product']
 
     # generates asked number of questions and add them to the list(output) out of topics
     for i in range(num):
         topic = random.choice(topics)
         output.append(functions.choices('11', topic))
 
-    return jsonify(js.json_maker('Random', output))
+    return jsonify(js.json_maker('random', output))
+
+
+@app.route('/venn-diagram', defaults={'num': 1}, methods=['GET'])
+@app.route('/venn-diagram/<int:num>')
+def venn_diagram(num):
+    questions = []
+    for i in range(num):
+        questions.append(functions.intersection_venn())
+    return jsonify(js.json_maker('venn-diagram', questions))
 
 
 # ---------- Functions ----------
 
 
 # DEBUG : for some functions like (4,1) (4,1) gives not functions (eliminate repeated answers)
-@app.route('/function/<int:num>', methods=['GET'])
-def general_function(num):
+@app.route('/function-definition', defaults={'num': 1}, methods=['GET'])
+@app.route('/function-definition/<int:num>', methods=['GET'])
+def function_definition(num):
     """
     Generates questions for determining if a set is function or not and if so what kind.
 
@@ -186,11 +207,12 @@ def general_function(num):
 
     for i in range(num):
         questions.append(functions.general_function())
-    return jsonify(js.json_maker('general function', questions))
+    return jsonify(js.json_maker('function-definition', questions))
 
 
-@app.route('/function/floorceiling/<int:num>', methods=['GET'])
-def floor_ceiling_function(num):
+@app.route('/ceiling-function', defaults={'num': 1}, methods=['GET'])
+@app.route('/ceiling-function/<int:num>', methods=['GET'])
+def ceiling_function(num):
     """
     Generates floor and ceiling function with random floats and asks for the answer.
 
@@ -200,12 +222,29 @@ def floor_ceiling_function(num):
     questions = []
 
     for i in range(num):
-        questions.append(functions.floor_ceiling_function())
-    return jsonify(js.json_maker('floor ceiling function', questions))
+        questions.append(functions.ceiling_function())
+    return jsonify(js.json_maker('ceiling-function', questions))
 
 
-@app.route('/function/inverse/<int:num>', methods=['GET'])
-def inverse_of_function(num):
+@app.route('/floor-function', defaults={'num': 1}, methods=['GET'])
+@app.route('/floor-function/<int:num>', methods=['GET'])
+def floor_function(num):
+    """
+    Generates floor and ceiling function with random floats and asks for the answer.
+
+    :param num: number of questions.
+    :return: questions in JSON format.
+    """
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.floor_function())
+    return jsonify(js.json_maker('floor-function', questions))
+
+
+@app.route('/inverse-function', defaults={'num': 1}, methods=['GET'])
+@app.route('/inverse-function/<int:num>', methods=['GET'])
+def inverse_function(num):
     """
     Generates a random function and asks for inverse of it.
 
@@ -215,13 +254,14 @@ def inverse_of_function(num):
     questions = []
 
     for i in range(num):
-        questions.append(functions.inverse_of_function())
-    return jsonify(js.json_maker('inverse of function', questions))
+        questions.append(functions.inverse_function())
+    return jsonify(js.json_maker('inverse-function', questions))
 
 
 # DEBUG : Make sure its a function first, then ask for domain.
-@app.route('/function/domain/<int:num>', methods=['GET'])
-def domain(num):
+@app.route('/function-domain', defaults={'num': 1}, methods=['GET'])
+@app.route('/function-domain/<int:num>', methods=['GET'])
+def function_domain(num):
     """
     Generates a function output and asks for its domain.
 
@@ -230,13 +270,14 @@ def domain(num):
     """
     questions = []
     for i in range(num):
-        questions.append(functions.domain())
-    return jsonify(js.json_maker('function domain', questions))
+        questions.append(functions.function_domain())
+    return jsonify(js.json_maker('function-domain', questions))
 
 
 # DEBUG : Make sure its a function first, then ask for target.
-@app.route('/function/target/<int:num>', methods=['GET'])
-def target(num):
+@app.route('/function-target', defaults={'num': 1}, methods=['GET'])
+@app.route('/function-target/<int:num>', methods=['GET'])
+def function_target(num):
     """
        Generates a function output and asks for its target.
 
@@ -245,8 +286,8 @@ def target(num):
        """
     questions = []
     for i in range(num):
-        questions.append(functions.target())
-    return jsonify(js.json_maker('function domain', questions))
+        questions.append(functions.function_target())
+    return jsonify(js.json_maker('function-target', questions))
 
 
 # ---------- Probabilities ----------
@@ -356,7 +397,6 @@ def relations_3(num):
     return jsonify(js.json_maker('relations', questions))
 
 
-
 @app.route('/relations_4/<int:num>', methods=['GET'])
 def relations_4(num):
     questions = []
@@ -364,7 +404,6 @@ def relations_4(num):
     for i in range(num):
         questions.append(functions.relations_4())
     return jsonify(js.json_maker('relations', questions))
-
 
 
 @app.route('/relations_5/<int:num>', methods=['GET'])
@@ -390,21 +429,17 @@ def relations(num):
     questions = []
 
     for i in range(num):
-        question_list = [functions.relations_1(), functions.relations_2(), functions.relations_3(), functions.relations_4(),
-                         functions.relations_5(), functions.relations_6(), functions.relations_7(), functions.relations_8(),
-                         functions.relations_9(),functions.relations_10()]
+        question_list = [functions.relations_1(), functions.relations_2(), functions.relations_3(),
+                         functions.relations_4(),
+                         functions.relations_5(), functions.relations_6(), functions.relations_7(),
+                         functions.relations_8(),
+                         functions.relations_9(), functions.relations_10()]
         questions.append(random.choice(question_list))
     return jsonify(js.json_maker('Relations', questions))
 
+
 # ======================================================================================================================
 
-
-@app.route('/intersection/venn/<int:num>')
-def intersection_ven(num):
-    questions = []
-    for i in range(num):
-        questions.append(functions.intersection_venn())
-    return jsonify(js.json_maker('venn', questions))
 
 @app.route('/function/equation/<int:num>')
 def equation(num):
@@ -426,26 +461,26 @@ def topics():
         'multiplication': '/probability/multiplication/',
         'permutation': '/probability/permutation/',
         'probability of an event': '/probability/event/',
-        'function target': '/function/target/',
-        'function domain': '/function/domain/',
-        'inverse of a function': '/function/inverse/',
-        'floor and ceiling function': '/function/floorceiling/',
-        'general function': '/function/',
-        'set theory': '/random/',
-        'complement': '/complement/',
-        'partition': '/partition/',
-        'symmetric difference': '/symmetric_difference/',
-        'cartesian product': '/cartesian/',
-        'difference of sets': '/difference/',
-        'intersection of sets': '/intersection/',
-        'union of sets': '/union/',
-        'venn':'/intersection/venn/',
-        'one to one function':'/function/equation/'
+        'function-target': '/function-target/',
+        'function-domain': '/function-domain/',
+        'inverse-function': '/inverse-function/',
+        'ceiling-function': '/ceiling-function/',
+        'floor-function': '/floor-function/',
+        'function-definition': '/function-definition/',
+        'set-theory': '/random/',
+        'set-complement': '/set-complement/',
+        'set-partition': '/set-partition/',
+        'set-symmetric-difference': '/set-symmetric-difference/',
+        'cartesian-product': '/cartesian-product/',
+        'set-difference': '/set-difference/',
+        'set-intersection': '/set-intersection/',
+        'set-union': '/set-union/',
+        'venn-diagram': '/venn-diagram/',
+        'one to one function': '/function/equation/'
     }}
     return jsonify(topics)
 
 
 # ---------- App Run ----------
 if __name__ == '__main__':
-
-    app.run(debug = True)
+    app.run(debug=True)

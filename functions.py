@@ -12,7 +12,6 @@ import datasets as ds
 import jsonify as js
 import uuid
 import venn_diagram as venn
-import itertools
 
 
 # ---------- Set Operations ----------
@@ -123,7 +122,7 @@ def subsetsRecur(current, sset):
 
 
 # DEBUG : partition and complement
-def set_operation(op='union', set_1=random_set(), set_2=random_set()):
+def set_operation(op='union', set_1=set(random_set()), set_2=set(random_set())):
     """
     Implements different set operations on two given sets.
 
@@ -148,41 +147,55 @@ def set_operation(op='union', set_1=random_set(), set_2=random_set()):
     empty_symbol = '∅'
     # delta = '&Delta;'
 
-    if op == 'union':
+    if op == 'set-union':
         output = str(set(set_1).union(set(set_2))).replace("'", '')
 
-    elif op == 'intersection':
+    elif op == 'set-intersection':
         output = str(
             set(set_1).intersection(set(set_2))).replace('set()', empty_symbol).replace("'", '')
 
-    elif op == 'difference':
+    elif op == 'set-difference':
         output = str(set(set_1).difference(set(set_2))).replace('set()',
                                                                 empty_symbol).replace(
             "'", '')
 
-    elif op == 'cartesian':
+    elif op == 'cartesian-product':
         output = str([(obj1, obj2) for obj1 in set_1 for obj2 in set_2]).replace(
             '[', '').replace(']', '')
 
-    elif op == 'symmetric_difference':
+    elif op == 'set-symmetric-difference':
         output = str(
             set(set_1).difference(set(set_2)).union(set(set_2).difference(set(set_1)))).replace('set()',
                                                                                                 empty_symbol).replace(
             "'", '')
-    elif op == 'partition':
+    elif op == 'set-partition':
         set_2 = []
-        output = str(sub_sets(set_1)).replace('[', '{').replace(']', '}')
+        output = str(sub_sets(set_1)).replace('[', '{').replace(']', '}').replace('B=', '')
 
-    elif op == 'complement':
-        set_2 = []
+
+    return output
+
+
+def set_complement():
+    choices = []
+    while len(choices) < 4:
+        set_1 = random_set()
         subset_1 = []
         for i in range(len(set_1) - 2):
             subset_1.append(random.choice(set_1))
-        output = 'U= ' + str(set_1).replace('[', '{').replace(']', '}') + ' ' + 'A= ' + str(set_1).replace('[',
-                                                                                                           '{').replace(
-            ']', '}') + ' U-A = ' + str(set(set_1) - set(subset_1)).replace('[', '{').replace(']', '}')
+        question = (
+            f'What is the complement of set A= {str(set(subset_1))} considering U= {str(set(set_1))} is universal set? ').replace(
+            '[]',
+            '').replace(
+            '[', '{').replace(']', '}').replace('_', ' ').replace('[', '{').replace(
+            ']', '}')
+        answer = str(set(set_1) - set(subset_1)).replace('[', '{').replace(']', '}')
 
-    return output
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
 def choices(par, operation):
@@ -197,7 +210,7 @@ def choices(par, operation):
     output = []
     while len(choices) < 4:
         num2 = str(par)
-        if operation == 'partition':
+        if operation == 'set-partition':
             set2 = []
             if num2[0] == '1':
                 set1 = random_set(integer=3)
@@ -272,22 +285,37 @@ def choices(par, operation):
                 set2 = random_set(integer=0, male_name=5)
             elif num2[1] == '7':
                 set2 = random_set(integer=0, female_name=5)
-        answer = set_operation(op=operation, set_1=set1, set_2=set2)
+        if operation == 'set-complement':
+            answer = set_operation(op=operation, set_1=set1, set_2=set2)
+        else:
+            answer = set_operation(op=operation, set_1=set(set1), set_2=set(set2))
         if answer not in choices:
             choices.append(answer)
         else:
             pass
-    if operation == 'partition' or operation == 'complement':
-        question = ('What is the ' + operation + ' of this set? ').replace('[]', '').replace('[', '{').replace(']', '}')
-    else:
-        question = ('What is the ' + operation + ' of these two sets? ').replace('_', ' ').replace('[', '{').replace(
+    if operation == 'set-complement':
+        question = ('What is the ' + operation.replace('set-',
+                                                       '') + ' of set A considering U is universal set? ').replace('[]',
+                                                                                                                   '').replace(
+            '[', '{').replace(']', '}').replace('_', ' ').replace('[', '{').replace(
             ']', '}')
+    elif operation == 'set-partition':
+        question = ('What is the ' + operation.replace('set-', '') + ' of this set? ').replace('[]', '').replace('[',
+                                                                                                                 '{').replace(
+            ']', '}') + ' A= ' + str(set(set1)).replace('[]', '').replace('[', '{').replace(
+            ']', '}')
+    else:
+        question = ('What is the ' + operation.replace('set-', '').replace('cartesian-product',
+                                                                           'cartesian product').replace(
+            'set-symmetric-difference', 'symmetric difference') + ' of these two sets? ').replace('_', ' ').replace('[',
+                                                                                                                    '{').replace(
+            ']', '}') + ' A= ' + str(set(set1)).replace('[]', '').replace('[', '{').replace(
+            ']', '}') + ' B= ' + str(set(set2)).replace(
+            '[]', '').replace('[]', '').replace('[', '{').replace(']', '}')
+
     choices = random.sample(choices, len(choices))
-    output_json = js.question_json_maker(uuid.uuid1().hex,
-                                         str(question) + ' A= ' + str(set1).replace('[]', '').replace('[', '{').replace(
-                                             ']', '}') + ' B= ' + str(set2).replace(
-                                             '[]', '').replace('[]', '').replace('[', '{').replace(']', '}'), choices,
-                                         choices.index(answer) + 1, difficulty=2)
+    output_json = js.question_json_maker(uuid.uuid1().hex, str(question), choices, choices.index(answer) + 1,
+                                         difficulty=2)
 
     return output_json
 
@@ -368,7 +396,7 @@ def general_function():
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
-def floor_ceiling_function():
+def ceiling_function():
     """
     Generates floor and ceiling function with random floats and asks for the answer.
 
@@ -376,21 +404,14 @@ def floor_ceiling_function():
     """
     choices = []
     while len(choices) < 4:
-        r_floor_symbol = '⌋'
-        l_floor_symbol = '⌊'
+
         r_ceiling_symbol = '⌉'
         l_ceiling_symbol = '⌈'
-        A = 0
 
-        # question_json = 'question ' + str(i + 1)
         A = round(random.uniform(-40, 40), 2)
-        identifier = random.randint(0, 10)
-        if identifier % 2 == 0:
-            question = l_floor_symbol + str(A) + r_floor_symbol + ' ?'
-            answer = str(math.floor(A))
-        else:
-            question = l_ceiling_symbol + str(A) + r_ceiling_symbol + ' ?'
-            answer = str(math.ceil(A))
+
+        question = l_ceiling_symbol + str(A) + r_ceiling_symbol + ' ?'
+        answer = str(math.ceil(A))
         if answer not in choices:
             choices.append(answer)
     choices = random.sample(choices, len(choices))
@@ -398,7 +419,26 @@ def floor_ceiling_function():
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
-def inverse_of_function():
+def floor_function():
+    choices = []
+    while len(choices) < 4:
+        r_floor_symbol = '⌋'
+        l_floor_symbol = '⌊'
+
+        # question_json = 'question ' + str(i + 1)
+        A = round(random.uniform(-40, 40), 2)
+
+        question = l_floor_symbol + str(A) + r_floor_symbol + ' ?'
+        answer = str(math.floor(A))
+
+        if answer not in choices:
+            choices.append(answer)
+    choices = random.sample(choices, len(choices))
+
+    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+
+
+def inverse_function():
     """
     Generates a random function and asks for inverse of it.
 
@@ -432,7 +472,7 @@ def inverse_of_function():
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
 
 
-def domain():
+def function_domain():
     global zip
     choices = []
     while len(choices) < 4:
@@ -454,7 +494,7 @@ def domain():
     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
 
 
-def target():
+def function_target():
     global zip
     choices = []
     while len(choices) < 4:
@@ -1189,7 +1229,7 @@ def bayes_theorem():
 #         choices.append(relations[rand_int])
 #     random.shuffle(choices)
 #     return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
-
+#
 
 #
 # def img_test():
@@ -1229,6 +1269,8 @@ def template():
         question = 'question in string'
         answer = 'whatever the answer is'
         # END TODO
+        # for making a Venn diagram
+        # venn.ven2(set1, set2)
 
         if answer not in choices:
             choices.append(answer)
