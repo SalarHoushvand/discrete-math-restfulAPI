@@ -292,15 +292,16 @@ def function_target(num):
 
 # ---------- Probabilities ----------
 
-@app.route('/probability/event/<int:num>', methods=['GET'])
-def event_probability(num):
+@app.route('/probability-event', defaults={'num': 1}, methods=['GET'])
+@app.route('/probability-event/<int:num>', methods=['GET'])
+def probability_event(num):
     questions = []
 
     for i in range(num):
         question_list = [functions.event_probability_1(), functions.event_probability_2(),
                          functions.event_probability_3()]
         questions.append(random.choice(question_list))
-    return jsonify(js.json_maker('probability of an event', questions))
+    return jsonify(js.json_maker('probability-event', questions))
 
 
 @app.route('/probability/permutation/<int:num>', methods=['GET'])
@@ -479,6 +480,36 @@ def topics():
         'one to one function': '/function/equation/'
     }}
     return jsonify(topics)
+
+
+@app.errorhandler(404)
+def not_found(e):
+    error_msg = {
+                 "error": "404",
+                 "message": "The requested resource does not exist.",
+                "detail": " Ensure that the URL you are using is correct."
+                 }
+    return jsonify(error_msg), 404
+
+
+@app.errorhandler(500)
+def server_error(e):
+    error_msg = {
+        "error": "500",
+        "message": "A generic error occurred on the server.",
+        "detail": "please try again later."
+    }
+    return jsonify(error_msg), 500
+
+
+@app.errorhandler(405)
+def server_error(e):
+    error_msg = {
+        "error": "405",
+        "message": "Method not allowed.",
+        "detail": "You requested a method that is not allowed by server."
+    }
+    return jsonify(error_msg), 405
 
 
 # ---------- App Run ----------

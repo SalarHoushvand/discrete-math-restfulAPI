@@ -44,18 +44,14 @@
     <h2>API Methods
     </h2>
 
-    <h3>Set Theories
-    </h3>
 
-    <h3>Get random quizz
-    </h3>
 
-    <p>By this call you can get as many questions as you requested for set theories randomly.
-    </p>
-
-    <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">GET</b> /random/int:num</int:num></p>
 
     <p><b>Response</b></p>
+
+        <p>
+            Following is a template of output in JSON format:
+        </p>
     <div style="background-color:rgb(231, 231, 231); font-size: small; padding:15px ;">
         {<br>
             &nbsp;"questions": [<br>
@@ -68,6 +64,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;"messageForIncorrectAnswer": "INCORRECT ANSWER",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"point": "10",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"question": String,<br>
+                    "questionID": String,<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"questionType": "text"<br>
                 &nbsp;&nbsp;}<br>
                 &nbsp;],<br>
@@ -76,15 +73,37 @@
             }<br>
     </div>
 
+        <h3>Optional and Required Parameters
+    </h3>
+        <p>There are optional and mandatory parameters for the API as follow:</p>
+        <h3>topic id : required</h3>
+        <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">example: GET</b> /<b>set-union</b></p>
+
+
+        <h3>number of questions : optional (required when using parameters in set theory), default = 1</h3>
+        <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">example: GET</b> /set-union/<b>4</b></p>
+
+
+        <h3>parameters (for set theory): optional, default=11</h3>
+        <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">example: GET</b> /set-union/5/<b>11</b></p>
+
+
+
 
     <h3>Questions from topics
     </h3>
 
-    <p>By calling this you need to first define the topic, then number of questions you want and finally
+
+
+
+        <h3>Set Theories
+    </h3>
+
+            <p>By calling this you need to first define the topic, then number of questions you want and finally
         type of items in each sets. as an example to call 5 questions from union of sets that both sets are containing integers:
     </p>
 
-    <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">GET</b> /union/5/11</int:num></p>
+    <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">GET</b> /set-union/5/11</int:num></p>
 
     <p>Here is the list of all available topics:
     </p>
@@ -102,44 +121,51 @@
         .tg .tg-1zn6{background-color:#FFF;color:#24292E;
           text-align:left;vertical-align:middle}
         </style>
-        <table class="tg">
+
+
+ <table class="tg">
         <thead>
           <tr>
-            <th class="tg-bznl"><span style="font-weight:600">param</span></th>
-            <th class="tg-bznl"><span style="font-weight:600">Output</span></th>
+            <th class="tg-0pky"><b>call</b></th>
+            <th class="tg-0pky"><b>Question Topic</b></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="tg-1zn6">union</td>
-            <td class="tg-1zn6">two random sets and union of them as answer.</td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /set-union </td>
+            <td class="tg-0pky">Random question for union of two sets. <a href="https://mathgen-api.herokuapp.com/set-union">example call</a><br></td>
           </tr>
           <tr>
-            <td class="tg-plyd">intersection</td>
-            <td class="tg-plyd">two random sets and intersection of them as answer.</td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /set-intersection</td>
+            <td class="tg-0pky">Random question for intersection of two sets. <a href="https://mathgen-api.herokuapp.com/set-intersection">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-1zn6">difference</td>
-            <td class="tg-1zn6">two random sets and difference of them as answer.</td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /set-difference	</td>
+            <td class="tg-0pky">Random question for difference of two sets.<a href="https://mathgen-api.herokuapp.com/set-difference">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-plyd">symmetric_difference</td>
-            <td class="tg-plyd">two random sets and symmetric difference of them as answer.</td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /set-symmetric-difference	</td>
+            <td class="tg-0pky">Random question for symmetric difference of two sets. <a href="https://mathgen-api.herokuapp.com/set-symmetric-difference">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-1zn6">cartesian</td>
-            <td class="tg-1zn6">two sets and cartesian product of them as answer.</td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /cartesian-product	</td>
+            <td class="tg-0pky">Random question for cartesian product of two sets. <a href="https://mathgen-api.herokuapp.com/function-domain">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-plyd">partition</td>
-            <td class="tg-plyd">one set and all subsets of it as answer.</td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /set-partition	</td>
+            <td class="tg-0pky">Random question for partition of a set. <a href="https://mathgen-api.herokuapp.com/set-partition">example call</a></td>
           </tr>
-          <tr>
-            <td class="tg-1zn6">complement</td>
-            <td class="tg-1zn6">one set and complment of it as answer.</td>
+         <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /set-complement		</td>
+            <td class="tg-0pky">Random question for set complement. <a href="https://mathgen-api.herokuapp.com/set-complement">example call</a></td>
+          </tr>
+         <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /venn-diagram		</td>
+            <td class="tg-0pky">Random question for Venn diagram. <a href="https://mathgen-api.herokuapp.com/venn-diagram">example call</a></td>
           </tr>
         </tbody>
         </table>
+
 
         <p>The first number defines the elements in
             first set and second number defines elements in second, here is the list of all available elements:</p>
@@ -197,6 +223,15 @@
                 </table>
 
 
+         <h3>Get random quiz for set theory
+    </h3>
+
+    <p>By this call you can get as many questions as you requested for set theories randomly.
+    </p>
+
+    <p style="background-color: rgb(226, 224, 224); padding:10px; border-radius: 3px;"><b style="color: rgb(238, 38, 38); ">GET</b> /random/int:num</int:num></p>
+
+
     <h3>Functions</h3>
 
     <p> You can generate random questions for different topics in function section by following calls. you can define number of output questions
@@ -219,24 +254,28 @@
         </thead>
         <tbody>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/int:num </td>
-            <td class="tg-0pky">Whether it's a function or not if yes what kind of function. <a href="https://mathgen-api.herokuapp.com/function/1">example call</a><br></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function-definition </td>
+            <td class="tg-0pky">Random question for function definition. <a href="https://mathgen-api.herokuapp.com/function-definition">example call</a><br></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/floorceiling/int:num</td>
-            <td class="tg-0pky">Random questions for floor and ceiling function. <a href="https://mathgen-api.herokuapp.com/function/floorceiling/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /floor-function</td>
+            <td class="tg-0pky">Random question for floor function. <a href="https://mathgen-api.herokuapp.com/floor-function">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/inverse/int:num</td>
-            <td class="tg-0pky">Random question for inverse of a function. <a href="https://mathgen-api.herokuapp.com/function/inverse/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /ceiling-function</td>
+            <td class="tg-0pky">Random question for ceiling function. <a href="https://mathgen-api.herokuapp.com/ceiling-function">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/domain/int:num</td>
-            <td class="tg-0pky">Random question for domain of a function. <a href="https://mathgen-api.herokuapp.com/function/domain/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /inverse-function</td>
+            <td class="tg-0pky">Random question for inverse of a function. <a href="https://mathgen-api.herokuapp.com/inverse-function">example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function/target/int:num</td>
-            <td class="tg-0pky">Random question for target of a function. <a href="https://mathgen-api.herokuapp.com/function/target/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function-domain</td>
+            <td class="tg-0pky">Random question for domain of a function. <a href="https://mathgen-api.herokuapp.com/function-domain">example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function-target</td>
+            <td class="tg-0pky">Random question for target of a function. <a href="https://mathgen-api.herokuapp.com/function-target">example call</a></td>
           </tr>
         </tbody>
         </table>
