@@ -46,7 +46,7 @@ By calling this you need to first define the topic, then number of questions you
 as an example to call 5 questions from union of sets that both sets are containing integers:
 
 ```HTTP
-GET /union/5/11
+GET /set-union/5/11
 ```
 
 Here is the list of all available topics:
