@@ -8,7 +8,6 @@
 
 # ---------- Imports ----------
 
-import math
 import random
 from flask import Flask, jsonify, render_template
 import functions as functions
@@ -184,6 +183,11 @@ def random_qa(num):
 @app.route('/venn-diagram', defaults={'num': 1}, methods=['GET'])
 @app.route('/venn-diagram/<int:num>')
 def venn_diagram(num):
+    """
+     Generates random questions for Venn diagram.
+    :param num: number of questions.
+    :return: questions in JSON format.
+    """
     questions = []
     for i in range(num):
         questions.append(functions.intersection_venn())
@@ -290,11 +294,31 @@ def function_target(num):
     return jsonify(js.json_maker('function-target', questions))
 
 
+@app.route('/one-to-one-function/<int:num>')
+def one_to_one_function(num):
+    """
+    Generates a question for one to one function using equations.
+
+    :param num: number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+    questions = []
+    for i in range(num):
+        questions.append(functions.one_to_one_function())
+    return jsonify(js.json_maker('one-to-one-function', questions))
+
+
 # ---------- Probabilities ----------
 
 @app.route('/probability-event', defaults={'num': 1}, methods=['GET'])
 @app.route('/probability-event/<int:num>', methods=['GET'])
 def probability_event(num):
+    """
+    Questions for probability of an event.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
     questions = []
 
     for i in range(num):
@@ -306,6 +330,12 @@ def probability_event(num):
 
 @app.route('/probability/permutation/<int:num>', methods=['GET'])
 def permutation(num):
+    """
+    Questions for permutation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
     questions = []
 
     for i in range(num):
@@ -316,6 +346,12 @@ def permutation(num):
 
 @app.route('/probability/multiplication/<int:num>', methods=['GET'])
 def multiplication(num):
+    """
+    Questions for multiplication.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
     questions = []
 
     for i in range(num):
@@ -327,6 +363,12 @@ def multiplication(num):
 
 @app.route('/probability/combination/<int:num>', methods=['GET'])
 def combination(num):
+    """
+    Questions for combination.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
     questions = []
 
     for i in range(num):
@@ -337,6 +379,12 @@ def combination(num):
 
 @app.route('/probability/conditional/<int:num>', methods=['GET'])
 def conditional_probability(num):
+    """
+    Questions for conditional probability.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
     questions = []
 
     for i in range(num):
@@ -346,6 +394,12 @@ def conditional_probability(num):
 
 @app.route('/probability/union/<int:num>', methods=['GET'])
 def probability_union(num):
+    """
+    Questions for union of events.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
     questions = []
 
     for i in range(num):
@@ -355,6 +409,13 @@ def probability_union(num):
 
 @app.route('/probability/complement/<int:num>', methods=['GET'])
 def probability_complement(num):
+    """
+    Questions for complement of events.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
     questions = []
 
     for i in range(num):
@@ -364,6 +425,12 @@ def probability_complement(num):
 
 @app.route('/probability/bayes/<int:num>', methods=['GET'])
 def bayes_theorem(num):
+    """
+    Questions for Bayes theorem.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+        """
     questions = []
 
     for i in range(num):
@@ -371,89 +438,16 @@ def bayes_theorem(num):
     return jsonify(js.json_maker('bayes theorem', questions))
 
 
-@app.route('/relations_1/<int:num>', methods=['GET'])
-def relations_1(num):
-    questions = []
-
-    for i in range(num):
-        questions.append(functions.relations_1())
-    return jsonify(js.json_maker('relations', questions))
-
-
-@app.route('/relations_2/<int:num>', methods=['GET'])
-def relations_2(num):
-    questions = []
-
-    for i in range(num):
-        questions.append(functions.relations_2())
-    return jsonify(js.json_maker('relations', questions))
-
-
-@app.route('/relations_3/<int:num>', methods=['GET'])
-def relations_3(num):
-    questions = []
-
-    for i in range(num):
-        questions.append(functions.relations_3())
-    return jsonify(js.json_maker('relations', questions))
-
-
-@app.route('/relations_4/<int:num>', methods=['GET'])
-def relations_4(num):
-    questions = []
-
-    for i in range(num):
-        questions.append(functions.relations_4())
-    return jsonify(js.json_maker('relations', questions))
-
-
-@app.route('/relations_5/<int:num>', methods=['GET'])
-def relations_5(num):
-    questions = []
-
-    for i in range(num):
-        questions.append(functions.relations_5())
-    return jsonify(js.json_maker('relations', questions))
-
-
-@app.route('/relations_6/<int:num>', methods=['GET'])
-def relations_6(num):
-    questions = []
-
-    for i in range(num):
-        questions.append(functions.relations_6())
-    return jsonify(js.json_maker('relations', questions))
-
-
-@app.route('/relations/<int:num>')
-def relations(num):
-    questions = []
-
-    for i in range(num):
-        question_list = [functions.relations_1(), functions.relations_2(), functions.relations_3(),
-                         functions.relations_4(),
-                         functions.relations_5(), functions.relations_6(), functions.relations_7(),
-                         functions.relations_8(),
-                         functions.relations_9(), functions.relations_10()]
-        questions.append(random.choice(question_list))
-    return jsonify(js.json_maker('Relations', questions))
-
-
 # ======================================================================================================================
-
-
-@app.route('/function/equation/<int:num>')
-def equation(num):
-    questions = []
-    for i in range(num):
-        questions.append(functions.equation())
-    return jsonify(js.json_maker('function', questions))
 
 
 @app.route('/topics', methods=['GET'])
 def topics():
+    """
+    List of topics to be used in a third party application.
+    :return: JSON file.
+    """
     topics = {"topics": {
-        'relations': '/relations/',
         'bayes theorem': '/probability/bayes/',
         'probability complement': '/probability/complement/',
         'probability union': '/probability/union/',
@@ -482,13 +476,16 @@ def topics():
     return jsonify(topics)
 
 
+# ---------- Error Handling ----------
+
+
 @app.errorhandler(404)
 def not_found(e):
     error_msg = {
-                 "error": "404",
-                 "message": "The requested resource does not exist.",
-                "detail": " Ensure that the URL you are using is correct."
-                 }
+        "error": "404",
+        "message": "The requested resource does not exist.",
+        "detail": " Ensure that the URL you are using is correct."
+    }
     return jsonify(error_msg), 404
 
 
@@ -514,4 +511,5 @@ def server_error(e):
 
 # ---------- App Run ----------
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.debug = True
+    app.run(host='127.0.0.1', port=5000)

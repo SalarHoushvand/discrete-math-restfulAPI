@@ -35,4 +35,3 @@ for p in param:
 #             print('Error : ' + str(x.status_code))
 
 
-print(str(len(status_codes_list)) + 'Test successful test cases.')
