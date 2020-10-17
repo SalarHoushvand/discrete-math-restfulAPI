@@ -565,7 +565,7 @@ def function_target():
         for i in range(random.randint(3, 6)):
             B.append(random.randint(11, 21))
         zip1 = list(zip(A, B))
-        question = 'what is the domain of this function ? f(x)=' + str(zip1).replace('[', '{').replace(']', '}')
+        question = 'what is the target of this function ? f(x)=' + str(zip1).replace('[', '{').replace(']', '}')
         zip2 = []
         for i in zip1:
             zip2.append(i[1])
