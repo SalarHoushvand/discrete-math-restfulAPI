@@ -53,13 +53,13 @@ Here is the list of all available topics:
 
 | param     | Output                                                                                                                                                                                                                                                                                                      |
 | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| set-union    | two random sets and union of them as answer.                                                                                                                                                                                                                                                             |
-| set-intersection  | two random sets and intersection of them as answer.                                                                                                                                                                                                                                                                                     |
-| set-difference     | two random sets and difference of them as answer.                                                                                                                                                                                                                                                   |
-| set-symmetric-difference      | two random sets and symmetric difference of them as answer.                                                                                                                                                                                                                                                                    |
-| cartesian-product | two sets and cartesian product of them as answer.                                                                                                                                                                                                                                            |
-| set-partition | one set and all subsets of it as answer.                                                                                                                                                                                                                                           |
-| set-complement      | one set and complment of it as answer.
+| ```GET /set-union```     | two random sets and union of them as answer.                                                                                                                                                                                                                                                             |
+| ```GET /set-intersection```  | two random sets and intersection of them as answer.                                                                                                                                                                                                                                                                                     |
+| ```GET /set-difference```     | two random sets and difference of them as answer.                                                                                                                                                                                                                                                   |
+| ```GET /set-symmetric-difference```      | two random sets and symmetric difference of them as answer.                                                                                                                                                                                                                                                                    |
+| ```GET /cartesian-product``` | two sets and cartesian product of them as answer.                                                                                                                                                                                                                                            |
+| ```GET /set-partition``` | one set and all subsets of it as answer.                                                                                                                                                                                                                                           |
+| ```GET /set-complement```      | one set and complment of it as answer.
 
 The first number defines the elements in first set and second number defines elements in second, here is the list of all available elements:
 | param| Set Items                                                                                                                                                                                                                                                                                                      |
@@ -102,3 +102,21 @@ You can generate random questions for different topics in probabilities section 
 | ```GET /probability/union/int:num```| Probability Union|
 | ```GET /probability/complement/int:num	```| Probability Complement |
 | ```GET /probability/bayes/int:num```| Bayes Theorem |
+
+
+
+### Relations
+
+You can generate random questions for different topics in relations section by following calls. you can define number of output questions by giving the value for num. Questions for relations are true or false questions.
+
+| Call| Question Topic                                                                                                                                                                                                                                                                                                     |
+| :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ```GET /reflexive-relation```    | Reflexive Relation |
+|  ```GET /irreflexive-relation```    | Irreflexive Relation  |
+| ```GET /symmetric-relation	```|Symmetric Relation|
+| ```GET /asymmetric-relation	```| Asymmetric Relation|
+| ```GET /antisymmetric-relation```| Antisymmetric Relation |
+| ```GET /transitive-relation```| Transitive Relation|
+| ```GET /reflexive-closure	```| Reflexive Closure |
+| ```GET /symmetric-closure```| Symmetric Closure |
+| ```GET /transitive-closure```| Transitive Closure |
