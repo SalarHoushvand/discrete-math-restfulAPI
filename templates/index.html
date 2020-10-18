@@ -58,14 +58,14 @@
             &nbsp;&nbsp;{<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"answerSelectionType": "single",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"answers": list<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"correctAnswer": int,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"correctAnswer": int, String ot Boolean<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"explanation": "",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"messageForCorrectAnswer": "CORRECT ANSWER",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"messageForIncorrectAnswer": "INCORRECT ANSWER",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"point": "10",<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"question": String,<br>
                     "questionID": String,<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"questionType": "text"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"questionType": String<br>
                 &nbsp;&nbsp;}<br>
                 &nbsp;],<br>
                 &nbsp;"quizSynopsis": String,<br>
@@ -255,27 +255,27 @@
         <tbody>
           <tr>
             <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function-definition </td>
-            <td class="tg-0pky">Random question for function definition. <a href="https://mathgen-api.herokuapp.com/function-definition">example call</a><br></td>
+            <td class="tg-0pky">Random question for function definition. <a href="https://mathgen-api.herokuapp.com/function-definition"> example call</a><br></td>
           </tr>
           <tr>
             <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /floor-function</td>
-            <td class="tg-0pky">Random question for floor function. <a href="https://mathgen-api.herokuapp.com/floor-function">example call</a></td>
+            <td class="tg-0pky">Random question for floor function. <a href="https://mathgen-api.herokuapp.com/floor-function"> example call</a></td>
           </tr>
           <tr>
             <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /ceiling-function</td>
-            <td class="tg-0pky">Random question for ceiling function. <a href="https://mathgen-api.herokuapp.com/ceiling-function">example call</a></td>
+            <td class="tg-0pky">Random question for ceiling function. <a href="https://mathgen-api.herokuapp.com/ceiling-function"> example call</a></td>
           </tr>
           <tr>
             <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /inverse-function</td>
-            <td class="tg-0pky">Random question for inverse of a function. <a href="https://mathgen-api.herokuapp.com/inverse-function">example call</a></td>
+            <td class="tg-0pky">Random question for inverse of a function. <a href="https://mathgen-api.herokuapp.com/inverse-function"> example call</a></td>
           </tr>
           <tr>
             <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function-domain</td>
-            <td class="tg-0pky">Random question for domain of a function. <a href="https://mathgen-api.herokuapp.com/function-domain">example call</a></td>
+            <td class="tg-0pky">Random question for domain of a function. <a href="https://mathgen-api.herokuapp.com/function-domain"> example call</a></td>
           </tr>
           <tr>
             <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /function-target</td>
-            <td class="tg-0pky">Random question for target of a function. <a href="https://mathgen-api.herokuapp.com/function-target">example call</a></td>
+            <td class="tg-0pky">Random question for target of a function. <a href="https://mathgen-api.herokuapp.com/function-target"> example call</a></td>
           </tr>
         </tbody>
         </table>
@@ -304,36 +304,99 @@
         </thead>
         <tbody>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/event/int:num </td>
-            <td class="tg-0pky">Probability of an event<a href="https://mathgen-api.herokuapp.com/probability/event/1">example call</a><br></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /event-probability </td>
+            <td class="tg-0pky">Probability of an event<a href="https://mathgen-api.herokuapp.com/event-probability"> example call</a><br></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/permutation/int:num</td>
-            <td class="tg-0pky">Permutation <a href="https://mathgen-api.herokuapp.com/probability/permutation/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /permutation</td>
+            <td class="tg-0pky">Permutation <a href="https://mathgen-api.herokuapp.com/permutation"> example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/multiplication/int:num</td>
-            <td class="tg-0pky">Multiplication<a href="https://mathgen-api.herokuapp.com/probability/multiplication/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /multiplication-rule</td>
+            <td class="tg-0pky">Multiplication Rule<a href="https://mathgen-api.herokuapp.com/multiplication-rule"> example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/combination/int:num</td>
-            <td class="tg-0pky">Combination<a href="https://mathgen-api.herokuapp.com/probability/combination/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /combination</td>
+            <td class="tg-0pky">Combination<a href="https://mathgen-api.herokuapp.com/combination"> example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/conditional/int:num</td>
-            <td class="tg-0pky">Conditional Probability<a href="https://mathgen-api.herokuapp.com/probability/conditional/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /conditional-probability</td>
+            <td class="tg-0pky">Conditional Probability<a href="https://mathgen-api.herokuapp.com/conditional-probability"> example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/union/int:num</td>
-            <td class="tg-0pky">Probability Union<a href="https://mathgen-api.herokuapp.com/probability/union/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability-union</td>
+            <td class="tg-0pky">Probability Union<a href="https://mathgen-api.herokuapp.com/probability-union"> example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/complement/int:num</td>
-            <td class="tg-0pky">Probability Complement<a href="https://mathgen-api.herokuapp.com/probability/complement/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability-complement</td>
+            <td class="tg-0pky">Probability Complement<a href="https://mathgen-api.herokuapp.com/probability-complement"> example call</a></td>
           </tr>
           <tr>
-            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /probability/bayes/int:num</td>
-            <td class="tg-0pky">Bayes Theorem<a href="https://mathgen-api.herokuapp.com/probability/bayes/1">example call</a></td>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /bayes-theorem</td>
+            <td class="tg-0pky">Bayes Theorem<a href="https://mathgen-api.herokuapp.com/bayes-theorem"> example call</a></td>
+          </tr>
+        </tbody>
+        </table>
+
+
+
+
+   <h3>Relations</h3>
+
+    <p> You can generate random questions for different topics in relations section by following calls. you can define number of output questions
+        by giving the value for num. Questions for relation are true or false questions.
+    </p>
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+        </style>
+        <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-0pky"><b>call</b></th>
+            <th class="tg-0pky"><b>Question Topic</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /reflexive-relation </td>
+            <td class="tg-0pky">Reflexive Relation<a href="https://mathgen-api.herokuapp.com/reflexive-relation"> example call</a><br></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /irreflexive-relation</td>
+            <td class="tg-0pky">Irreflexive Relation <a href="https://mathgen-api.herokuapp.com/irreflexive-relation"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /symmetric-relation</td>
+            <td class="tg-0pky">Symmetric Relation<a href="https://mathgen-api.herokuapp.com/symmetric-relation"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /asymmetric-relation</td>
+            <td class="tg-0pky">Asymmetric Relation<a href="https://mathgen-api.herokuapp.com/asymmetric-relation"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /antisymmetric-relation</td>
+            <td class="tg-0pky">Antisymmetric Relation<a href="https://mathgen-api.herokuapp.com/antisymmetric-relation"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /transitive-relation</td>
+            <td class="tg-0pky">Transitive Relation<a href="https://mathgen-api.herokuapp.com/transitive-relation"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /reflexive-closure</td>
+            <td class="tg-0pky">Reflexive Closure<a href="https://mathgen-api.herokuapp.com/reflexive-closure"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /symmetric-closure</td>
+            <td class="tg-0pky">Symmetric Closure<a href="https://mathgen-api.herokuapp.com/symmetric-closure"> example call</a></td>
+          </tr>
+          <tr>
+            <td class="tg-0pky"><b style="color: rgb(238, 38, 38);">GET</b> /transitive-closure</td>
+            <td class="tg-0pky">Transitive Closure<a href="https://mathgen-api.herokuapp.com/transitive-closure"> example call</a></td>
           </tr>
         </tbody>
         </table>
