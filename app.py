@@ -310,9 +310,9 @@ def one_to_one_function(num):
 
 # ---------- Probabilities ----------
 
-@app.route('/probability-event', defaults={'num': 1}, methods=['GET'])
-@app.route('/probability-event/<int:num>', methods=['GET'])
-def probability_event(num):
+@app.route('/event-probability', defaults={'num': 1}, methods=['GET'])
+@app.route('/event-probability/<int:num>', methods=['GET'])
+def event_probability(num):
     """
     Questions for probability of an event.
 
@@ -325,10 +325,11 @@ def probability_event(num):
         question_list = [functions.event_probability_1(), functions.event_probability_2(),
                          functions.event_probability_3()]
         questions.append(random.choice(question_list))
-    return jsonify(js.json_maker('probability-event', questions))
+    return jsonify(js.json_maker('event-probability', questions))
 
 
-@app.route('/probability/permutation/<int:num>', methods=['GET'])
+@app.route('/permutation', defaults={'num': 1}, methods=['GET'])
+@app.route('/permutation/<int:num>', methods=['GET'])
 def permutation(num):
     """
     Questions for permutation.
@@ -344,8 +345,9 @@ def permutation(num):
     return jsonify(js.json_maker('permutation', questions))
 
 
-@app.route('/probability/multiplication/<int:num>', methods=['GET'])
-def multiplication(num):
+@app.route('/multiplication-rule', defaults={'num': 1}, methods=['GET'])
+@app.route('/multiplication-rule/<int:num>', methods=['GET'])
+def multiplication_rule(num):
     """
     Questions for multiplication.
 
@@ -355,13 +357,14 @@ def multiplication(num):
     questions = []
 
     for i in range(num):
-        question_list = [functions.multiplication_2(), functions.multiplication_3(),
-                         functions.multiplication_4()]
+        question_list = [functions.multiplication_rule_2(), functions.multiplication_rule_3(),
+                         functions.multiplication_rule_4(), functions.multiplication_rule_1()]
         questions.append(random.choice(question_list))
-    return jsonify(js.json_maker('multiplication', questions))
+    return jsonify(js.json_maker('multiplication-rule', questions))
 
 
-@app.route('/probability/combination/<int:num>', methods=['GET'])
+@app.route('/combination', defaults={'num': 1}, methods=['GET'])
+@app.route('/combination/<int:num>', methods=['GET'])
 def combination(num):
     """
     Questions for combination.
@@ -377,7 +380,8 @@ def combination(num):
     return jsonify(js.json_maker('combination', questions))
 
 
-@app.route('/probability/conditional/<int:num>', methods=['GET'])
+@app.route('/conditional-probability', defaults={'num': 1}, methods=['GET'])
+@app.route('/conditional-probability/<int:num>', methods=['GET'])
 def conditional_probability(num):
     """
     Questions for conditional probability.
@@ -389,10 +393,11 @@ def conditional_probability(num):
 
     for i in range(num):
         questions.append(functions.conditional_probability_1())
-    return jsonify(js.json_maker('conditional probability', questions))
+    return jsonify(js.json_maker('conditional-probability', questions))
 
 
-@app.route('/probability/union/<int:num>', methods=['GET'])
+@app.route('/probability-union', defaults={'num': 1}, methods=['GET'])
+@app.route('/probability-union/<int:num>', methods=['GET'])
 def probability_union(num):
     """
     Questions for union of events.
@@ -404,10 +409,11 @@ def probability_union(num):
 
     for i in range(num):
         questions.append(functions.probability_union())
-    return jsonify(js.json_maker('probability union', questions))
+    return jsonify(js.json_maker('probability-union', questions))
 
 
-@app.route('/probability/complement/<int:num>', methods=['GET'])
+@app.route('/probability-complement', defaults={'num': 1}, methods=['GET'])
+@app.route('/probability-complement/<int:num>', methods=['GET'])
 def probability_complement(num):
     """
     Questions for complement of events.
@@ -420,10 +426,11 @@ def probability_complement(num):
 
     for i in range(num):
         questions.append(functions.probability_complement())
-    return jsonify(js.json_maker('probability complement', questions))
+    return jsonify(js.json_maker('probability-complement', questions))
 
 
-@app.route('/probability/bayes/<int:num>', methods=['GET'])
+@app.route('/bayes-theorem', defaults={'num': 1}, methods=['GET'])
+@app.route('/bayes-theorem/<int:num>', methods=['GET'])
 def bayes_theorem(num):
     """
     Questions for Bayes theorem.
@@ -435,10 +442,164 @@ def bayes_theorem(num):
 
     for i in range(num):
         questions.append(functions.bayes_theorem())
-    return jsonify(js.json_maker('bayes theorem', questions))
+    return jsonify(js.json_maker('bayes-theorem', questions))
 
 
-# ======================================================================================================================
+# ---------- Relations ----------
+
+@app.route('/reflexive-relation', defaults={'num': 1}, methods=['GET'])
+@app.route('/reflexive-relation/<int:num>', methods=['GET'])
+def reflexive_relation(num):
+    """
+    Questions for reflexive relation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.reflexive_relation())
+    return jsonify(js.json_maker('reflexive-relation', questions))
+
+
+@app.route('/irreflexive-relation', defaults={'num': 1}, methods=['GET'])
+@app.route('/irreflexive-relation/<int:num>', methods=['GET'])
+def irreflexive_relation(num):
+    """
+    Questions for irreflexive relation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.irreflexive_relation())
+    return jsonify(js.json_maker('irreflexive-relation', questions))
+
+
+@app.route('/symmetric-relation', defaults={'num': 1}, methods=['GET'])
+@app.route('/symmetric-relation/<int:num>', methods=['GET'])
+def symmetric_relation(num):
+    """
+    Questions for symmetric relation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.symmetric_relation())
+    return jsonify(js.json_maker('symmetric-relation', questions))
+
+
+@app.route('/asymmetric-relation', defaults={'num': 1}, methods=['GET'])
+@app.route('/asymmetric-relation/<int:num>', methods=['GET'])
+def asymmetric_relation(num):
+    """
+    Questions for asymmetric relation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.asymmetric_relation())
+    return jsonify(js.json_maker('asymmetric-relation', questions))
+
+
+@app.route('/antisymmetric-relation', defaults={'num': 1}, methods=['GET'])
+@app.route('/antisymmetric-relation/<int:num>', methods=['GET'])
+def antisymmetric_relation(num):
+    """
+    Questions for antisymmetric relation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.antisymmetric_relation())
+    return jsonify(js.json_maker('antisymmetric-relation', questions))
+
+
+@app.route('/transitive-relation', defaults={'num': 1}, methods=['GET'])
+@app.route('/transitive-relation/<int:num>', methods=['GET'])
+def transitive_relation(num):
+    """
+    Questions for transitive relation.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.antisymmetric_relation())
+    return jsonify(js.json_maker('transitive-relation', questions))
+
+
+@app.route('/reflexive-closure', defaults={'num': 1}, methods=['GET'])
+@app.route('/reflexive-closure/<int:num>', methods=['GET'])
+def reflexive_closure(num):
+    """
+    Questions for reflexive closure.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.reflexive_closure())
+    return jsonify(js.json_maker('reflexive-closure', questions))
+
+
+@app.route('/symmetric-closure', defaults={'num': 1}, methods=['GET'])
+@app.route('/symmetric-closure/<int:num>', methods=['GET'])
+def symmetric_closure(num):
+    """
+    Questions for symmetric closure.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.symmetric_closure())
+    return jsonify(js.json_maker('symmetric-closure', questions))
+
+
+@app.route('/transitive-closure', defaults={'num': 1}, methods=['GET'])
+@app.route('/transitive-closure/<int:num>', methods=['GET'])
+def transitive_closure(num):
+    """
+    Questions for transitive closure.
+
+    :param num:  number of questions.(int)
+    :return: question, answer, answer choices and topic.(JSON)
+    """
+
+    questions = []
+
+    for i in range(num):
+        questions.append(functions.transitive_closure())
+    return jsonify(js.json_maker('transitive-closure', questions))
+
+    # ======================================================================================================================
 
 
 @app.route('/topics', methods=['GET'])
@@ -448,14 +609,14 @@ def topics():
     :return: JSON file.
     """
     topics = {"topics": {
-        'bayes theorem': '/probability/bayes/',
-        'probability complement': '/probability/complement/',
-        'probability union': '/probability/union/',
-        'conditional probability': '/probability/conditional/',
-        'combination': '/probability/combination/',
-        'multiplication': '/probability/multiplication/',
+        'bayes-theorem': '/bayes-theorem/',
+        'probability-complement': '/probability-complement/',
+        'probability-union': '/probability-union/',
+        'conditional-probability': '/conditional-probability/',
+        'combination': '/combination/',
+        'multiplication-rule': '/multiplication-rule/',
         'permutation': '/probability/permutation/',
-        'probability of an event': '/probability/event/',
+        'event-probability': '/event-probability/',
         'function-target': '/function-target/',
         'function-domain': '/function-domain/',
         'inverse-function': '/inverse-function/',
@@ -471,7 +632,17 @@ def topics():
         'set-intersection': '/set-intersection/',
         'set-union': '/set-union/',
         'venn-diagram': '/venn-diagram/',
-        'one to one function': '/function/equation/'
+        'one-to-one-function': '/one-to-one-function/',
+        'reflexive-relation': '/reflexive-relation',
+        'irreflexive-relation': '/irreflexive-relation/',
+        'symmetric-relation': '/symmetric-relation/',
+        'asymmetric-relation': '/asymmetric-relation/',
+        'antisymmetric-relation': '/antisymmetric-relation',
+        'transitive-relation': '/transitive-relation/',
+        'reflexive-closure': '/reflexive-closure/',
+        'symmetric-closure': '/symmetric-closure',
+        'transitive-closure': '/transitive-closure'
+
     }}
     return jsonify(topics)
 
