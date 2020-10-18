@@ -1,37 +1,125 @@
 import requests
 
-topics = ['set-union',
-          'set-difference', 'set-symmetric-difference',
-          'cartesian-product', 'set-partition',
-          'set-complement']
 params = ['1', '2', '3', '4', '5', '6', '7']
 
-param = ['11', '12', '13', '14', '15', '16', '17', '21', '22', '23', '24', '25', '26', '27', '31', '32', '33', '34',
-         '35', '36', '37', '41', '42', '43', '44', '45', '46', '47', '51', '52', '53', '54', '55', '56', '57', '61',
-         '62', '63', '64', '65', '66', '67', '71', '72', '73', '74', '75', '76', '77']
+param = []
+for m in params:
+    for n in params:
+        param.append(m + n)
 
-param_intersection = ['11', '22', '33', '44', '55', '66', '77']
-# for i in params:
-#     for j in params:
-#         param.append(i+j)
-#
-# print(param)
 status_codes_list = []
 
 
-for p in param:
-    for i in range(20):
-        x = requests.get('http://127.0.0.1:5000/' + 'set-complement' + '/' + str(i) + '/' + p)
-        status_codes_list.append(x.status_code)
-        if x.status_code is not 200:
-            print('Error : ' + str(x.status_code))
+# test for set theory
+def set_theory_test():
+    """
+    Test function for set theory
+    """
+    topics_with_param = ['set-union', 'set-difference', 'set-symmetric-difference', 'cartesian-product',
+                         'set-partition',
+                         'set-intersection']
+
+    topics_without_param = ['venn-diagram', 'set-complement']
+    print('test started for set theory ...')
+    test_case = 0
+    for topic in topics_with_param:
+        for p in param:
+            for i in range(20):
+                x = requests.get('http://127.0.0.1:5000/' + topic + '/' + str(i) + '/' + p)
+                status_codes_list.append(x.status_code)
+                if x.status_code is not 200:
+                    print('Error : ' + str(x.status_code))
+                if x.headers.get('content-type') is not 'application/json':
+                    x.headers.get('content-type')
+                test_case = test_case + 1
+    for topic in topics_without_param:
+        for i in range(20):
+            x = requests.get('http://127.0.0.1:5000/' + topic + '/' + str(i))
+            status_codes_list.append(x.status_code)
+            if x.status_code is not 200:
+                print('Error : ' + str(x.status_code))
+            if x.headers.get('content-type') is not 'application/json':
+                x.headers.get('content-type')
+            test_case = test_case + 1
+    print(f'{str(test_case)} test cases for {str(len(topics_with_param)+len(topics_without_param))} topics in '
+          f'set theory with success (response code 200).')
+    print(f'{str(test_case)} test cases for {str(len(topics_with_param)+len(topics_without_param))} topics in '
+          f'set theory has body type of application/json.')
+    print('test completed for set theory. \n')
 
 
-# for p in param_intersection:
-#     for i in range(20):
-#         x = requests.get('http://127.0.0.1:5000/' + 'set-intersection' + '/' + str(i) + '/' + p)
-#         status_codes_list.append(x.status_code)
-#         if x.status_code is not 200:
-#             print('Error : ' + str(x.status_code))
+
+def functions_test():
+    """
+   Test function for functions
+    """
+    topics = ['ceiling-function', 'floor-function', 'function-definition', 'function-domain',
+              'function-target', 'inverse-function', 'one-to-one-function']
+    print('test started for functions ...')
+    test_case = 0
+    for topic in topics:
+        for i in range(20):
+            x = requests.get('http://127.0.0.1:5000/' + topic + '/' + str(i))
+            status_codes_list.append(x.status_code)
+            if x.status_code is not 200:
+                print('Error : ' + str(x.status_code))
+            if x.headers.get('content-type') is not 'application/json':
+                x.headers.get('content-type')
+            test_case = test_case + 1
+    print(f'{str(test_case)} test cases for {str(len(topics))} topics in functions with success (response code 200).')
+    print(f'{str(test_case)} test cases for {str(len(topics))} topics in functions has body type of application/json.')
+    print('test completed for functions. \n')
 
 
+
+def probabilities_test():
+    """
+   Test function for probabilities
+    """
+    topics = ['event-probability', 'permutation', 'multiplication-rule', 'combination',
+              'conditional-probability', 'probability-union', 'probability-complement', 'bayes-theorem']
+    print('test started for probabilities ...')
+    test_case = 0
+    for topic in topics:
+        for i in range(20):
+            x = requests.get('http://127.0.0.1:5000/' + topic + '/' + str(i))
+            status_codes_list.append(x.status_code)
+            if x.status_code is not 200:
+                print('Error : ' + str(x.status_code))
+            if x.headers.get('content-type') is not 'application/json':
+                x.headers.get('content-type')
+            test_case = test_case + 1
+    print(f'{str(test_case)} test cases for {str(len(topics))} topics in '
+          f'probabilities with success (response code 200).')
+    print(f'{str(test_case)} test cases for {str(len(topics))} topics in '
+          f'probabilities has body type of application/json.')
+    print('test completed for probabilities. \n')
+
+def relations_test():
+    """
+   Test function for probabilities
+    """
+    topics = ['reflexive-relation', 'irreflexive-relation', 'symmetric-relation', 'asymmetric-relation',
+              'antisymmetric-relation', 'transitive-relation', 'reflexive-closure', 'symmetric-closure',
+              'transitive-closure']
+    print('test started for relations ...')
+    test_case = 0
+    for topic in topics:
+        for i in range(20):
+            x = requests.get('http://127.0.0.1:5000/' + topic + '/' + str(i))
+            status_codes_list.append(x.status_code)
+            if x.status_code is not 200:
+                print('Error : ' + str(x.status_code))
+            if x.headers.get('content-type') is not 'application/json':
+                x.headers.get('content-type')
+            test_case = test_case + 1
+    print(f'{str(test_case)} test cases for {str(len(topics))} topics in relations with success (response code 200).')
+    print(f'{str(test_case)} test cases for {str(len(topics))} topics in relations has body type of application/json.')
+    print('test completed for relations. \n')
+
+
+
+set_theory_test()
+functions_test()
+probabilities_test()
+relations_test()

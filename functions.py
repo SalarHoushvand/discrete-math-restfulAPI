@@ -24,12 +24,12 @@ def template():
     Template for making questions
     :return:
     """
-    # Making a list for answer choices for multiple choice question.
-    choices = []
+    # Making a list for answer answer_choices for multiple choice question.
+    answer_choices = []
 
     # Making 4 question and adding the answer of first three to
     # the answer options and choose the last question as the main question
-    while len(choices) < 4:
+    while len(answer_choices) < 4:
 
         # TODO
         question = 'question in string'
@@ -38,16 +38,16 @@ def template():
         # for making a Venn diagram
         # venn.ven2(set1, set2)
 
-        # To prevent presence duplicate answer choices.
-        if answer not in choices:
-            choices.append(answer)
+        # To prevent presence duplicate answer answer_choices.
+        if answer not in answer_choices:
+            answer_choices.append(answer)
         # end while
 
-    # Shuffle choices
-    choices = random.sample(choices, len(choices))
+    # Shuffle answer_choices
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
     # Put the question in json format using jsonify.py
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 # ---------- Set Operations ----------
@@ -159,7 +159,6 @@ def subsetsRecur(current, sset):
     return [current]
 
 
-
 def set_operation(op='set-union', set_1=set(random_set()), set_2=set(random_set())):
     """
     Implements different set operations on two given sets.
@@ -221,8 +220,8 @@ def set_complement():
     function to generate random questions for set complement.
     :return: Questions.(JSON)
     """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         set_1 = random_set()
         subset_1 = []
         for i in range(len(set_1) - 2):
@@ -235,14 +234,14 @@ def set_complement():
             ']', '}')
         answer = str(set(set_1) - set(subset_1)).replace('[', '{').replace(']', '}')
 
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
-def choices(par, operation):
+def set_theory_choices(par, operation):
     """
     Generates choices for set operation multiple answer questions.
 
@@ -250,9 +249,9 @@ def choices(par, operation):
     :param operation: type of operation on sets.(str)
     :return: Questions.(JSON)
     """
-    choices = []
-    output = []
-    while len(choices) < 4:
+    answer_choices = []
+
+    while len(answer_choices) < 4:
         num2 = str(par)
         if operation == 'set-partition':
             set2 = []
@@ -333,8 +332,8 @@ def choices(par, operation):
             answer = set_operation(op=operation, set_1=set1, set_2=set2)
         else:
             answer = set_operation(op=operation, set_1=set(set1), set_2=set(set2))
-        if answer not in choices:
-            choices.append(answer)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
         else:
             pass
     if operation == 'set-complement':
@@ -357,8 +356,8 @@ def choices(par, operation):
             ']', '}') + ' B= ' + str(set(set2)).replace(
             '[]', '').replace('[]', '').replace('[', '{').replace(']', '}')
 
-    choices = random.sample(choices, len(choices))
-    output_json = js.question_json_maker(uuid.uuid1().hex, str(question), choices, choices.index(answer) + 1,
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    output_json = js.question_json_maker(uuid.uuid1().hex, str(question), answer_choices, answer_choices.index(answer) + 1,
                                          difficulty=2)
 
     return output_json
@@ -369,9 +368,9 @@ def intersection_venn():
     Generate question for sets using Venn diagram.
     :return: Question in JSON format. Venn diagram in img tag for use in HTML.
     """
-    choices = []
+    answer_choices = []
 
-    while len(choices) < 4:
+    while len(answer_choices) < 4:
         set1 = set(random_set(integer=8, floats=0, char=0, country_name=0, city_name=0, male_name=0
                               , female_name=0, integer_min=5, integer_max=20, integer_type='mix'
                               , float_min=0, float_max=20, float_dec=2, heterogeneous=False))
@@ -381,11 +380,11 @@ def intersection_venn():
 
         question = f'Which one is correct for two sets of A = {set1} B = {set2} ?'
         answer = venn.ven2(set1, set2)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 # ---------- Functions ----------
@@ -419,10 +418,11 @@ def general_function():
     :param num: number of questions.
     :return: questions in JSON format.
     """
-    choices = []
+    answer_choices = []
     global zip
 
-    while len(choices) < 4:
+    while len(answer_choices) < 4:
+
         A = []
         B = []
         # question_json = 'question ' + str(i + 1)
@@ -437,11 +437,11 @@ def general_function():
                        f'B = {str(set(B)).replace("[", "{").replace("]", "}")}  a function ? ' \
                        f'If so what kind of function it is ? f(x)=' + str(zip1).replace("[", "{").replace("]", "}")
         answer = function(A, B)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def ceiling_function():
@@ -450,8 +450,8 @@ def ceiling_function():
 
     :return: questions in JSON format.
     """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
 
         r_ceiling_symbol = '⌉'
         l_ceiling_symbol = '⌈'
@@ -460,11 +460,11 @@ def ceiling_function():
 
         question = l_ceiling_symbol + str(A) + r_ceiling_symbol + ' ?'
         answer = str(math.ceil(A))
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def floor_function():
@@ -473,8 +473,9 @@ def floor_function():
 
        :return: questions in JSON format.
        """
-    choices = []
-    while len(choices) < 4:
+
+    answer_choices = []
+    while len(answer_choices) < 4:
         r_floor_symbol = '⌋'
         l_floor_symbol = '⌊'
 
@@ -483,11 +484,11 @@ def floor_function():
         question = l_floor_symbol + str(A) + r_floor_symbol + ' ?'
         answer = str(math.floor(A))
 
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def inverse_function():
@@ -498,8 +499,8 @@ def inverse_function():
     :return: questions in JSON format.
     """
     global zip
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         A = []
         B = []
         set_len = random.randint(3, 6)
@@ -517,11 +518,11 @@ def inverse_function():
 
         question = 'What is the inverse of function f=' + str(zip1) + ' ?'
         answer = str(zip2)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def function_domain():
@@ -530,8 +531,8 @@ def function_domain():
     :return: questions in JSON format.
     """
     global zip
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         A = []
         B = []
 
@@ -545,9 +546,9 @@ def function_domain():
         for i in zip1:
             zip2.append(i[0])
         answer = str(set(zip2))
-        choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+        answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def function_target():
@@ -556,8 +557,8 @@ def function_target():
         :return: questions in JSON format.
         """
     global zip
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         A = []
         B = []
         # question_json = 'question ' + str(i + 1)
@@ -571,9 +572,9 @@ def function_target():
         for i in zip1:
             zip2.append(i[1])
         answer = str(set(zip2))
-        choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+        answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def one_to_one_function():
@@ -582,11 +583,11 @@ def one_to_one_function():
         :return: questions in JSON format, equations are in LaTex format and wrapped in $$ in order to be rendered with Mathjax.
         """
     answer = f'\(x+{random.randint(2, 20)}\)'
-    choices = [f'\(x^{random.randint(2, 6)}\)', '$${\sqrt{x} \over 2}$$', '$${\sqrt{x}}$$', answer]
+    answer_choices = [f'\(x^{random.randint(2, 6)}\)', '$${\sqrt{x} \over 2}$$', '$${\sqrt{x}}$$', answer]
     question = 'Which one of these functions is one-to-one?'
 
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 # ---------- Probabilities ----------
 
@@ -596,9 +597,9 @@ def event_probability_1():
     Generates a question for event probability.
     :return: question, answer choices, correct answer.(JSON)
     """
-    choices = []
+    answer_choices = []
 
-    while len(choices) < 4:
+    while len(answer_choices) < 4:
         roll_number = random.randint(2, 6)
         outcome_num = random.randint(1, 6)
         times = random.randint(1, roll_number)
@@ -606,10 +607,10 @@ def event_probability_1():
         question = f'We throw a dice for {roll_number} times what is the probability of having number {outcome_num},' \
             f' {times} times?'
         answer = f'{times}/{6 * roll_number}'
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def event_probability_2():
@@ -617,9 +618,9 @@ def event_probability_2():
        Generates a question for event probability.
        :return: question, answer choices, correct answer.(JSON)
        """
-    choices = []
+    answer_choices = []
 
-    while len(choices) < 4:
+    while len(answer_choices) < 4:
         symbols = ['spades', 'hearts', 'clubs', 'diamonds']
         cards = ['Jack', 'King', 'Queen', 'Ace']
         cards_num = random.randint(2, 8)
@@ -633,10 +634,10 @@ def event_probability_2():
             f' {goal_card2} of {random.choice(symbols)}?'
 
         answer = f'1/52<sup>{cards_num}</sup>'
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def event_probability_3():
@@ -645,17 +646,17 @@ def event_probability_3():
            :return: question, answer choices, correct answer.(JSON)
            """
 
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(5, 9)
         b = random.randint(8, 12)
         question = ('While picking out a tie, you have the choice between ' + str(a) + ' satin ties or ' + str(b) +
                     ' cotton. How many tie choices do you have?')
         answer = str(a + b)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def multiplication_rule_1():
@@ -663,18 +664,18 @@ def multiplication_rule_1():
     Generates a question for multiplication.
     :return: question, answer choices, correct answer.(JSON)
     """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(3, 8)
         question = ('You need to create a password ' + str(
             a) + ' characters long. You can choose letters and numbers. Repetition of letters and numbers are allowed, '
                  'and letters can be capital or lowercase. How many passwords are possible?')
         answer = 'You have 62 choices available for each of the ' + str(
             a) + ' positions since repetition is allowed.' + str(62 ** a)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def multiplication_rule_2():
@@ -682,17 +683,17 @@ def multiplication_rule_2():
         Generates a question for multiplication.
         :return: question, answer choices, correct answer.(JSON)
         """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(5, 10)
         question = ('You decide to flip a coin ' + str(a) + ' times, resulting in a sequence of heads (H) '
                                                             'or tails (T). How many difference sequences'
                                                             ' of heads and tails are possible?')
         answer = str(2 ** a)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def multiplication_rule_3():
@@ -700,16 +701,16 @@ def multiplication_rule_3():
         Generates a question for multiplication.
         :return: question, answer choices, correct answer.(JSON)
         """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(5, 10)
         question = ('Rolling a 3-sided die results in a 1, 2, or 3 appearing. If you roll the die ' + str(
             a) + ' times, how many different sequences are possible?')
         answer = str(3 ** a)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def multiplication_rule_4():
@@ -717,18 +718,18 @@ def multiplication_rule_4():
         Generates a question for multiplication.
         :return: question, answer choices, correct answer.(JSON)
         """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(4, 8)
         b = random.randint(3, 6)
         c = random.randint(4, 9)
         question = ('You have ' + str(a) + ' shirts, ' + str(b) + ' pairs of shoes, and ' + str(
             c) + ' pairs of pants. How many outfits can you make?')
         answer = str(a * b * c)
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def permutation_1():
@@ -736,8 +737,8 @@ def permutation_1():
        Generates a question for event permutation.
        :return: question, answer choices, correct answer.(JSON)
     """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         athletes_num = random.randint(6, 10)
         question = f'{athletes_num} athletes are competing in a tournament, the first winner ' \
             f'is going to get a golden medal, ' \
@@ -745,11 +746,11 @@ def permutation_1():
             f'the chances of all athletes for all three medals are same in how many possible' \
             f' way we can distribute the medals?'
         answer = str(math.factorial(athletes_num) / math.factorial(athletes_num - 3))
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def permutation_2():
@@ -757,20 +758,20 @@ def permutation_2():
           Generates a question for event permutation.
           :return: question, answer choices, correct answer.(JSON)
        """
-    choices = []
+    answer_choices = []
 
-    while len(choices) < 4:
+    while len(answer_choices) < 4:
         a = random.randint(5, 8)
         word_list = ['phone', 'truck', 'beach', 'ideal', 'spare', 'smart', 'tower', 'times', 'today']
         selected_word = random.choice(word_list)
         question = f'How many different {str(a)} letter words can be made' \
             f' from {selected_word} if letters cannot be repeated?'
         answer = str((math.factorial(a)) / (math.factorial(a - (len(selected_word)))))
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
 
 
 def combination_1():
@@ -778,8 +779,8 @@ def combination_1():
        Generates a question for combination.
        :return: question, answer choices, correct answer.(JSON)
        """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         athletes_num = random.randint(3, 6)
         total_num = athletes_num + random.randint(4, 8)
         question = f'{athletes_num} are going to be selected out of a team of {total_num}' \
@@ -787,11 +788,11 @@ def combination_1():
             f' exist?'
         answer = str(
             math.factorial(total_num) / (math.factorial(athletes_num - athletes_num) * math.factorial(athletes_num)))
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def combination_2():
@@ -799,18 +800,18 @@ def combination_2():
            Generates a question for combination.
            :return: question, answer choices, correct answer.(JSON)
            """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(2, 7)
         b = random.randint(3, 8)
         question = (str(a) + ' marbles are drawn from a bag containing ' + str(a) + ' red and ' + str(
             b) + ' white marbles. How many different draws are there?')
         answer = str((math.factorial(a + b)) / (math.factorial(a) * math.factorial(b)))
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def combination_3():
@@ -818,18 +819,18 @@ def combination_3():
                Generates a question for combination.
                :return: question, answer choices, correct answer.(JSON)
                """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         a = random.randint(3, 6)
         b = random.randint(20, 40)
         question = ('Drawing ' + str(a) + ' cards from a standard deck of ' + str(
             b) + ' cards, how many different card hands are there?')
         answer = str((math.factorial(b)) / (math.factorial(b - a)))
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def conditional_probability_1():
@@ -837,19 +838,19 @@ def conditional_probability_1():
           Generates a question for conditional probability.
           :return: question, answer choices, correct answer.(JSON)
           """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
 
         allergic_percent = round(random.uniform(2, 8), 2)
         question = f'The {allergic_percent} percent of adults are female are allergic to sesame, ' \
             f'what is the probability of being allergic to sesame, given being a female? round your answer to nearest hundredth'
         raw_result = ((allergic_percent / 100) / (0.5)) * 100
         answer = str(round(raw_result, 2)) + '%'
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def probability_union():
@@ -857,8 +858,8 @@ def probability_union():
                Generates a question for union of events.
                :return: question, answer choices, correct answer.(JSON)
                """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         python = (random.randint(10, 60))
         java = (random.randint(10, 50))
         both = (random.randint(10, 20))
@@ -870,11 +871,11 @@ def probability_union():
             f'{both_str} are familiar with both Python and Java.  What percent of students are familiar with either Python or Java?'
         raw_result = str((python + java) - both)
         answer = raw_result + '%'
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def probability_complement():
@@ -882,8 +883,8 @@ def probability_complement():
         Generates a question for complement of events.
         :return: question, answer choices, correct answer.(JSON)
         """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
 
         possible_outcomes = [1, 2, 3, 4, 5, 6]
         chosen_ones = []
@@ -896,11 +897,11 @@ def probability_complement():
         chosen_ones = set(chosen_ones)
         raw_answer = (1 - (len(chosen_ones) / 6)) * 100
         answer = str(round(raw_answer, 2)) + '%'
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 def bayes_theorem():
@@ -908,8 +909,8 @@ def bayes_theorem():
         Generates a question for Bayes theorem.
         :return: question, answer choices, correct answer.(JSON)
             """
-    choices = []
-    while len(choices) < 4:
+    answer_choices = []
+    while len(answer_choices) < 4:
         A_blue = random.randint(2, 10)
         A_red = random.randint(2, 10)
         B_blue = random.randint(2, 10)
@@ -925,11 +926,11 @@ def bayes_theorem():
             f'that pencil was from bucket A ? '
         raw_answer = ((P_blue_from_A * P_bucket) / P_blue) * 100
         answer = str(round(raw_answer, 2)) + '%'
-        if answer not in choices:
-            choices.append(answer)
-    choices = random.sample(choices, len(choices))
+        if answer not in answer_choices:
+            answer_choices.append(answer)
+    answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, choices.index(answer) + 1, difficulty=4)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=4)
 
 
 # ---------- Relations ----------
@@ -1146,9 +1147,9 @@ def irreflexive_relation():
         question = (f'Is the relation R an irreflecive relation of set A? A = {rand_set}, R = {ind_relation}').replace(
             '[', '{').replace(']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 def symmetric_relation():
@@ -1186,9 +1187,9 @@ def symmetric_relation():
                                                                                                                     '{').replace(
             ']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 def asymmetric_relation():
@@ -1225,9 +1226,9 @@ def asymmetric_relation():
         question = (f'Is the relation R an asymmetric relation of set A? A = {rand_set}, R = {ind_relation}').replace(
             '[', '{').replace(']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 
@@ -1269,9 +1270,9 @@ def antisymmetric_relation():
                                                                                                                  '{').replace(
             ']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 def transitive_relation():
@@ -1307,9 +1308,9 @@ def transitive_relation():
         question = f'Is the relation R a transitive relation of set A? A = {rand_set}, R = {ind_relation}'.replace(
             '[', '{').replace(']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 
@@ -1339,9 +1340,9 @@ def reflexive_closure():
             f'Is {closure_relation} the reflexive closure of relation R on set A? A = {rand_set}, R = {relation_1}').replace(
             '[', '{').replace(']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 def symmetric_closure():
@@ -1370,9 +1371,9 @@ def symmetric_closure():
             f'Is {closure_relation} the symmetric closure of relation R on set A? A = {rand_set}, R = {relation_1}').replace(
             '[', '{').replace(']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 def transitive_closure():
@@ -1400,9 +1401,9 @@ def transitive_closure():
             f'Is {closure_relation} the transitive closure of relation R on set A? A = {rand_set}, R = {relation_1}').replace(
             '[', '{').replace(']', '}')
 
-    choices = [True, False]
+    answer_choices = [True, False]
 
-    return js.question_json_maker(uuid.uuid1().hex, question, choices, answer, question_type='TF', difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer, question_type='TF', difficulty=3)
 
 
 

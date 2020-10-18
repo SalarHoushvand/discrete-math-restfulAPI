@@ -13,6 +13,8 @@ from flask import Flask, jsonify, render_template
 import functions as functions
 import jsonify as js
 from flask_cors import CORS, cross_origin
+import json
+
 
 # ---------- App ----------
 
@@ -46,9 +48,20 @@ def question_list_maker(num, par, operation):
     :return: a list containing questions.
     """
     output = []
-    for i in range(num):
-        output.append(functions.choices(par, operation))
-    return js.json_maker(operation, output)
+    error_msg = { "error" : "Params selected for set-intersection should match. ex : 11",
+                  "example of a correct call" : "/set-intersection/1/22",
+                  "example of an incorrect call" : "/set-intersection/1/12"}
+    if operation == 'set-intersection':
+        if par in [11,22,33,44,55,66,77]:
+            for i in range(num):
+                output.append(functions.set_theory_choices(par, operation))
+            return js.json_maker(operation, output)
+        else:
+            return error_msg
+    else:
+        for i in range(num):
+            output.append(functions.set_theory_choices(par, operation))
+        return js.json_maker(operation, output)
 
 
 @app.route('/set-union', defaults={'num': 1, 'par': 11}, methods=['GET'])
@@ -262,7 +275,6 @@ def inverse_function(num):
     return jsonify(js.json_maker('inverse-function', questions))
 
 
-# DEBUG : Make sure its a function first, then ask for domain.
 @app.route('/function-domain', defaults={'num': 1}, methods=['GET'])
 @app.route('/function-domain/<int:num>', methods=['GET'])
 def function_domain(num):
@@ -278,7 +290,6 @@ def function_domain(num):
     return jsonify(js.json_maker('function-domain', questions))
 
 
-# DEBUG : Make sure its a function first, then ask for target.
 @app.route('/function-target', defaults={'num': 1}, methods=['GET'])
 @app.route('/function-target/<int:num>', methods=['GET'])
 def function_target(num):
@@ -294,6 +305,7 @@ def function_target(num):
     return jsonify(js.json_maker('function-target', questions))
 
 
+@app.route('/one-to-one-function', defaults={'num': 1}, methods=['GET'])
 @app.route('/one-to-one-function/<int:num>')
 def one_to_one_function(num):
     """
@@ -671,7 +683,7 @@ def server_error(e):
 
 
 @app.errorhandler(405)
-def server_error(e):
+def method_error(e):
     error_msg = {
         "error": "405",
         "message": "Method not allowed.",
@@ -682,5 +694,5 @@ def server_error(e):
 
 # ---------- App Run ----------
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = False
     app.run(host='127.0.0.1', port=5000)
