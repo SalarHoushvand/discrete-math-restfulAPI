@@ -94,14 +94,14 @@ You can generate random questions for different topics in probabilities section 
 
 | Call| Question Topic                                                                                                                                                                                                                                                                                                     |
 | :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ```GET /probability/event/int:num```    | Probability of an event |
-|  ```GET /probability/permutation/int:num```    | Permutation  |
-| ```GET /probability/multiplication/int:num	```|Multiplication|
-| ```GET /probability/combination/int:num	```| Combination|
-| ```GET /probability/conditional/int:num```| Conditional Probability |
-| ```GET /probability/union/int:num```| Probability Union|
-| ```GET /probability/complement/int:num	```| Probability Complement |
-| ```GET /probability/bayes/int:num```| Bayes Theorem |
+| ```GET /event-probability```    | Probability of an event |
+|  ```GET /permutation```    | Permutation  |
+| ```GET /multiplication-rule```|Multiplication Rule|
+| ```GET /combination```| Combination|
+| ```GET /conditional-probability```| Conditional Probability |
+| ```GET /probability-union```| Probability Union|
+| ```GET /probability-complement```| Probability Complement |
+| ```GET /bayes-theorem```| Bayes Theorem |
 
 
 
