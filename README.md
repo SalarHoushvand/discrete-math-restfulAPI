@@ -42,6 +42,8 @@ list
 
 ### Questions from topics
 
+### Set Theory
+
 By calling this you need to first define the topic, then number of questions you want and finally type of items in each sets.
 as an example to call 5 questions from union of sets that both sets are containing integers:
 
@@ -51,15 +53,15 @@ GET /set-union/5/11
 
 Here is the list of all available topics:
 
-| param     | Output                                                                                                                                                                                                                                                                                                      |
+| Call     | Output                                                                                                                                                                                                                                                                                                      |
 | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| set-union    | two random sets and union of them as answer.                                                                                                                                                                                                                                                             |
-| set-intersection  | two random sets and intersection of them as answer.                                                                                                                                                                                                                                                                                     |
-| set-difference     | two random sets and difference of them as answer.                                                                                                                                                                                                                                                   |
-| set-symmetric-difference      | two random sets and symmetric difference of them as answer.                                                                                                                                                                                                                                                                    |
-| cartesian-product | two sets and cartesian product of them as answer.                                                                                                                                                                                                                                            |
-| set-partition | one set and all subsets of it as answer.                                                                                                                                                                                                                                           |
-| set-complement      | one set and complment of it as answer.
+| ```GET /set-union```     | two random sets and union of them as answer.                                                                                                                                                                                                                                                             |
+| ```GET /set-intersection```  | two random sets and intersection of them as answer.                                                                                                                                                                                                                                                                                     |
+| ```GET /set-difference```     | two random sets and difference of them as answer.                                                                                                                                                                                                                                                   |
+| ```GET /set-symmetric-difference```      | two random sets and symmetric difference of them as answer.                                                                                                                                                                                                                                                                    |
+| ```GET /cartesian-product``` | two sets and cartesian product of them as answer.                                                                                                                                                                                                                                            |
+| ```GET /set-partition``` | one set and all subsets of it as answer.                                                                                                                                                                                                                                           |
+| ```GET /set-complement```      | one set and complment of it as answer.
 
 The first number defines the elements in first set and second number defines elements in second, here is the list of all available elements:
 | param| Set Items                                                                                                                                                                                                                                                                                                      |
@@ -94,11 +96,29 @@ You can generate random questions for different topics in probabilities section 
 
 | Call| Question Topic                                                                                                                                                                                                                                                                                                     |
 | :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ```GET /probability/event/int:num```    | Probability of an event |
-|  ```GET /probability/permutation/int:num```    | Permutation  |
-| ```GET /probability/multiplication/int:num	```|Multiplication|
-| ```GET /probability/combination/int:num	```| Combination|
-| ```GET /probability/conditional/int:num```| Conditional Probability |
-| ```GET /probability/union/int:num```| Probability Union|
-| ```GET /probability/complement/int:num	```| Probability Complement |
-| ```GET /probability/bayes/int:num```| Bayes Theorem |
+| ```GET /event-probability```    | Probability of an event |
+|  ```GET /permutation```    | Permutation  |
+| ```GET /multiplication-rule```|Multiplication Rule|
+| ```GET /combination```| Combination|
+| ```GET /conditional-probability```| Conditional Probability |
+| ```GET /probability-union```| Probability Union|
+| ```GET /probability-complement```| Probability Complement |
+| ```GET /bayes-theorem```| Bayes Theorem |
+
+
+
+### Relations
+
+You can generate random questions for different topics in relations section by following calls. you can define number of output questions by giving the value for num. Questions for relations are true or false questions.
+
+| Call| Question Topic                                                                                                                                                                                                                                                                                                     |
+| :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ```GET /reflexive-relation```    | Reflexive Relation |
+|  ```GET /irreflexive-relation```    | Irreflexive Relation  |
+| ```GET /symmetric-relation	```|Symmetric Relation|
+| ```GET /asymmetric-relation	```| Asymmetric Relation|
+| ```GET /antisymmetric-relation```| Antisymmetric Relation |
+| ```GET /transitive-relation```| Transitive Relation|
+| ```GET /reflexive-closure	```| Reflexive Closure |
+| ```GET /symmetric-closure```| Symmetric Closure |
+| ```GET /transitive-closure```| Transitive Closure |
