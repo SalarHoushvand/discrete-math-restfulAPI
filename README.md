@@ -51,7 +51,7 @@ GET /set-union/5/11
 
 Here is the list of all available topics:
 
-| param     | Output                                                                                                                                                                                                                                                                                                      |
+| Call     | Output                                                                                                                                                                                                                                                                                                      |
 | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ```GET /set-union```     | two random sets and union of them as answer.                                                                                                                                                                                                                                                             |
 | ```GET /set-intersection```  | two random sets and intersection of them as answer.                                                                                                                                                                                                                                                                                     |
