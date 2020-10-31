@@ -13,8 +13,6 @@ from flask import Flask, jsonify, render_template
 import functions as functions
 import jsonify as js
 from flask_cors import CORS, cross_origin
-import json
-
 
 # ---------- App ----------
 
@@ -48,11 +46,11 @@ def question_list_maker(num, par, operation):
     :return: a list containing questions.
     """
     output = []
-    error_msg = { "error" : "Params selected for set-intersection should match. ex : 11",
-                  "example of a correct call" : "/set-intersection/1/22",
-                  "example of an incorrect call" : "/set-intersection/1/12"}
+    error_msg = {"error": "Params selected for set-intersection should match. ex : 11",
+                 "example of a correct call": "/set-intersection/1/22",
+                 "example of an incorrect call": "/set-intersection/1/12"}
     if operation == 'set-intersection':
-        if par in [11,22,33,44,55,66,77]:
+        if par in [11, 22, 33, 44, 55, 66, 77]:
             for i in range(num):
                 output.append(functions.set_theory_choices(par, operation))
             return js.json_maker(operation, output)
@@ -161,7 +159,6 @@ def set_complement(num):
         A function returns question for complement of a generated set.
 
         :param num: number of questions.
-        :param par: type of items in the set based on documentation.
         :return: questions in JSON format.
     """
     questions = []
@@ -656,6 +653,7 @@ def topics():
         'transitive-closure': '/transitive-closure'
 
     }}
+
     return jsonify(topics)
 
 

@@ -48,7 +48,6 @@ def set_theory_test():
     print('test completed for set theory. \n')
 
 
-
 def functions_test():
     """
    Test function for functions
@@ -69,7 +68,6 @@ def functions_test():
     print(f'{str(test_case)} test cases for {str(len(topics))} topics in functions with success (response code 200).')
     print(f'{str(test_case)} test cases for {str(len(topics))} topics in functions has body type of application/json.')
     print('test completed for functions. \n')
-
 
 
 def probabilities_test():
@@ -94,6 +92,7 @@ def probabilities_test():
     print(f'{str(test_case)} test cases for {str(len(topics))} topics in '
           f'probabilities has body type of application/json.')
     print('test completed for probabilities. \n')
+
 
 def relations_test():
     """

@@ -122,10 +122,10 @@ def random_set(integer=5, floats=0, char=0, country_name=0, city_name=0, male_na
             main_list.append(rand_float)
 
     # strings
-    topics = [(ds.country_names, country_name), (ds.city_names, city_name),
+    string_ls = [(ds.country_names, country_name), (ds.city_names, city_name),
               (ds.male_names, male_name), (ds.female_names, female_name), (ds.characters, char)]
     string_temp = []
-    for i in topics:
+    for i in string_ls:
         if heterogeneous:
             while len(string_temp) < i[1]:
                 temp1 = random.choice(i[0])
@@ -441,7 +441,8 @@ def general_function():
             answer_choices.append(answer)
     answer_choices = random.sample(answer_choices, len(answer_choices))
 
-    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1, difficulty=3)
+    return js.question_json_maker(uuid.uuid1().hex, question, answer_choices, answer_choices.index(answer) + 1,
+                                  difficulty=3)
 
 
 def ceiling_function():
@@ -618,6 +619,7 @@ def event_probability_2():
        Generates a question for event probability.
        :return: question, answer choices, correct answer.(JSON)
        """
+
     answer_choices = []
 
     while len(answer_choices) < 4:
@@ -938,7 +940,7 @@ def bayes_theorem():
 
 def is_reflexive(universe, relation):
     """
-    Function to determine if a relation of a set is reflexiver
+    Function to determine if a relation of a set is reflexive
     :param universe: a set
     :param relation: a relation on set universe
     return: True if relation is a reflexiver relation of set universe
