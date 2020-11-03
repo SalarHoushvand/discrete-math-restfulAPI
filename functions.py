@@ -672,8 +672,7 @@ def multiplication_rule_1():
         question = ('You need to create a password ' + str(
             a) + ' characters long. You can choose letters and numbers. Repetition of letters and numbers are allowed, '
                  'and letters can be capital or lowercase. How many passwords are possible?')
-        answer = 'You have 62 choices available for each of the ' + str(
-            a) + ' positions since repetition is allowed.' + str(62 ** a)
+        answer =  str(62 ** a)
         if answer not in answer_choices:
             answer_choices.append(answer)
     answer_choices = random.sample(answer_choices, len(answer_choices))
@@ -763,12 +762,12 @@ def permutation_2():
     answer_choices = []
 
     while len(answer_choices) < 4:
-        a = random.randint(5, 8)
+        a = random.randint(1, 5)
         word_list = ['phone', 'truck', 'beach', 'ideal', 'spare', 'smart', 'tower', 'times', 'today']
         selected_word = random.choice(word_list)
         question = f'How many different {str(a)} letter words can be made' \
             f' from {selected_word} if letters cannot be repeated?'
-        answer = str((math.factorial(a)) / (math.factorial(a - (len(selected_word)))))
+        answer = str((math.factorial(5)) / (math.factorial(5-a)))
         if answer not in answer_choices:
             answer_choices.append(answer)
     answer_choices = random.sample(answer_choices, len(answer_choices))
@@ -895,7 +894,7 @@ def probability_complement():
 
         excluded_numebrs = str(set(chosen_ones)).replace('[', '{').replace(']', '}')
         question = f'We are rolling a normal dice, What is the probability that out come would not be' \
-            f'one of these numbers ? {excluded_numebrs} round your answer to nearest hundredth'
+            f' one of these numbers ? {excluded_numebrs} round your answer to nearest hundredth'
         chosen_ones = set(chosen_ones)
         raw_answer = (1 - (len(chosen_ones) / 6)) * 100
         answer = str(round(raw_answer, 2)) + '%'

@@ -550,11 +550,10 @@ def transitive_relation(num):
     :param num:  number of questions.(int)
     :return: question, answer, answer choices and topic.(JSON)
     """
-
     questions = []
 
     for i in range(num):
-        questions.append(functions.antisymmetric_relation())
+        questions.append(functions.transitive_relation())
     return jsonify(js.json_maker('transitive-relation', questions))
 
 
