@@ -6,7 +6,7 @@ Werkzeug==0.14.1
 gunicorn==19.9.0
 Click==7.0
 itsdangerous==1.1.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 uuid==1.30
 pybase64==1.0.1
