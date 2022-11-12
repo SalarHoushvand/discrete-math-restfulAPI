@@ -1,6 +1,6 @@
 # discrete-math-restfulAPI
 
-This is an API made by python using flask to generate unlimited questions for different discrete mathematic topics.
+This is an API made by python 3 using flask to generate unlimited questions for different discrete mathematic topics.
 
 ## Servers
 
